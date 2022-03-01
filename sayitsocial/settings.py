@@ -86,11 +86,7 @@ DATABASES = {
 DJOSER = {
     "LOGIN_FIELD": "email",
     "USER_CREATE_PASSWORD_RETYPE": True,
-    'SERIALIZERS':{
-            'user': 'base.serializers.CreateUserSerializer',
-            'current_user': 'base.serializers.CreateUserSerializer',
-            'user_create':'base.serializers.CreateUserSerializer'
-        }
+   
 }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
