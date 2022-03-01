@@ -10,11 +10,6 @@ class CreateUserSerializer(ModelSerializer):
         model = User
         fields = ('username','name','email','password1','password2','bio','avatar')
 
-    def validate(self, attrs):
-        if attrs['password1'] != attrs['password2']:
-            raise serializers.ValidationError({'password1':'Passwords didnt match'})
-        return attrs
-
     def create(self, validated_data):
         user = User.objects.create(
             username=validated_data['username'],
