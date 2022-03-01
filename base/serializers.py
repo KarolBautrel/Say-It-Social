@@ -4,6 +4,11 @@ from rest_framework import serializers
 from base.models import User
 
 
+class UserListSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
 class UpdateUserInfoSerializer(ModelSerializer):
     class Meta:
         model = User

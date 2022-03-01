@@ -20,3 +20,23 @@ class User (AbstractUser):
 
     def __str__(self):  
         return self.username
+
+class Topic (models.Model):
+    topic = models.CharField(max_length=40,null=True, blank=True)
+
+    def __str__(self):
+        return self.topic
+
+class Room(models.Model):
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateField(auto_now_add=True)
+    name = models.CharField(blank=True, max_length=30)
+    description = models.TextField(blank=True, max_length=255)
+    participants = models.ManyToManyField(User, related_name = 'participants', blank = True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return self.name
