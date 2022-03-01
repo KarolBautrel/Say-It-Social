@@ -29,7 +29,7 @@ class Topic (models.Model):
 
 class Room(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    host = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     name = models.CharField(blank=True, max_length=30)
     description = models.TextField(blank=True, max_length=255)
