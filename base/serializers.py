@@ -10,6 +10,12 @@ class UserListSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class UserDetailSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['name','email','bio','gender']
+
+
 class UpdateUserInfoSerializer(ModelSerializer):
     class Meta:
         model = User

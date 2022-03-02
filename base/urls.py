@@ -7,12 +7,14 @@ from .views import (
                     RoomCreateView, 
                     RoomListView,
                     RoomRetrieveView,
-                    RoomUpdateView
+                    RoomUpdateView,
+                    UserRetrieveView
                     )
 
 urlpatterns = [
     
     path('', UserListView.as_view(), name = 'users'),
+    path('user/<int:pk>', UserRetrieveView.as_view(), name = 'user'),
     path('update_user/<int:pk>', UserUpdateView.as_view(),name='update-user'),
     path('create_room', RoomCreateView.as_view(), name='create-room'),
     path('rooms', RoomListView.as_view(), name='rooms'),
