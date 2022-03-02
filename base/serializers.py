@@ -22,6 +22,41 @@ class UpdateUserInfoSerializer(ModelSerializer):
         fields = ['bio', 'gender']
 
 
+class MessageCreateSerializer(ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    room = serializers.PrimaryKeyRelatedField(many=False, queryset=Room.objects.all())
+    class Meta:
+        model = Message
+        fields = ['body','room','user']
+
+        def create(self, validated_data):
+            room = validated_data['room']
+            room_qs = Room.objects.get(pk = room.id)
+            room_qs.participants.add(self.request.user)
+
+
+class MessagesSerializer(ModelSerializer):
+    class Meta:
+        model = Message
+        fields = '_all__'
+
+
+class MessageUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['body']
+
+
+class RoomSerializer(ModelSerializer):
+    host = serializers.ReadOnlyField(source='host.username')
+    topic= serializers.ReadOnlyField(source='topic.topic')
+    messages = serializers.StringRelatedField(many=True)
+    participants = serializers.StringRelatedField(many=True)
+    class Meta:
+        model = Room
+        fields = ['name','description','topic', 'host','participants', 'messages']
+
+
 class RoomCreateSerializer(ModelSerializer):
     host = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     class Meta:
@@ -29,26 +64,9 @@ class RoomCreateSerializer(ModelSerializer):
         fields = ['name','description','topic', 'host']
         
 
-class RoomSerializer(ModelSerializer):
-    host = serializers.ReadOnlyField(source='host.username')
-    topic= serializers.ReadOnlyField(source='topic.topic')
-    class Meta:
-        model = Room
-        fields = ['name','description','topic', 'host']
-
-
 class RoomUpdateSerializer(ModelSerializer):
 
     topic= serializers.ReadOnlyField(source='topic.name')
     class Meta:
         model = Room
         fields = ['name','description','topic']
-
-
-class MessageCreateSerializer(ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
-    class Meta:
-        model = Message
-        fields = ['body','model', 'room']
-
-    

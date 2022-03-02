@@ -8,7 +8,9 @@ from .views import (
                     RoomListView,
                     RoomRetrieveView,
                     RoomUpdateView,
-                    UserRetrieveView
+                    UserRetrieveView,
+                    MessageCreateView,
+                    MessageUpdateView
                     )
 
 urlpatterns = [
@@ -19,6 +21,8 @@ urlpatterns = [
     path('create_room', RoomCreateView.as_view(), name='create-room'),
     path('rooms', RoomListView.as_view(), name='rooms'),
     path('room/<int:pk>', RoomRetrieveView.as_view(), name='detail_room'),
-    path('room/update/<int:pk>',RoomUpdateView.as_view(), name = 'update-room' )
+    path('room/update/<int:pk>',RoomUpdateView.as_view(), name = 'update-room'),
+    path('create_message',MessageCreateView.as_view(), name='message'),
+    path('update_message/<int:pk>', MessageUpdateView.as_view(), name='update-message')
     
 ]

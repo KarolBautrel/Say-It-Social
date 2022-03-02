@@ -23,3 +23,15 @@ class HostEditAllow(permissions.BasePermission):
         if obj.host == request.user:
             return True
         return False
+
+class MessageCreatorEditAllow(permissions.BasePermission):
+    message = 'Only creator of messsage is allowed to edit message '
+    def has_permission(self, request, view):
+        if request.user.is_authenticated:
+            return True
+        return False
+
+    def has_object_permission(self, request, view, obj):
+        if obj.user == request.user:
+            return True
+        return False
