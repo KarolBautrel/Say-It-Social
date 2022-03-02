@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
-from base.models import User, Room
+from base.models import User, Room, Message
 
 
 class UserListSerializer(ModelSerializer):
@@ -43,3 +43,12 @@ class RoomUpdateSerializer(ModelSerializer):
     class Meta:
         model = Room
         fields = ['name','description','topic']
+
+
+class MessageCreateSerializer(ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    class Meta:
+        model = Message
+        fields = ['body','model', 'room']
+
+    

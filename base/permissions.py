@@ -12,11 +12,6 @@ class RequestUserAllowed(permissions.BasePermission):
         return False
 
 
-
-
-
-
-
 class HostEditAllow(permissions.BasePermission):
     message = 'Only host of room is allowed to edit room '
     def has_permission(self, request, view):
