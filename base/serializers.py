@@ -54,7 +54,7 @@ class RoomSerializer(ModelSerializer):
     participants = serializers.StringRelatedField(many=True)
     class Meta:
         model = Room
-        fields = ['name','description','topic', 'host','participants', 'messages']
+        fields = ['id','name','description','topic', 'host','participants', 'messages']
 
 
 class RoomCreateSerializer(ModelSerializer):
