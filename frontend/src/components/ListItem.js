@@ -1,18 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ListItem = ({room}) => {
+const ListItem = ({ room }) => {
   return (
-    <Link to={`/room/${room.id}`}>
     <div>
-        <h2>{room.topic}</h2>
-        <h3>{room.name}</h3>
-        <h4>{room.description}</h4>
-        <h4>{room.host}</h4>
-
+      <h2>Topic : {room.topic}</h2>
+      <h3>Room name: {room.name}</h3>
+      <Link to={`/room/${room.id}`}>
+        <button>Get to the room</button>
+      </Link>
     </div>
-    </Link>
-  )
-}
+  );
+};
 
-export default ListItem
+export default ListItem;

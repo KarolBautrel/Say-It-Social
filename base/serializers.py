@@ -13,7 +13,7 @@ class UserListSerializer(ModelSerializer):
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['name','email','bio','gender']
+        fields = ['name', 'email', 'bio', 'gender']
 
 
 class UpdateUserInfoSerializer(ModelSerializer):
@@ -23,15 +23,18 @@ class UpdateUserInfoSerializer(ModelSerializer):
 
 
 class MessageCreateSerializer(ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
-    room = serializers.PrimaryKeyRelatedField(many=False, queryset=Room.objects.all())
+    user = serializers.PrimaryKeyRelatedField(
+        read_only=True, default=serializers.CurrentUserDefault())
+    room = serializers.PrimaryKeyRelatedField(
+        many=False, queryset=Room.objects.all())
+
     class Meta:
         model = Message
-        fields = ['body','room','user']
+        fields = ['body', 'room', 'user']
 
         def create(self, validated_data):
             room = validated_data['room']
-            room_qs = Room.objects.get(pk = room.id)
+            room_qs = Room.objects.get(pk=room.id)
             room_qs.participants.add(self.request.user)
 
 
@@ -49,24 +52,29 @@ class MessageUpdateSerializer(ModelSerializer):
 
 class RoomSerializer(ModelSerializer):
     host = serializers.ReadOnlyField(source='host.username')
-    topic= serializers.ReadOnlyField(source='topic.topic')
+    topic = serializers.ReadOnlyField(source='topic.topic')
     messages = serializers.StringRelatedField(many=True)
     participants = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Room
-        fields = ['id','name','description','topic', 'host','participants', 'messages']
+        fields = ['id', 'name', 'description', 'topic',
+                  'host', 'participants', 'messages']
 
 
 class RoomCreateSerializer(ModelSerializer):
-    host = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    host = serializers.PrimaryKeyRelatedField(
+        read_only=True, default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Room
-        fields = ['name','description','topic', 'host']
-        
+        fields = ['name', 'description', 'topic', 'host']
+
 
 class RoomUpdateSerializer(ModelSerializer):
 
-    topic= serializers.ReadOnlyField(source='topic.name')
+    topic = serializers.ReadOnlyField(source='topic.name')
+
     class Meta:
         model = Room
-        fields = ['name','description','topic']
+        fields = ['name', 'description', 'topic']

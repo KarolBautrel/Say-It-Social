@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from base.serializers import (
-                         UpdateUserInfoSerializer,
-                         UserListSerializer,
-                         RoomSerializer,
-                         RoomCreateSerializer,
-                         RoomUpdateSerializer,
-                         UserDetailSerializer,
-                         MessageCreateSerializer,
-                         MessageUpdateSerializer)
+    UpdateUserInfoSerializer,
+    UserListSerializer,
+    RoomSerializer,
+    RoomCreateSerializer,
+    RoomUpdateSerializer,
+    UserDetailSerializer,
+    MessageCreateSerializer,
+    MessageUpdateSerializer)
 
 from rest_framework import generics
 from .models import User, Room, Message
@@ -55,7 +55,7 @@ class RoomRetrieveView(generics.RetrieveAPIView):
 
 
 class RoomUpdateView(generics.RetrieveUpdateAPIView):
-    queryset= Room.objects.all()
+    queryset = Room.objects.all()
     permission_classes = (HostEditAllow,)
     serializer_class = RoomUpdateSerializer
 
@@ -64,11 +64,11 @@ class MessageCreateView(generics.CreateAPIView):
     queryset = Message.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = MessageCreateSerializer
-    
+
     def perform_create(self, serializer):
         room = serializer.validated_data['room']
         room.participants.add(self.request.user)
-        serializer.save(user = self.request.user)
+        serializer.save(user=self.request.user)
 
 
 class MessageUpdateView(generics.UpdateAPIView):
