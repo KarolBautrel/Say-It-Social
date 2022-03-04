@@ -4,19 +4,24 @@ import './App.css';
 import RoomListPage from './pages/RoomListPage';
 import RoomPage from './pages/RoomPage';
 import Header from './components/Header';
+import Login from './components/Login';
+import { CookiesProvider } from 'react-cookie';
 function App() {
   return (
-    <Router>
-      <div className="container dark">
-        <div className="app">
-          <Header />
-          <Routes>
-            <Route path="/" exact element={<RoomListPage />} />
-            <Route path="/room/:id" element={<RoomPage />} />
-          </Routes>
+    <CookiesProvider>
+      <Router>
+        <div className="container dark">
+          <div className="app">
+            <Header />
+            <Routes>
+              <Route path="/" exact element={<RoomListPage />} />
+              <Route path="/room/:id" element={<RoomPage />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </CookiesProvider>
   );
 }
 
