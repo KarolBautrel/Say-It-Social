@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import ListItem from '../components/ListItem';
 
 const RoomListPage = () => {
-  const [rooms, setRooms] = useState([]);
+  let [rooms, setRooms] = useState([]);
 
   useEffect(() => {
     getRooms();
   }, []);
 
-  const getRooms = async () => {
-    const response = await fetch('/api/rooms');
-    const data = await response.json();
+  let getRooms = async () => {
+    let response = await fetch('/api/rooms');
+    let data = await response.json();
     setRooms(data);
   };
 
