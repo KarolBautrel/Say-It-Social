@@ -5,13 +5,12 @@ import {
   Routes
 
 } from "react-router-dom";
-
-
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header'
 import RoomListPage from './pages/RoomListPage'
 import RoomPage from './pages/RoomPage'
+
 function App() {
   return (
     <Router>
