@@ -5,8 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:prettier/recommended"
+        "plugin:react/recommended"
+  
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -20,8 +20,7 @@
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "react/prop-types": 0,
-        "prefer-const": "error"
-
+        "react/prop-types": 0
+    
     }
 }

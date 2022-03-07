@@ -15,10 +15,16 @@ function Login() {
     }
   }, [token]);
 
-  const loginBtn = () => {
-    APIService.LoginUser({ email, password })
-      .then((resp) => setToken('mytoken', resp.auth_token))
-      .catch((error) => console.log(error));
+  const loginBtn = async () => {
+    try {
+      const response = await APIService.LoginUser({ email, password });
+
+      if (response.auth_token) {
+        setToken('mytoken', response.auth_token);
+      }
+    } catch (error) {
+      throw new Error('Error during login', error);
+    }
   };
   return (
     <div className="Login">

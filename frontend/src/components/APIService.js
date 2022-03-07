@@ -18,4 +18,14 @@ export default class APIService {
       body: JSON.stringify(body)
     }).then((resp) => resp.json());
   }
+
+  static LogoutUser(body) {
+    return fetch('/api/token/logout/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then((resp) => resp.json());
+  }
 }
