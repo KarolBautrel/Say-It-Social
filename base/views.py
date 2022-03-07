@@ -23,7 +23,7 @@ class UserListView(generics.ListAPIView):
 
 class UserRetrieveView(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (RequestUserAllowed,)
     serializer_class = UserDetailSerializer
 
 

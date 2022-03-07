@@ -13,7 +13,7 @@ class UserListSerializer(ModelSerializer):
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['name', 'email', 'bio']
+        fields = ['id', 'name', 'email', 'bio']
 
 
 class UpdateUserInfoSerializer(ModelSerializer):

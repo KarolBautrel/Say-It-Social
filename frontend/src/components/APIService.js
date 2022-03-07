@@ -1,3 +1,5 @@
+import token from '../components/Login';
+
 export default class APIService {
   static LoginUser(body) {
     return fetch('/api/token/login/', {
@@ -23,7 +25,7 @@ export default class APIService {
     return fetch('/api/token/logout/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        Authorization: ~`Token ${token}`
       },
       body: JSON.stringify(body)
     }).then((resp) => resp.json());

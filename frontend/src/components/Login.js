@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useCookies(['mytoken']);
+  var [token, setToken] = useCookies(['mytoken']);
   let navigate = useNavigate();
+  const [userData, setUserData] = useState('');
 
   useEffect(() => {
     if (token['mytoken']) {
@@ -15,12 +16,23 @@ function Login() {
     }
   }, [token]);
 
+  const getUserData = async (token) => {
+    const response = await fetch('api/users/me', {
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    });
+    return response;
+  };
+
   const loginBtn = async () => {
     try {
       const response = await APIService.LoginUser({ email, password });
 
       if (response.auth_token) {
         setToken('mytoken', response.auth_token);
+        const data = await getUserData(response.auth.token);
+        setUserData(data);
       }
     } catch (error) {
       throw new Error('Error during login', error);
