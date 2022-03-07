@@ -1,11 +1,18 @@
+import { useCookies } from 'react-cookie';
 import React, { useState, useEffect } from 'react';
 import ListItem from '../components/ListItem';
+import Logout from '../components/Logout';
+import { useNavigate } from 'react-router-dom';
 
 const RoomListPage = () => {
   let [rooms, setRooms] = useState([]);
+  const [cookies] = useCookies(['mytoken']);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getRooms();
+    if (cookies?.mytoken) {
+      getRooms();
+    }
   }, []);
 
   let getRooms = async () => {
@@ -13,9 +20,12 @@ const RoomListPage = () => {
     let data = await response.json();
     setRooms(data);
   };
-
+  if (!cookies.mytoken) {
+    navigate('/login');
+  }
   return (
     <div>
+      <Logout />
       <div className="Rooms-list">
         {rooms.map((room, index) => (
           <ListItem key={index} room={room} />

@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  var [token, setToken] = useCookies(['mytoken']);
+  const [token, setToken] = useCookies(['mytoken']);
   let navigate = useNavigate();
   const [userData, setUserData] = useState('');
 
   useEffect(() => {
-    if (token['mytoken']) {
+    if (token.mytoken) {
       navigate('/');
     }
   }, [token]);
@@ -22,7 +22,8 @@ function Login() {
         Authorization: `Token ${token}`
       }
     });
-    return response;
+    const data = await response.json();
+    return data;
   };
 
   const loginBtn = async () => {
@@ -31,13 +32,17 @@ function Login() {
 
       if (response.auth_token) {
         setToken('mytoken', response.auth_token);
-        const data = await getUserData(response.auth.token);
+        console.log(response);
+        const data = await getUserData(response.auth_token);
+        console.log(data);
         setUserData(data);
+        navigate('/');
       }
     } catch (error) {
       throw new Error('Error during login', error);
     }
   };
+
   return (
     <div className="Login">
       <br />

@@ -21,13 +21,12 @@ export default class APIService {
     }).then((resp) => resp.json());
   }
 
-  static LogoutUser(body) {
+  static LogoutUser(cookie) {
     return fetch('/api/token/logout/', {
       method: 'POST',
       headers: {
-        Authorization: ~`Token ${token}`
-      },
-      body: JSON.stringify(body)
-    }).then((resp) => resp.json());
+        Authorization: `Token ${cookie}`
+      }
+    });
   }
 }
