@@ -27,7 +27,7 @@ class HostEditAllow(permissions.BasePermission):
         return False
 
 
-class MessageCreatorEditAllow(permissions.BasePermission):
+class MessageCreatorAllow(permissions.BasePermission):
     message = 'Only creator of messsage is allowed to edit message '
 
     def has_permission(self, request, view):

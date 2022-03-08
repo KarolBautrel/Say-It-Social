@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { addMessage } from '../components/Utils';
+import { addMessage, deleteMessage } from '../components/Utils';
 
 const RoomPage = () => {
   const { id } = useParams();
@@ -24,12 +24,20 @@ const RoomPage = () => {
         <h3>{room?.name}</h3>
         <p>{room?.description}</p>
         <p>{cookies.mytoken}</p>
-        <p>{user.user.id}</p>
+        <p>{user.user.name}</p>
       </div>
       <div>
         <h4>Messages</h4>
         {room?.messages.map((messages) => (
-          <div>{messages.body}</div>
+          <div>
+            {' '}
+            <p>
+              {messages.body}
+              {user.user.name === messages.user && (
+                <button onClick={() => deleteMessage(messages.id, cookies.mytoken)}>remove</button>
+              )}
+            </p>
+          </div>
         ))}
         <input
           type="text"

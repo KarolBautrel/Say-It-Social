@@ -10,7 +10,8 @@ from .views import (
     RoomUpdateView,
     UserRetrieveView,
     MessageCreateView,
-    MessageUpdateView
+    MessageUpdateView,
+    MessageDeleteView
 )
 
 urlpatterns = [
@@ -24,6 +25,8 @@ urlpatterns = [
     path('room/update/<int:pk>', RoomUpdateView.as_view(), name='update-room'),
     path('create_message', MessageCreateView.as_view(), name='message'),
     path('update_message/<int:pk>',
-         MessageUpdateView.as_view(), name='update-message')
+         MessageUpdateView.as_view(), name='update-message'),
+    path('delete_message/<int:pk>',
+         MessageDeleteView.as_view(), name='delete-message')
 
 ]

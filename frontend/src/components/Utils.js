@@ -12,8 +12,13 @@ export const onLogout = async (cookie, onSuccess) => {
     console.error(error);
   }
 };
-//TODO auth
+
 export const addMessage = async ({ body, room }, token) => {
   const response = await APIService.messageCreation({ body, room }, token);
+  return response;
+};
+
+export const deleteMessage = async (message, token) => {
+  const response = await APIService.messageDelete(message, token);
   return response;
 };

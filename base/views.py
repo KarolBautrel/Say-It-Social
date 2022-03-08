@@ -12,7 +12,7 @@ from base.serializers import (
 from rest_framework import generics
 from .models import User, Room, Message
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from base.permissions import HostEditAllow, RequestUserAllowed, MessageCreatorEditAllow
+from base.permissions import HostEditAllow, RequestUserAllowed, MessageCreatorAllow
 
 
 class UserListView(generics.ListAPIView):
@@ -73,5 +73,10 @@ class MessageCreateView(generics.CreateAPIView):
 
 class MessageUpdateView(generics.UpdateAPIView):
     queryset = Message.objects.all()
-    permission_classes = (MessageCreatorEditAllow,)
+    permission_classes = (MessageCreatorAllow,)
     serializer_class = MessageUpdateSerializer
+
+
+class MessageDeleteView(generics.DestroyAPIView):
+    queryset = Message.objects.all()
+    permission_classes = (MessageCreatorAllow,)

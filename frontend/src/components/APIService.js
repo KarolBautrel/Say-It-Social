@@ -42,4 +42,13 @@ export default class APIService {
       })
     }).then((resp) => resp.json());
   }
+
+  static messageDelete(message, token) {
+    return fetch(`/api/delete_message/${message}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    });
+  }
 }

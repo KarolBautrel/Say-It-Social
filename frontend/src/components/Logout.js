@@ -5,7 +5,6 @@ import { useCookies } from 'react-cookie';
 
 function Logout() {
   const [cookies, _, removeCookie] = useCookies(['mytoken']);
-
   console.log(useCookies(['mytoken']));
   return (
     <div>
