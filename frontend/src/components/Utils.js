@@ -13,7 +13,7 @@ export const onLogout = async (cookie, onSuccess) => {
   }
 };
 //TODO auth
-export const addMessage = async (body, cookie) => {
-  const response = await APIService.messageCreation(body, cookie);
+export const addMessage = async ({ body, room }, token) => {
+  const response = await APIService.messageCreation({ body, room }, token);
   return response;
 };

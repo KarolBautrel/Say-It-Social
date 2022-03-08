@@ -28,14 +28,18 @@ export default class APIService {
     });
   }
 
-  static messageCreation(body, cookie) {
+  static messageCreation(body, token) {
+    console.log(body);
     return fetch('/api/create_message', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Token ${cookie}`
+        Authorization: `Token ${token}`
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify({
+        room: body.room,
+        body: body.body
+      })
     }).then((resp) => resp.json());
   }
 }

@@ -8,7 +8,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [token, setToken] = useCookies(['mytoken']);
   let navigate = useNavigate();
-  const [userData, setUserData] = useState('');
+  const [userData, setUserData] = useCookies(['user']);
 
   useEffect(() => {
     if (token.mytoken) {
@@ -35,7 +35,7 @@ function Login() {
         console.log(response);
         const data = await getUserData(response.auth_token);
         console.log(data);
-        setUserData(data);
+        setUserData('user', data);
         navigate('/');
       }
     } catch (error) {

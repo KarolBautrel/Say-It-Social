@@ -11,6 +11,7 @@ const RoomPage = () => {
   }, [id]);
   const [body, setMessage] = useState('');
   const [cookies, _] = useCookies(['mytoken']);
+  const [user] = useCookies(['user']);
   const getNote = async () => {
     const response = await fetch(`/api/room/${id}`);
     const data = await response.json();
@@ -22,6 +23,8 @@ const RoomPage = () => {
       <div className="Room">
         <h3>{room?.name}</h3>
         <p>{room?.description}</p>
+        <p>{cookies.mytoken}</p>
+        <p>{user.user.id}</p>
       </div>
       <div>
         <h4>Messages</h4>
@@ -36,7 +39,9 @@ const RoomPage = () => {
           value={body}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button onClick={() => addMessage(body, cookies.mytoken)}>Button</button>
+        <button onClick={() => addMessage({ body, room: room?.id }, cookies.mytoken)}>
+          Button
+        </button>
       </div>
       <div>
         <h4>Participants: </h4>
