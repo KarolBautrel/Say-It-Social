@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
-from base.models import User, Room, Message
+from base.models import User, Room, Message, Topic
 
 
 class UserListSerializer(ModelSerializer):
@@ -26,6 +26,12 @@ class UpdateUserInfoSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ['bio']
+
+
+class TopicSerializer(ModelSerializer):
+    class Meta:
+        model = Topic
+        fields = ['topic']
 
 
 class MessageCreateSerializer(ModelSerializer):
@@ -59,7 +65,7 @@ class MessageUpdateSerializer(ModelSerializer):
 
 
 class RoomSerializer(ModelSerializer):
-    host = serializers.ReadOnlyField(source='host.username')
+    host = UserDetailSerializer(many=False)
     topic = serializers.ReadOnlyField(source='topic.topic')
     messages = MessagesSerializer(many=True)
     participants = ParticipantSerializer(many=True)

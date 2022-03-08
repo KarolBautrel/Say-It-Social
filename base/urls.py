@@ -4,6 +4,7 @@ from django.urls import path, include
 from .views import (
     UserUpdateView,
     UserListView,
+    TopicView,
     RoomCreateView,
     RoomListView,
     RoomRetrieveView,
@@ -17,6 +18,7 @@ from .views import (
 urlpatterns = [
 
     path('', UserListView.as_view(), name='users'),
+    path('topics', TopicView.as_view(), name='topics'),
     path('user/<int:pk>', UserRetrieveView.as_view(), name='user'),
     path('update_user/<int:pk>', UserUpdateView.as_view(), name='update-user'),
     path('create_room', RoomCreateView.as_view(), name='create-room'),

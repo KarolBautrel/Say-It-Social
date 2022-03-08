@@ -5,10 +5,12 @@ import { useCookies } from 'react-cookie';
 
 function Logout() {
   const [cookies, _, removeCookie] = useCookies(['mytoken']);
-  console.log(useCookies(['mytoken']));
+  const [user, i, removeCookieUser] = useCookies(['user']);
   return (
     <div>
-      <button onClick={() => onLogout(cookies.mytoken, removeCookie)}>Logout</button>
+      <button onClick={() => onLogout(cookies.mytoken, user.user, removeCookie, removeCookieUser)}>
+        Logout
+      </button>
     </div>
   );
 }

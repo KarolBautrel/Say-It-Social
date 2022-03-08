@@ -2,6 +2,7 @@ from django.shortcuts import render
 from base.serializers import (
     UpdateUserInfoSerializer,
     UserListSerializer,
+    TopicSerializer,
     RoomSerializer,
     RoomCreateSerializer,
     RoomUpdateSerializer,
@@ -10,7 +11,7 @@ from base.serializers import (
     MessageUpdateSerializer)
 
 from rest_framework import generics
-from .models import User, Room, Message
+from .models import User, Room, Message, Topic
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from base.permissions import HostEditAllow, RequestUserAllowed, MessageCreatorAllow
 
@@ -31,6 +32,12 @@ class UserUpdateView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (RequestUserAllowed,)
     serializer_class = UpdateUserInfoSerializer
+
+
+class TopicView(generics.ListAPIView):
+    queryset = Topic.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TopicSerializer
 
 
 class RoomCreateView(generics.CreateAPIView):

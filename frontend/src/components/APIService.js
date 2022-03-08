@@ -20,6 +20,7 @@ export default class APIService {
   }
 
   static LogoutUser(cookie) {
+    console.log(cookie);
     return fetch('/api/token/logout/', {
       method: 'POST',
       headers: {

@@ -30,7 +30,6 @@ const RoomPage = () => {
         <h4>Messages</h4>
         {room?.messages.map((messages) => (
           <div>
-            {' '}
             <p>
               {messages.body}
               {user.user.name === messages.user && (

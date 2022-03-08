@@ -1,11 +1,13 @@
 import APIService from '../components/APIService';
 
-export const onLogout = async (cookie, onSuccess) => {
+export const onLogout = async (cookie, user, onSuccessToken, onSuccessUser) => {
   try {
+    console.log(user);
     console.log(cookie);
     const response = await APIService.LogoutUser(cookie);
     if (response.ok) {
-      onSuccess('mytoken');
+      onSuccessToken('mytoken');
+      onSuccessUser('user');
     }
     console.log(response);
   } catch (error) {

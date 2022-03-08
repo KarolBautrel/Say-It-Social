@@ -2,6 +2,7 @@ import { useCookies } from 'react-cookie';
 import React, { useState, useEffect } from 'react';
 import ListItem from '../components/ListItem';
 import Logout from '../components/Logout';
+import CreateRoom from '../components/CreateRoom';
 import { useNavigate } from 'react-router-dom';
 
 const RoomListPage = () => {
@@ -28,6 +29,7 @@ const RoomListPage = () => {
   return (
     <div>
       <Logout />
+      <CreateRoom />
       <div className="Rooms-list">
         {rooms.map((room, index) => (
           <ListItem key={index} room={room} />
