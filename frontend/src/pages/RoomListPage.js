@@ -12,6 +12,8 @@ const RoomListPage = () => {
   useEffect(() => {
     if (cookies?.mytoken) {
       getRooms();
+    } else {
+      navigate('/login');
     }
   }, []);
 

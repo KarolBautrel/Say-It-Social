@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import ListItem from '../components/ListItem';
 
 const RoomPage = () => {
   const { id } = useParams();
@@ -22,8 +23,16 @@ const RoomPage = () => {
       </div>
       <div>
         <h4>Messages</h4>
-        <p>{room?.messages}</p>
+        {room?.messages.map((messages) => (
+          <div>{messages.body}</div>
+        ))}
         <button className="btn btn-success">add message</button>
+      </div>
+      <div>
+        <h4>Participants: </h4>
+        {room?.participants.map((participants) => (
+          <div>{participants.name}</div>
+        ))}
       </div>
     </div>
   );

@@ -10,6 +10,12 @@ class UserListSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class ParticipantSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'name', 'email']
+
+
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
@@ -39,9 +45,11 @@ class MessageCreateSerializer(ModelSerializer):
 
 
 class MessagesSerializer(ModelSerializer):
+    user = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Message
-        fields = '_all__'
+        fields = '__all__'
 
 
 class MessageUpdateSerializer(ModelSerializer):
@@ -53,8 +61,8 @@ class MessageUpdateSerializer(ModelSerializer):
 class RoomSerializer(ModelSerializer):
     host = serializers.ReadOnlyField(source='host.username')
     topic = serializers.ReadOnlyField(source='topic.topic')
-    messages = serializers.StringRelatedField(many=True)
-    participants = serializers.StringRelatedField(many=True)
+    messages = MessagesSerializer(many=True)
+    participants = ParticipantSerializer(many=True)
 
     class Meta:
         model = Room
