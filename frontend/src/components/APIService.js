@@ -1,5 +1,3 @@
-import token from '../components/Login';
-
 export default class APIService {
   static LoginUser(body) {
     return fetch('/api/token/login/', {
@@ -28,5 +26,16 @@ export default class APIService {
         Authorization: `Token ${cookie}`
       }
     });
+  }
+
+  static messageCreation(body, cookie) {
+    return fetch('/api/create_message', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${cookie}`
+      },
+      body: JSON.stringify(body)
+    }).then((resp) => resp.json());
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ListItem from '../components/ListItem';
+import { useCookies } from 'react-cookie';
+import { addMessage } from '../components/Utils';
 
 const RoomPage = () => {
   const { id } = useParams();
@@ -8,7 +9,8 @@ const RoomPage = () => {
   useEffect(() => {
     getNote();
   }, [id]);
-
+  const [body, setMessage] = useState('');
+  const [cookies, _] = useCookies(['mytoken']);
   const getNote = async () => {
     const response = await fetch(`/api/room/${id}`);
     const data = await response.json();
@@ -26,7 +28,15 @@ const RoomPage = () => {
         {room?.messages.map((messages) => (
           <div>{messages.body}</div>
         ))}
-        <button className="btn btn-success">add message</button>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="add your message"
+          id="message"
+          value={body}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button onClick={() => addMessage(body, cookies.mytoken)}>Button</button>
       </div>
       <div>
         <h4>Participants: </h4>
