@@ -7,7 +7,7 @@ const ListItem = ({ room }) => {
       <h2>Topic : {room.topic}</h2>
       <h3>Room name: {room.name}</h3>
       <Link to={`/room/${room.id}`}>
-        <button>Get to the room</button>
+        <button className="btn-white">Get to the room</button>
       </Link>
     </div>
   );

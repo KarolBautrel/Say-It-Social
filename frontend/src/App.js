@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import RoomListPage from './pages/RoomListPage';
 import RoomPage from './pages/RoomPage';
-import Header from './components/Header';
+import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
 import CreateRoom from './components/CreateRoom';
@@ -12,17 +12,15 @@ function App() {
   return (
     <CookiesProvider>
       <Router>
-        <div className="container dark">
-          <div className="app">
-            <Header />
-            <Routes>
-              <Route path="/" exact element={<RoomListPage />} />
-              <Route path="/room/:id" element={<RoomPage />} />
-              <Route path="/create_room" element={<CreateRoom />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </Routes>
-          </div>
+        <div className="app">
+          <Navbar />
+          <Routes>
+            <Route path="/" exact element={<RoomListPage />} />
+            <Route path="/room/:id" element={<RoomPage />} />
+            <Route path="/create_room" element={<CreateRoom />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
         </div>
       </Router>
     </CookiesProvider>

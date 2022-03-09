@@ -19,38 +19,46 @@ const RoomPage = () => {
   };
 
   return (
-    <div>
-      <div className="Room">
-        <h3>{room?.name}</h3>
-        <p>{room?.description}</p>
-        <p>{cookies.mytoken}</p>
-        <p>{user.user.name}</p>
+    <div className="grid grid-rows-2 grid-flow-col gap-2">
+      <div className="grid justify-items-start">
+        <div className="row-span-2 ">
+          <h3>{room?.name}</h3>
+          <p>{room?.description}</p>
+        </div>
+        <div className="col-span-2 ">
+          <h4>Conversation</h4>
+          {room?.messages.map((messages) => (
+            <div>
+              <p>
+                @{messages.user}: {messages.body}
+                {user.user.name === messages.user && (
+                  <button
+                    className="btn-white"
+                    onClick={() => deleteMessage(messages.id, cookies.mytoken)}>
+                    {' '}
+                    remove
+                  </button>
+                )}
+              </p>
+            </div>
+          ))}
+
+          <input
+            type="text"
+            className="form-control"
+            placeholder="add your message"
+            id="message"
+            value={body}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <button
+            className="btn-white"
+            onClick={() => addMessage({ body, room: room?.id }, cookies.mytoken)}>
+            Add
+          </button>
+        </div>
       </div>
-      <div>
-        <h4>Messages</h4>
-        {room?.messages.map((messages) => (
-          <div>
-            <p>
-              {messages.body}
-              {user.user.name === messages.user && (
-                <button onClick={() => deleteMessage(messages.id, cookies.mytoken)}>remove</button>
-              )}
-            </p>
-          </div>
-        ))}
-        <input
-          type="text"
-          className="form-control"
-          placeholder="add your message"
-          id="message"
-          value={body}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button onClick={() => addMessage({ body, room: room?.id }, cookies.mytoken)}>
-          Button
-        </button>
-      </div>
-      <div>
+      <div className="row-span-3 ">
         <h4>Participants: </h4>
         {room?.participants.map((participants) => (
           <div>{participants.name}</div>

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const RoomListPage = () => {
   let [rooms, setRooms] = useState([]);
+  const [topics, setTopic] = useState([]);
   const [cookies] = useCookies(['mytoken']);
   const navigate = useNavigate();
 
@@ -17,20 +18,36 @@ const RoomListPage = () => {
       navigate('/login');
     }
   }, []);
+  useEffect(() => {
+    getTopic();
+  }, []);
 
   let getRooms = async () => {
     let response = await fetch('/api/rooms');
     let data = await response.json();
     setRooms(data);
   };
+
+  const getTopic = async () => {
+    const response = await fetch('api/topics', {
+      headers: {
+        Authorization: `Token ${cookies.mytoken}`
+      }
+    });
+    const data = await response.json();
+    setTopic(data);
+  };
+
   if (!cookies.mytoken) {
     navigate('/login');
   }
   return (
     <div>
       <Logout />
-      <CreateRoom />
-      <div className="Rooms-list">
+      <hr></hr>
+      <div className="grid grid-rows-3 grid-flow-col gap-4">
+        {topics && topics.map((topic) => <p>{topic.topic}</p>)}
+
         {rooms.map((room, index) => (
           <ListItem key={index} room={room} />
         ))}
