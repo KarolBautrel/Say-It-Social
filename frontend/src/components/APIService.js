@@ -52,4 +52,20 @@ export default class APIService {
       }
     });
   }
+
+  static roomCreation(body, token) {
+    console.log(body);
+    return fetch('/api/create_room', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify({
+        name: body.name,
+        description: body.description,
+        topic: body.topic
+      })
+    });
+  }
 }

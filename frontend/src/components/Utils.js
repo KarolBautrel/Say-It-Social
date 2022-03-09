@@ -24,3 +24,8 @@ export const deleteMessage = async (message, token) => {
   const response = await APIService.messageDelete(message, token);
   return response;
 };
+
+export const newRoom = async ({ name, description, topic }, token) => {
+  const response = await APIService.roomCreation({ name, description, topic }, token);
+  return response;
+};

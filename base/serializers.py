@@ -31,7 +31,7 @@ class UpdateUserInfoSerializer(ModelSerializer):
 class TopicSerializer(ModelSerializer):
     class Meta:
         model = Topic
-        fields = ['topic']
+        fields = ['id', 'topic']
 
 
 class MessageCreateSerializer(ModelSerializer):

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import APIService from '../components/APIService';
+import { newRoom } from '../components/Utils';
 import { useCookies } from 'react-cookie';
+import { useParams } from 'react-router-dom';
 
 function CreateRoom() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [topics, setTopic] = useState('');
+  const [topics, setTopic] = useState([]);
+  const [topic, setTopicname] = useState('');
   const [token] = useCookies(['mytoken']);
-
   useEffect(() => {
     getTopic();
   }, []);
@@ -19,22 +21,19 @@ function CreateRoom() {
       }
     });
     const data = await response.json();
-    console.log(data);
     setTopic(data);
   };
-
   return (
     <div className="Login">
       <br />
       <br />
       <h1>Create your room</h1>
       <div className="mb-3">
-        <label htmlFor="topics" className="form-label">
-          Topics <p>{topics.topic}</p>
-        </label>
+        <label htmlFor="topics" className="form-label"></label>
 
-        <select name="topics" id="topics">
-          <option value="topic">{topics.topic}</option>
+        <select value={topic} onChange={(e) => setTopicname(e.target.value)}>
+          <option defaultValue="1">---</option>
+          {topics && topics.map((topic) => <option value={topic.id}>{topic.topic}</option>)}
         </select>
         <br />
       </div>
@@ -66,7 +65,11 @@ function CreateRoom() {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button className="Submit">Register</button>
+      <button
+        onClick={() => newRoom({ name, description, topic }, token.mytoken)}
+        className="Submit">
+        Submit
+      </button>
     </div>
   );
 }
