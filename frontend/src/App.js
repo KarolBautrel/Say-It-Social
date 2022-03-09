@@ -14,6 +14,7 @@ function App() {
       <Router>
         <div className="app">
           <Navbar />
+          <br />
           <Routes>
             <Route path="/" exact element={<RoomListPage />} />
             <Route path="/room/:id" element={<RoomPage />} />

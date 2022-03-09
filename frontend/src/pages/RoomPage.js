@@ -22,15 +22,17 @@ const RoomPage = () => {
     <div className="grid grid-rows-2 grid-flow-col gap-2">
       <div className="grid justify-items-start">
         <div className="row-span-2 ">
-          <h3>{room?.name}</h3>
-          <p>{room?.description}</p>
+          <p className="text-xl">{room?.name}</p>
+          <p className="text-lg">{room?.description}</p>
         </div>
         <div className="col-span-2 ">
-          <h4>Conversation</h4>
+          <br />
+          <p className="text-xl font-bold">Conversation</p>
           {room?.messages.map((messages) => (
             <div>
-              <p>
-                @{messages.user}: {messages.body}
+              <p className="text-light font-bold">@{messages.user}</p>
+              <p className="text-light">
+                {messages.body}
                 {user.user.name === messages.user && (
                   <button
                     className="btn-white"
@@ -42,7 +44,7 @@ const RoomPage = () => {
               </p>
             </div>
           ))}
-
+          <br />
           <input
             type="text"
             className="form-control"
@@ -59,9 +61,14 @@ const RoomPage = () => {
         </div>
       </div>
       <div className="row-span-3 ">
-        <h4>Participants: </h4>
+        <p className="text-2xl font-bold">Participants: </p>
         {room?.participants.map((participants) => (
-          <div>{participants.name}</div>
+          <div>
+            <p className="text-small">
+              {participants.name}
+              {user.user.name === participants.name && <h> (you)</h>}
+            </p>
+          </div>
         ))}
       </div>
     </div>

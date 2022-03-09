@@ -42,15 +42,22 @@ const RoomListPage = () => {
     navigate('/login');
   }
   return (
-    <div>
+    <div className="grid grid-rows-2 grid-flow-col gap-2">
       <Logout />
       <hr></hr>
-      <div className="grid grid-rows-3 grid-flow-col gap-4">
-        {topics && topics.map((topic) => <p>{topic.topic}</p>)}
 
+      <div className="row-span-3 ">
+        <p className="text-2xl">Topics</p>
+        {topics && topics.map((topic) => <p>{topic.topic}</p>)}
+      </div>
+      <div className="row-span-3 ">
+        <p className="text-2xl">Recent Rooms</p>
         {rooms.map((room, index) => (
           <ListItem key={index} room={room} />
         ))}
+      </div>
+      <div className="row-span-3 ">
+        <p className="text-2xl">Recent Activity</p>
       </div>
     </div>
   );
