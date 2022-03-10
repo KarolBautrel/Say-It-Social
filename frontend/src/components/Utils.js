@@ -22,11 +22,21 @@ export const addMessage = async ({ body, room }, token) => {
 };
 
 export const deleteMessage = async (messageId, token) => {
-  const response = await APIService.messageDelete(messageId, token);
+  const response = await APIService.deleteMessage(messageId, token);
   return response;
 };
 
 export const newRoom = async ({ name, description, topic }, token) => {
   const response = await APIService.roomCreation({ name, description, topic }, token);
   return response;
+};
+
+export const getUserData = async (token) => {
+  const response = await fetch('api/users/me', {
+    headers: {
+      Authorization: `Token ${token}`
+    }
+  });
+  const data = await response.json();
+  return data;
 };

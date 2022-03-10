@@ -11,10 +11,12 @@ import CreateRoom from './components/CreateRoom';
 import { CookiesProvider } from 'react-cookie';
 function App() {
   return (
-    <div className="app">
-      <Navbar />
-      <Routers />
-    </div>
+    <CookiesProvider>
+      <div className="app">
+        <Navbar />
+        <Routers />
+      </div>
+    </CookiesProvider>
   );
 }
 

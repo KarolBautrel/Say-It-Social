@@ -5,11 +5,19 @@ import { useNavigate } from 'react-router-dom';
 import { getUserData } from './Utils';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userConfiguration, setUserConfiguration] = useState({
+    email: '',
+    password: ''
+  });
   const [token, setToken] = useCookies(['mytoken']);
-  const navigate = useNavigate();
   const [userData, setUserData] = useCookies(['user']);
+  const navigate = useNavigate();
+
+  const handleChange = (event) =>
+    setUserConfiguration({
+      ...userConfiguration,
+      [event.target.name]: event.target.value
+    });
 
   useEffect(() => {
     if (token.mytoken) {
@@ -19,7 +27,7 @@ function Login() {
 
   const onLogin = async () => {
     try {
-      const response = await APIService.LoginUser({ email, password });
+      const response = await APIService.LoginUser(userConfiguration);
 
       if (response.auth_token) {
         setToken('mytoken', response.auth_token);
@@ -41,12 +49,13 @@ function Login() {
           Email
         </label>
         <input
+          name="email"
           type="email"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="email"
           id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userConfiguration.email}
+          onChange={handleChange}
         />
       </div>
       <div className="mb-6">
@@ -55,12 +64,13 @@ function Login() {
         </label>
         <br />
         <input
+          name="password"
           type="password"
           className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           id="password"
           placeholder="******************"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={userConfiguration.password}
+          onChange={handleChange}
         />
       </div>
       <button
