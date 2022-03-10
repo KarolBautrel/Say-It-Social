@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import APIService from '../components/APIService';
-import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -11,6 +10,7 @@ function Register() {
     password: '',
     re_password: ''
   });
+  const navigate = useNavigate();
   const handleChange = (event) =>
     setUserRegisterConfiguration({
       ...userRegisterConfiguration,
@@ -26,19 +26,20 @@ function Register() {
   const onRegister = () => {
     APIService.RegisterUser(userRegisterConfiguration)
       .then((resp) => console.log(resp))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .then(navigate('/login'));
   };
 
   return (
-    <div className="Login">
+    <div className="w-full max-w-xs">
       {registerFormConfiguration.map(({ name, id, placeholder, type }) => (
         <div>
-          <label htmlFor={name} className="form-label">
+          <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">
             {name}
           </label>
           <input
             type={type}
-            className="form-control"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder={placeholder}
             id={id}
             name={name}
@@ -47,7 +48,9 @@ function Register() {
           />
         </div>
       ))}
-      <button onClick={onRegister} className="Submit">
+      <button
+        onClick={onRegister}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Register
       </button>
     </div>

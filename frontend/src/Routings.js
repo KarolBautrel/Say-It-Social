@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import CreateRoom from './components/CreateRoom';
 import { CookiesProvider } from 'react-cookie';
-function Routers() {
+function Routings() {
   return (
     <Router>
       <Routes>
@@ -21,4 +21,4 @@ function Routers() {
   );
 }
 
-export default Routers;
+export default Routings;

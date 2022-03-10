@@ -8,7 +8,7 @@ function CreateRoom() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [topicsList, setTopicsList] = useState([]);
-  const [topic, setTopicname] = useState('');
+  const [topicName, setTopicname] = useState('');
   const [token] = useCookies(['mytoken']);
   useEffect(() => {
     getTopic();
@@ -31,7 +31,7 @@ function CreateRoom() {
       <div className="mb-3">
         <label htmlFor="topics" className="form-label"></label>
 
-        <select value={topic} onChange={(e) => setTopicname(e.target.value)}>
+        <select value={topicName} onChange={(e) => setTopicname(e.target.value)}>
           <option defaultValue="1">---</option>
           {topicsList && topicsList.map((topic) => <option value={topic.id}>{topic.topic}</option>)}
         </select>
@@ -66,7 +66,7 @@ function CreateRoom() {
         />
       </div>
       <button
-        onClick={() => newRoom({ name, description, topic }, token.mytoken)}
+        onClick={() => newRoom({ name, description, topic: topicName }, token.mytoken)}
         className="Submit">
         Submit
       </button>

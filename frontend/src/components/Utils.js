@@ -27,7 +27,7 @@ export const deleteMessage = async (messageId, token) => {
 };
 
 export const newRoom = async ({ name, description, topic }, token) => {
-  const response = await APIService.roomCreation({ name, description, topic }, token);
+  const response = await APIService.createRoom({ name, description, topic }, token);
   return response;
 };
 

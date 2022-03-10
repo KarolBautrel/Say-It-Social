@@ -43,14 +43,13 @@ const RoomListPage = () => {
     setTopic(data);
   };
 
-  const getActivity = async (token) => {
+  const getActivity = async () => {
     const response = await fetch('api/messages', {
       headers: {
         Authorization: `Token ${cookies.mytoken}`
       }
     });
     const data = await response.json();
-    console.log(data);
     setActivity(data);
   };
 

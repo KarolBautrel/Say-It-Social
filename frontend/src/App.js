@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Routers from './Routers';
+import Routings from './Routings';
 import RoomListPage from './pages/RoomListPage';
 import RoomPage from './pages/RoomPage';
 import Navbar from './components/Navbar';
@@ -14,7 +14,7 @@ function App() {
     <CookiesProvider>
       <div className="app">
         <Navbar />
-        <Routers />
+        <Routings />
       </div>
     </CookiesProvider>
   );

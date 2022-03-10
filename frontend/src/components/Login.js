@@ -33,7 +33,6 @@ function Login() {
         setToken('mytoken', response.auth_token);
         console.log(response);
         const data = await getUserData(response.auth_token);
-        console.log(data);
         setUserData('user', data);
         navigate('/');
       }
@@ -68,7 +67,7 @@ function Login() {
           type="password"
           className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           id="password"
-          placeholder="******************"
+          placeholder="Password"
           value={userConfiguration.password}
           onChange={handleChange}
         />
