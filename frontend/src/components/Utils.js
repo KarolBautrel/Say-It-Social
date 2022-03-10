@@ -17,12 +17,12 @@ export const onLogout = async (token, user, onSuccessToken, onSuccessUser) => {
 };
 
 export const addMessage = async ({ body, room }, token) => {
-  const response = await APIService.messageCreation({ body, room }, token);
+  const response = await APIService.createMessage({ body, room }, token);
   return response;
 };
 
-export const deleteMessage = async (message, token) => {
-  const response = await APIService.messageDelete(message, token);
+export const deleteMessage = async (messageId, token) => {
+  const response = await APIService.messageDelete(messageId, token);
   return response;
 };
 

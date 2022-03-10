@@ -20,7 +20,6 @@ export default class APIService {
   }
 
   static LogoutUser(token) {
-    console.log(token);
     return fetch('/api/token/logout/', {
       method: 'POST',
       headers: {
@@ -29,8 +28,7 @@ export default class APIService {
     });
   }
 
-  static messageCreation(body, token) {
-    console.log(body);
+  static createMessage({ body, room }, token) {
     return fetch('/api/create_message', {
       method: 'POST',
       headers: {
@@ -38,14 +36,14 @@ export default class APIService {
         Authorization: `Token ${token}`
       },
       body: JSON.stringify({
-        room: body.room,
-        body: body.body
+        body,
+        room
       })
     }).then((resp) => resp.json());
   }
 
-  static messageDelete(message, token) {
-    return fetch(`/api/delete_message/${message}`, {
+  static messageDelete(messageId, token) {
+    return fetch(`/api/delete_message/${messageId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Token ${token}`
@@ -54,7 +52,6 @@ export default class APIService {
   }
 
   static roomCreation({ name, description, topic }, token) {
-    console.log({ name, description, topic });
     return fetch('/api/create_room', {
       method: 'POST',
       headers: {

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import APIService from '../components/APIService';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { getUserData } from './Utils';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useCookies(['mytoken']);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [userData, setUserData] = useCookies(['user']);
 
   useEffect(() => {
@@ -15,16 +16,6 @@ function Login() {
       navigate('/');
     }
   }, [token]);
-
-  const getUserData = async (token) => {
-    const response = await fetch('api/users/me', {
-      headers: {
-        Authorization: `Token ${token}`
-      }
-    });
-    const data = await response.json();
-    return data;
-  };
 
   const onLogin = async () => {
     try {

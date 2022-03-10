@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 function CreateRoom() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [topics, setTopic] = useState([]);
+  const [topicsList, setTopicsList] = useState([]);
   const [topic, setTopicname] = useState('');
   const [token] = useCookies(['mytoken']);
   useEffect(() => {
@@ -21,7 +21,7 @@ function CreateRoom() {
       }
     });
     const data = await response.json();
-    setTopic(data);
+    setTopicsList(data);
   };
   return (
     <div className="Login">
@@ -33,7 +33,7 @@ function CreateRoom() {
 
         <select value={topic} onChange={(e) => setTopicname(e.target.value)}>
           <option defaultValue="1">---</option>
-          {topics && topics.map((topic) => <option value={topic.id}>{topic.topic}</option>)}
+          {topicsList && topicsList.map((topic) => <option value={topic.id}>{topic.topic}</option>)}
         </select>
         <br />
       </div>
