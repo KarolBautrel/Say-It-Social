@@ -20,7 +20,7 @@ export default class APIService {
       body: JSON.stringify({ name, username, password, re_password, email })
     })
       .then((resp) => resp.json())
-      .catch((error) => console.error(`Login user error: ${error}`));
+      .catch((error) => console.error(`Register user error: ${error}`));
   }
 
   static LogoutUser(token) {
@@ -29,7 +29,7 @@ export default class APIService {
       headers: {
         Authorization: `Token ${token}`
       }
-    }).catch((error) => console.error(`Login user error: ${error}`));
+    }).catch((error) => console.error(`Logout user error: ${error}`));
   }
 
   static createMessage({ body, room }, token) {
@@ -45,7 +45,7 @@ export default class APIService {
       })
     })
       .then((resp) => resp.json())
-      .catch((error) => console.error(`Login user error: ${error}`));
+      .catch((error) => console.error(`Error during message creation: ${error}`));
   }
 
   static deleteMessage(messageId, token) {
@@ -54,7 +54,7 @@ export default class APIService {
       headers: {
         Authorization: `Token ${token}`
       }
-    }).catch((error) => console.error(`Login user error: ${error}`));
+    }).catch((error) => console.error(`Error during message deleting: ${error}`));
   }
 
   static createRoom({ name, description, topic }, token) {
@@ -65,6 +65,6 @@ export default class APIService {
         Authorization: `Token ${token}`
       },
       body: JSON.stringify({ name, description, topic })
-    }).catch((error) => console.error(`Login user error: ${error}`));
+    }).catch((error) => console.error(`Error during room creation: ${error}`));
   }
 }
