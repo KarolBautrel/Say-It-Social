@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { onLogout } from './Utils';
-import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 function Logout() {

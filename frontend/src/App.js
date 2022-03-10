@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Routings from './Routings';
 import RoomListPage from './pages/RoomListPage';
 import RoomPage from './pages/RoomPage';
 import Navbar from './components/Navbar';
@@ -11,19 +12,10 @@ import { CookiesProvider } from 'react-cookie';
 function App() {
   return (
     <CookiesProvider>
-      <Router>
-        <div className="app">
-          <Navbar />
-          <br />
-          <Routes>
-            <Route path="/" exact element={<RoomListPage />} />
-            <Route path="/room/:id" element={<RoomPage />} />
-            <Route path="/create_room" element={<CreateRoom />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </div>
-      </Router>
+      <div className="app">
+        <Navbar />
+        <Routings />
+      </div>
     </CookiesProvider>
   );
 }

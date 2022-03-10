@@ -7,8 +7,8 @@ import { useParams } from 'react-router-dom';
 function CreateRoom() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [topics, setTopic] = useState([]);
-  const [topic, setTopicname] = useState('');
+  const [topicsList, setTopicsList] = useState([]);
+  const [topicName, setTopicName] = useState('');
   const [token] = useCookies(['mytoken']);
   useEffect(() => {
     getTopic();
@@ -21,19 +21,17 @@ function CreateRoom() {
       }
     });
     const data = await response.json();
-    setTopic(data);
+    setTopicsList(data);
   };
   return (
-    <div className="Login">
-      <br />
-      <br />
+    <div className="w-full max-w-xs">
       <h1>Create your room</h1>
       <div className="mb-3">
         <label htmlFor="topics" className="form-label"></label>
 
-        <select value={topic} onChange={(e) => setTopicname(e.target.value)}>
+        <select value={topicName} onChange={(e) => setTopicName(e.target.value)}>
           <option defaultValue="1">---</option>
-          {topics && topics.map((topic) => <option value={topic.id}>{topic.topic}</option>)}
+          {topicsList && topicsList.map((topic) => <option value={topic.id}>{topic.topic}</option>)}
         </select>
         <br />
       </div>
@@ -44,7 +42,7 @@ function CreateRoom() {
         <br />
         <input
           type="name"
-          className="form-control"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="name"
           id="name"
           value={name}
@@ -58,7 +56,7 @@ function CreateRoom() {
         <br />
         <input
           type="description"
-          className="form-control"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="description"
           id="description"
           value={description}
@@ -66,8 +64,8 @@ function CreateRoom() {
         />
       </div>
       <button
-        onClick={() => newRoom({ name, description, topic }, token.mytoken)}
-        className="Submit">
+        onClick={() => newRoom({ name, description, topic: topicName }, token.mytoken)}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Submit
       </button>
     </div>

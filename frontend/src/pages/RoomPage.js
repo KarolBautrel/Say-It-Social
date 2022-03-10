@@ -37,7 +37,6 @@ const RoomPage = () => {
                   <button
                     className="btn-white"
                     onClick={() => deleteMessage(messages.id, cookies.mytoken)}>
-                    {' '}
                     remove
                   </button>
                 )}
