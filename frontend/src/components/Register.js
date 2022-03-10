@@ -10,7 +10,7 @@ function Register() {
   const [re_password, setRe_password] = useState('');
   const [email, setEmail] = useState('');
 
-  const regiserBtn = () => {
+  const onRegister = () => {
     APIService.RegisterUser({ name, username, password, re_password, email })
       .then((resp) => console.log(resp))
       .catch((error) => console.log(error));
@@ -79,7 +79,7 @@ function Register() {
       </div>
       <div className="mb-3">
         <label htmlFor="re_password" className="form-label">
-          Re - Pasword
+          Confirm Password
         </label>
         <br />
         <input
@@ -91,7 +91,7 @@ function Register() {
           onChange={(e) => setRe_password(e.target.value)}
         />
       </div>
-      <button onClick={regiserBtn} className="Submit">
+      <button onClick={onRegister} className="Submit">
         Register
       </button>
     </div>

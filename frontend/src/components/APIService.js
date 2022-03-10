@@ -1,30 +1,30 @@
 export default class APIService {
-  static LoginUser(body) {
+  static LoginUser({ email, password }) {
     return fetch('/api/token/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify({ email, password })
     }).then((resp) => resp.json());
   }
 
-  static RegisterUser(body) {
+  static RegisterUser({ name, username, password, re_password, email }) {
     return fetch('/api/users/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify({ name, username, password, re_password, email })
     }).then((resp) => resp.json());
   }
 
-  static LogoutUser(cookie) {
-    console.log(cookie);
+  static LogoutUser(token) {
+    console.log(token);
     return fetch('/api/token/logout/', {
       method: 'POST',
       headers: {
-        Authorization: `Token ${cookie}`
+        Authorization: `Token ${token}`
       }
     });
   }
@@ -53,19 +53,15 @@ export default class APIService {
     });
   }
 
-  static roomCreation(body, token) {
-    console.log(body);
+  static roomCreation({ name, description, topic }, token) {
+    console.log({ name, description, topic });
     return fetch('/api/create_room', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`
       },
-      body: JSON.stringify({
-        name: body.name,
-        description: body.description,
-        topic: body.topic
-      })
+      body: JSON.stringify({ name, description, topic })
     });
   }
 }

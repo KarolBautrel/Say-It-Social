@@ -1,10 +1,11 @@
 import APIService from '../components/APIService';
+import { useNavigate } from 'react-router-dom';
 
-export const onLogout = async (cookie, user, onSuccessToken, onSuccessUser) => {
+export const onLogout = async (token, user, onSuccessToken, onSuccessUser) => {
   try {
     console.log(user);
-    console.log(cookie);
-    const response = await APIService.LogoutUser(cookie);
+    console.log(token);
+    const response = await APIService.LogoutUser(token);
     if (response.ok) {
       onSuccessToken('mytoken');
       onSuccessUser('user');

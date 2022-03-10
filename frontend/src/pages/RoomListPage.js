@@ -1,7 +1,7 @@
 import { useCookies } from 'react-cookie';
 import React, { useState, useEffect } from 'react';
 import ListItem from '../components/ListItem';
-import Logout from '../components/Logout';
+
 import CreateRoom from '../components/CreateRoom';
 import { useNavigate } from 'react-router-dom';
 
@@ -59,7 +59,6 @@ const RoomListPage = () => {
   }
   return (
     <div className="grid grid-rows-2 grid-flow-col gap-2">
-      <Logout />
       <hr></hr>
 
       <div className="row-span-3 ">
