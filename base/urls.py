@@ -12,7 +12,8 @@ from .views import (
     UserRetrieveView,
     MessageCreateView,
     MessageUpdateView,
-    MessageDeleteView
+    MessageDeleteView,
+    MessageListView
 )
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('rooms', RoomListView.as_view(), name='rooms'),
     path('room/<int:pk>', RoomRetrieveView.as_view(), name='detail_room'),
     path('room/update/<int:pk>', RoomUpdateView.as_view(), name='update-room'),
+    path('messages', MessageListView.as_view(), name='messages'),
     path('create_message', MessageCreateView.as_view(), name='message'),
     path('update_message/<int:pk>',
          MessageUpdateView.as_view(), name='update-message'),

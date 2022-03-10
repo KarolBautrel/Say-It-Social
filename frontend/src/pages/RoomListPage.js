@@ -10,6 +10,7 @@ const RoomListPage = () => {
   const [topics, setTopic] = useState([]);
   const [cookies] = useCookies(['mytoken']);
   const navigate = useNavigate();
+  const [activities, setActivity] = useState([]);
 
   useEffect(() => {
     if (cookies?.mytoken) {
@@ -20,6 +21,10 @@ const RoomListPage = () => {
   }, []);
   useEffect(() => {
     getTopic();
+  }, []);
+
+  useEffect(() => {
+    getActivity();
   }, []);
 
   let getRooms = async () => {
@@ -36,6 +41,17 @@ const RoomListPage = () => {
     });
     const data = await response.json();
     setTopic(data);
+  };
+
+  const getActivity = async (token) => {
+    const response = await fetch('api/messages', {
+      headers: {
+        Authorization: `Token ${cookies.mytoken}`
+      }
+    });
+    const data = await response.json();
+    console.log(data);
+    setActivity(data);
   };
 
   if (!cookies.mytoken) {
@@ -58,6 +74,14 @@ const RoomListPage = () => {
       </div>
       <div className="row-span-3 ">
         <p className="text-2xl">Recent Activity</p>
+        {activities &&
+          activities.map((activity) => (
+            <div>
+              <p className="font-bold">@{activity.user}</p>
+              <p>To: {activity.room}</p>
+              <p className="italic">{activity.body}</p>
+            </div>
+          ))}
       </div>
     </div>
   );

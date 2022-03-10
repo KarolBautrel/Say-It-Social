@@ -44,39 +44,38 @@ function Login() {
   };
 
   return (
-    <div className="Login">
-      <br />
-      <br />
-      <h1>Please login</h1>
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Email
+    <div className="w-full max-w-xs">
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2" forHtml="username">
+          Username
         </label>
-        <br />
         <input
           type="email"
-          className="form-control"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label">
-          Pasword
+      <div className="mb-6">
+        <label className="block text-gray-700 text-sm font-bold mb-2" forHtml="password">
+          Password
         </label>
         <br />
         <input
           type="password"
-          className="form-control"
-          placeholder="password"
+          className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           id="password"
+          placeholder="******************"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button onClick={loginBtn} className="Submit">
+      <button
+        onClick={loginBtn}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button">
         Login
       </button>
     </div>

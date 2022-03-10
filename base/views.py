@@ -8,7 +8,8 @@ from base.serializers import (
     RoomUpdateSerializer,
     UserDetailSerializer,
     MessageCreateSerializer,
-    MessageUpdateSerializer)
+    MessageUpdateSerializer,
+    MessagesSerializer)
 
 from rest_framework import generics
 from .models import User, Room, Message, Topic
@@ -87,3 +88,9 @@ class MessageUpdateView(generics.UpdateAPIView):
 class MessageDeleteView(generics.DestroyAPIView):
     queryset = Message.objects.all()
     permission_classes = (MessageCreatorAllow,)
+
+
+class MessageListView(generics.ListAPIView):
+    queryset = Message.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = MessagesSerializer

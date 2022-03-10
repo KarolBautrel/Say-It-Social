@@ -52,10 +52,11 @@ class MessageCreateSerializer(ModelSerializer):
 
 class MessagesSerializer(ModelSerializer):
     user = serializers.StringRelatedField(many=False)
+    room = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = Message
-        fields = '__all__'
+        fields = ['user', 'room', 'body', 'created']
 
 
 class MessageUpdateSerializer(ModelSerializer):
