@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ListItem = ({ room }) => {
+const ListRooms = ({ room }) => {
   return (
     <div>
       <h2>Topic : {room.topic}</h2>
@@ -13,4 +13,4 @@ const ListItem = ({ room }) => {
   );
 };
 
-export default ListItem;
+export default ListRooms;

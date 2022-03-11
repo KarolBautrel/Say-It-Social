@@ -17,6 +17,7 @@ from rest_framework import generics
 from .models import User, Room, Message, Topic
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from base.permissions import HostEditAllow, RequestUserAllowed, MessageCreatorAllow
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class UserListView(generics.ListAPIView):
@@ -39,8 +40,10 @@ class UserUpdateView(generics.RetrieveUpdateAPIView):
 
 class TopicView(generics.ListAPIView):
     queryset = Topic.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = TopicSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['topic']
 
 
 class RoomCreateView(generics.CreateAPIView):
@@ -56,6 +59,8 @@ class RoomListView(generics.ListAPIView):
     queryset = Room.objects.all()
     permission_classes = (AllowAny, )
     serializer_class = RoomSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['topic']
 
 
 class RoomRetrieveView(generics.RetrieveAPIView):

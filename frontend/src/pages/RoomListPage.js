@@ -1,16 +1,20 @@
 import { useCookies } from 'react-cookie';
 import React, { useState, useEffect } from 'react';
-import ListItem from '../components/ListItem';
-
-import CreateRoom from '../components/CreateRoom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const RoomListPage = () => {
-  let [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]);
+  let [exactRooms, setExactRooms] = useState([]);
   const [topics, setTopic] = useState([]);
   const [cookies] = useCookies(['mytoken']);
   const navigate = useNavigate();
   const [activities, setActivity] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   useEffect(() => {
     if (cookies?.mytoken) {
@@ -52,6 +56,11 @@ const RoomListPage = () => {
     const data = await response.json();
     setActivity(data);
   };
+  const filterRooms = async (topic, token) => {
+    const response = await fetch(`api/rooms?topic=${topic}`);
+    const data = await response.json();
+    setExactRooms(data);
+  };
 
   if (!cookies.mytoken) {
     navigate('/login');
@@ -61,14 +70,33 @@ const RoomListPage = () => {
       <hr></hr>
 
       <div className="row-span-3 ">
+        <input type="text" value={searchTerm} onChange={handleChange} />
+
         <p className="text-2xl">Topics</p>
-        {topics && topics.map((topic) => <p>{topic.topic}</p>)}
+        {topics &&
+          topics.map((topic) => (
+            <p>
+              <button defaultValue="" onClick={() => filterRooms(topic.id, cookies.mytoken)}>
+                {topic.topic}
+              </button>
+            </p>
+          ))}
+        <button defaultValue="" onClick={() => filterRooms('', cookies.mytoken)}>
+          All
+        </button>
       </div>
       <div className="row-span-3 ">
         <p className="text-2xl">Recent Rooms</p>
-        {rooms.map((room, index) => (
-          <ListItem key={index} room={room} />
-        ))}
+        {exactRooms &&
+          exactRooms.map((room) => (
+            <div>
+              <h2>Topic : {room.topic}</h2>
+              <h3>Room name: {room.name}</h3>
+              <Link to={`/room/${room.id}`}>
+                <button className="btn-white">Get to the room</button>
+              </Link>
+            </div>
+          ))}
       </div>
       <div className="row-span-3 ">
         <p className="text-2xl">Recent Activity</p>

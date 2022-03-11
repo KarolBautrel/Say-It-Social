@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import APIService from '../components/APIService';
+
 import { newRoom } from '../components/Utils';
 import { useCookies } from 'react-cookie';
-import { useParams } from 'react-router-dom';
 
 function CreateRoom() {
   const [name, setName] = useState('');
