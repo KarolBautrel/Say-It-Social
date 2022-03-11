@@ -11,6 +11,8 @@ from base.serializers import (
     MessageUpdateSerializer,
     MessagesSerializer)
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import generics
 from .models import User, Room, Message, Topic
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
@@ -66,6 +68,15 @@ class RoomUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Room.objects.all()
     permission_classes = (HostEditAllow,)
     serializer_class = RoomUpdateSerializer
+
+
+class RoomTopicView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, *args, **kwargs):
+        queryset = Room.objects.filter(topic=self.kwargs['topic'])
+        serializer_class = RoomSerializer(queryset, many=True)
+        return Response(serializer_class.data)
 
 
 class MessageCreateView(generics.CreateAPIView):

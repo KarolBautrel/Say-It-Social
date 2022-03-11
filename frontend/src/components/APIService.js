@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 export default class APIService {
   static LoginUser({ email, password }) {
     return fetch('/api/token/login/', {
