@@ -18,6 +18,7 @@ from .models import User, Room, Message, Topic
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from base.permissions import HostEditAllow, RequestUserAllowed, MessageCreatorAllow
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 class UserListView(generics.ListAPIView):
@@ -59,8 +60,9 @@ class RoomListView(generics.ListAPIView):
     queryset = Room.objects.all()
     permission_classes = (AllowAny, )
     serializer_class = RoomSerializer
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     filterset_fields = ['topic']
+    search_fields = ['name']
 
 
 class RoomRetrieveView(generics.RetrieveAPIView):

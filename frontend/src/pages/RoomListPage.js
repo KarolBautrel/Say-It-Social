@@ -9,11 +9,7 @@ const RoomListPage = () => {
   const [cookies] = useCookies(['mytoken']);
   const navigate = useNavigate();
   const [activities, setActivity] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  const [searchTerm, setSearchTerm] = useState([]);
 
   useEffect(() => {
     if (cookies?.mytoken) {
@@ -61,6 +57,12 @@ const RoomListPage = () => {
     setRooms(data);
   };
 
+  const searchPhrase = async (term, token) => {
+    const response = await fetch(`/api/rooms?search=${term}`);
+    const data = await response.json();
+    setRooms(data);
+  };
+
   if (!cookies.mytoken) {
     navigate('/login');
   }
@@ -76,9 +78,12 @@ const RoomListPage = () => {
             placeholder="Search Rooms"
             aria-label="Search"
             aria-describedby="button-addon2"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button
             className="btn inline-block px-2 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            onClick={() => searchPhrase(searchTerm, cookies.mytoken)}
             type="button"
             id="button-addon3">
             Search
