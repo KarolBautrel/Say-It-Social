@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const RoomListPage = () => {
-  const [rooms, setRooms] = useState([]);
-  let [exactRooms, setExactRooms] = useState([]);
+  const [exactRooms, setRooms] = useState([]);
   const [topics, setTopic] = useState([]);
   const [cookies] = useCookies(['mytoken']);
   const navigate = useNavigate();
@@ -59,7 +58,7 @@ const RoomListPage = () => {
   const filterRooms = async (topic, token) => {
     const response = await fetch(`api/rooms?topic=${topic}`);
     const data = await response.json();
-    setExactRooms(data);
+    setRooms(data);
   };
 
   if (!cookies.mytoken) {
@@ -70,9 +69,22 @@ const RoomListPage = () => {
       <hr></hr>
 
       <div className="row-span-3 ">
-        <input type="text" value={searchTerm} onChange={handleChange} />
-
-        <p className="text-2xl">Topics</p>
+        <div className="flex justify-center">
+          <input
+            type="search"
+            className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder="Search Rooms"
+            aria-label="Search"
+            aria-describedby="button-addon2"
+          />
+          <button
+            className="btn inline-block px-2 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            type="button"
+            id="button-addon3">
+            Search
+          </button>
+        </div>
+        <p className="text-2xl">Browse Topics</p>
         {topics &&
           topics.map((topic) => (
             <p>
@@ -86,7 +98,7 @@ const RoomListPage = () => {
         </button>
       </div>
       <div className="row-span-3 ">
-        <p className="text-2xl">Recent Rooms</p>
+        <p className="text-2xl"> Rooms</p>
         {exactRooms &&
           exactRooms.map((room) => (
             <div>

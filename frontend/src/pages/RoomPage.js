@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { addMessage, deleteMessage } from '../components/Utils';
-
+import { Link } from 'react-router-dom';
 const RoomPage = () => {
   const { id } = useParams();
   const [room, setRoom] = useState(null);
   useEffect(() => {
-    getNote();
+    getRoom();
   }, [id]);
   const [body, setMessage] = useState('');
   const [cookies, _] = useCookies(['mytoken']);
   const [user] = useCookies(['user']);
-  const getNote = async () => {
+
+  const getRoom = async () => {
     const response = await fetch(`/api/room/${id}`);
     const data = await response.json();
     setRoom(data);
@@ -61,11 +62,15 @@ const RoomPage = () => {
       </div>
       <div className="row-span-3 ">
         <p className="text-2xl font-bold">Participants: </p>
-        {room?.participants.map((participants) => (
+        {room?.participants.map((participant) => (
           <div>
             <p className="text-small">
-              {participants.name}
-              {user.user.name === participants.name && <h> (you)</h>}
+              <Link to={`/user/${participant.id}`}>
+                <button>
+                  {participant.name}
+                  {user.user.name === participant.name && <h> (you)</h>}
+                </button>
+              </Link>
             </p>
           </div>
         ))}

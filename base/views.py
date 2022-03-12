@@ -28,7 +28,7 @@ class UserListView(generics.ListAPIView):
 
 class UserRetrieveView(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    permission_classes = (RequestUserAllowed,)
+    permission_classes = (AllowAny,)
     serializer_class = UserDetailSerializer
 
 
@@ -46,7 +46,7 @@ class TopicView(generics.ListAPIView):
     filterset_fields = ['topic']
 
 
-class RoomCreateView(generics.CreateAPIView):
+class RoomCreateView(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = RoomCreateSerializer

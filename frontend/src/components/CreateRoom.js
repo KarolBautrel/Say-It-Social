@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-
 import { newRoom } from '../components/Utils';
 import { useCookies } from 'react-cookie';
-
+import { useNavigate } from 'react-router-dom';
 function CreateRoom() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [topicsList, setTopicsList] = useState([]);
   const [topicName, setTopicName] = useState('');
   const [token] = useCookies(['mytoken']);
+  const navigate = useNavigate();
   useEffect(() => {
     getTopic();
   }, []);
@@ -63,7 +63,9 @@ function CreateRoom() {
         />
       </div>
       <button
-        onClick={() => newRoom({ name, description, topic: topicName }, token.mytoken)}
+        onClick={() =>
+          newRoom({ name, description, topic: topicName }, token.mytoken).then(navigate('/'))
+        }
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Submit
       </button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import UserDetail from './components/UserDetail';
 import RoomListPage from './pages/RoomListPage';
 import RoomPage from './pages/RoomPage';
 import Login from './components/Login';
@@ -12,6 +12,7 @@ function Routings() {
     <Router>
       <Routes>
         <Route path="/" exact element={<RoomListPage />} />
+        <Route path="/user/:id" element={<UserDetail />} />
         <Route path="/room/:id" element={<RoomPage />} />
         <Route path="/create_room" element={<CreateRoom />} />
         <Route path="/login" element={<Login />} />
