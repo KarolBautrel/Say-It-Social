@@ -115,7 +115,11 @@ const RoomListPage = () => {
         {activities &&
           activities.map((activity) => (
             <div>
-              <p className="font-bold">@{activity.user}</p>
+              <Link to={`/user/${activity.user.id}`}>
+                <button>
+                  <p className="font-bold">@{activity.user.name}</p>
+                </button>
+              </Link>
               <p>To: {activity.room}</p>
               <p className="italic">{activity.body}</p>
             </div>
