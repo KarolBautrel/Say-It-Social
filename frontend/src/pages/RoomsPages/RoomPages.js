@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { RecentActivityList } from './RecentActivityList';
 import { TopicsList } from './TopicsList';
 import { RoomFilter } from './RoomFilter';
-const RoomListPage = () => {
+const RoomPages = () => {
   const [exactRooms, setRooms] = useState([]);
   const [token] = useCookies(['mytoken']);
   const navigate = useNavigate();
@@ -53,4 +53,4 @@ const RoomListPage = () => {
   );
 };
 
-export default RoomListPage;
+export default RoomPages;
