@@ -26,14 +26,13 @@ export const TopicsList = ({ token, onFilterSuccess }) => {
   return (
     <div className="row-span-3 ">
       <p className="text-2xl">Browse Topics</p>
-      {topics &&
-        topics.map((topic) => (
-          <p>
-            <button defaultValue="" onClick={() => filterRooms(topic.id, token.mytoken)}>
-              {topic.topic}
-            </button>
-          </p>
-        ))}
+      {topics?.map((topic) => (
+        <p>
+          <button defaultValue="" onClick={() => filterRooms(topic.id, token.mytoken)}>
+            {topic.topic}
+          </button>
+        </p>
+      ))}
       <button defaultValue="" onClick={() => filterRooms('', token.mytoken)}>
         All
       </button>

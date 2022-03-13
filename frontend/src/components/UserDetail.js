@@ -14,7 +14,6 @@ const UserInfo = () => {
     const response = await fetch(`/api/user/${id}`);
     const data = await response.json();
     setUserInfo(data);
-    console.log(data);
   };
 
   return <div> {userInfo.name}</div>;

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { newRoom } from '../../components/Utils';
+import { useState } from 'react';
+import { createRoom } from '../../components/Utils';
 import { useNavigate } from 'react-router-dom';
 
-export const RoomForm = ({ token, topicName }) => {
+export const CreateRoomForm = ({ token, topicId }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export const RoomForm = ({ token, topicName }) => {
         />
       </div>
       <button
-        onClick={() => newRoom({ name, description, topic: topicName }, token.mytoken)}
+        onClick={() => createRoom({ name, description, topic: topicId }, token.mytoken)}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Submit
       </button>

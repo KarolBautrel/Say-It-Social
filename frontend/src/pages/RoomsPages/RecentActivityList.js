@@ -20,18 +20,17 @@ export const RecentActivityList = ({ token }) => {
   return (
     <div className="row-span-3 ">
       <p className="text-2xl">Recent Activity</p>
-      {activities &&
-        activities.map((activity) => (
-          <div>
-            <Link to={`/user/${activity.user.id}`}>
-              <button>
-                <p className="font-bold">@{activity.user.name}</p>
-              </button>
-            </Link>
-            <p>To: {activity.room}</p>
-            <p className="italic">{activity.body}</p>
-          </div>
-        ))}
+      {activities?.map((activity) => (
+        <div>
+          <Link to={`/user/${activity.user.id}`}>
+            <button>
+              <p className="font-bold">@{activity.user.name}</p>
+            </button>
+          </Link>
+          <p>To: {activity.room}</p>
+          <p className="italic">{activity.body}</p>
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-export const TopicList = ({ token, getTopicName }) => {
+export const TopicList = ({ token, getTopicId }) => {
   const [topicsList, setTopicsList] = useState([]);
-  const [topicName, setTopicName] = useState('');
+  const [topicId, setTopicName] = useState('');
   useEffect(() => {
     getTopic();
   }, []);
+
+  const onTopicToggle = (event) => {
+    console.log(event);
+    const { value, topic } = event.target;
+    getTopicId(value);
+    setTopicName(topic);
+  };
 
   const getTopic = async () => {
     const response = await fetch('api/topics', {
@@ -21,9 +28,11 @@ export const TopicList = ({ token, getTopicName }) => {
     <div className="mb-3">
       <label htmlFor="topics" className="form-label"></label>
 
-      <select value={topicName} onChange={(e) => getTopicName(e.target.value)}>
+      <select value={topicId} onChange={(event) => onTopicToggle(event)}>
         <option defaultValue="1">---</option>
-        {topicsList && topicsList.map((topic) => <option value={topic.id}>{topic.topic}</option>)}
+        {topicsList?.map((topic) => (
+          <option value={topic.id}>{topic.topic}</option>
+        ))}
       </select>
       <br />
     </div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { addMessage, deleteMessage } from '../../components/Utils';
 
 export const MessagesOperations = ({ room, user, token }) => {
-  const [body, setMessage] = useState('');
+  const [message, setMessage] = useState('');
   return (
     <div className="col-span-2 ">
       <br />
@@ -28,12 +28,12 @@ export const MessagesOperations = ({ room, user, token }) => {
         className="form-control"
         placeholder="add your message"
         id="message"
-        value={body}
+        value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
       <button
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={() => addMessage({ body, room: room?.id }, token.mytoken)}>
+        onClick={() => addMessage({ body: message, room: room?.id }, token.mytoken)}>
         Add
       </button>
     </div>
