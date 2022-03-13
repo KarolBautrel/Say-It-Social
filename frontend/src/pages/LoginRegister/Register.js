@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import APIService from '../../components/APIService';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -12,7 +12,7 @@ function Register() {
     re_password: ''
   });
 
-  const [token, setToken] = useCookies(['mytoken']);
+  const [token] = useCookies(['mytoken']);
   const navigate = useNavigate();
   const handleChange = (event) =>
     setUserRegisterConfiguration({
@@ -21,12 +21,11 @@ function Register() {
     });
 
   const registerFormConfiguration = [
-    { id: 1, name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
-    { id: 2, name: 'username', id: 'username', placeholder: 'Username', type: 'username' },
-    { id: 3, name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
-    { id: 4, name: 'password', id: 'password', placeholder: 'Password', type: 'password' },
+    { name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
+    { name: 'username', id: 'username', placeholder: 'Username', type: 'username' },
+    { name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
+    { name: 'password', id: 'password', placeholder: 'Password', type: 'password' },
     {
-      id: 5,
       name: 're_password',
       id: 're_password',
       placeholder: 'Confirm Password',
@@ -36,8 +35,9 @@ function Register() {
 
   const onRegister = () => {
     APIService.RegisterUser(userRegisterConfiguration)
-      .then((resp) => console.log(resp))
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        throw new Error(error);
+      })
       .then(navigate('/login'));
   };
   if (token.mytoken) {
@@ -46,12 +46,11 @@ function Register() {
   return (
     <div className="w-full max-w-xs">
       {registerFormConfiguration.map(({ name, id, placeholder, type }) => (
-        <div>
+        <div key={id}>
           <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">
             {name}
           </label>
           <input
-            key={id}
             type={type}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder={placeholder}

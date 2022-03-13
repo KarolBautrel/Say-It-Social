@@ -1,18 +1,25 @@
 import { useState } from 'react';
 import { addMessage, deleteMessage } from '../../components/Utils';
+import { RoomType, User } from 'pages/RoomPage/types';
 
-export const MessagesOperations = ({ room, user, token }) => {
+type MessageCreationProps = {
+  room: RoomType;
+  user: User;
+  token: string;
+};
+
+export const MessagesOperations = ({ room, user, token }: MessageCreationProps) => {
   const [message, setMessage] = useState('');
   return (
     <div className="col-span-2 ">
       <br />
       <p className="text-xl font-bold">Conversation</p>
       {room?.messages.map((messages) => (
-        <div>
+        <div key={messages.id}>
           <p className="text-light font-bold">@{messages.user.name}</p>
           <p className="text-light">
             {messages.body}
-            {user.user.name === messages.user.name && (
+            {user.name === messages.user.name && (
               <button
                 className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                 onClick={() => deleteMessage(messages.id, token)}>

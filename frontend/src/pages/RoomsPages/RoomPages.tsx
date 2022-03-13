@@ -1,5 +1,5 @@
 import { useCookies } from 'react-cookie';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RecentActivityList } from './RecentActivityList';
 import { TopicsList } from './TopicsList';
@@ -12,7 +12,6 @@ const RoomPages = () => {
   const [exactRooms, setRooms] = useState<ExactRoom[]>([]);
   const [token] = useCookies(['mytoken']);
   const tokenId: string = token?.mytoken;
-  console.log(tokenId);
   useEffect(() => {
     {
       getRooms();
@@ -24,9 +23,8 @@ const RoomPages = () => {
     const data = await response.json();
     setRooms(data);
   };
-
   const updateRooms = (rooms: ExactRoom[]) => setRooms(rooms);
-
+  console.log(token);
   return (
     <CheckUserAuth>
       <Navbar />
@@ -50,7 +48,7 @@ const RoomPages = () => {
             </div>
           ))}
         </div>
-        <RecentActivityList token={token} />
+        <RecentActivityList token={tokenId} />
       </div>
     </CheckUserAuth>
   );

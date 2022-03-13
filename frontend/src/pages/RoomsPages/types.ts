@@ -5,7 +5,7 @@ export type ExactRoom = {
   topic: string | number;
   host: ExactRoomHost;
   messages: Message[];
-  participants: Participant[];
+  participants: User[];
 };
 
 export type ExactRoomHost = {
@@ -17,13 +17,13 @@ export type ExactRoomHost = {
 
 type Message = {
   id: number;
-  user: any;
+  user: User;
   room: string | number;
   body: string;
   created: string;
 };
 
-type Participant = {
+type User = {
   id: number;
   username: string;
   name: string;
@@ -32,5 +32,5 @@ type Participant = {
 
 export type Token = {
   mytoken: string;
-  user: Participant;
+  user: User;
 };

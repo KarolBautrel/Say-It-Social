@@ -19,7 +19,7 @@ class ParticipantSerializer(ModelSerializer):
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'bio']
+        fields = ['id', 'username', 'name', 'email']
 
 
 class UpdateUserInfoSerializer(ModelSerializer):

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Navigate } from 'react-router-dom';
 
