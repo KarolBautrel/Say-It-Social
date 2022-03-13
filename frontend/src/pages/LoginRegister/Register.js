@@ -21,11 +21,17 @@ function Register() {
     });
 
   const registerFormConfiguration = [
-    { name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
-    { name: 'username', id: 'username', placeholder: 'Username', type: 'username' },
-    { name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
-    { name: 'password', id: 'password', placeholder: 'Password', type: 'password' },
-    { name: 're_password', id: 're_password', placeholder: 'Confirm Password', type: 'password' }
+    { id: 1, name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
+    { id: 2, name: 'username', id: 'username', placeholder: 'Username', type: 'username' },
+    { id: 3, name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
+    { id: 4, name: 'password', id: 'password', placeholder: 'Password', type: 'password' },
+    {
+      id: 5,
+      name: 're_password',
+      id: 're_password',
+      placeholder: 'Confirm Password',
+      type: 'password'
+    }
   ];
 
   const onRegister = () => {
@@ -49,6 +55,7 @@ function Register() {
             {name}
           </label>
           <input
+            key={id}
             type={type}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder={placeholder}

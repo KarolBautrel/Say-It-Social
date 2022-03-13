@@ -12,13 +12,14 @@ function CreateRoom() {
 
   return (
     <>
-      <CheckUserAuth />
-      <Navbar />
-      <div className="w-full max-w-xs">
-        <h1>Create your room</h1>
-        <TopicList token={token} getTopicId={getTopicId} />
-        <CreateRoomForm token={token} topicId={topicId} />
-      </div>
+      <CheckUserAuth>
+        <Navbar />
+        <div className="w-full max-w-xs">
+          <h1>Create your room</h1>
+          <TopicList token={token} getTopicId={getTopicId} />
+          <CreateRoomForm token={token} topicId={topicId} />
+        </div>
+      </CheckUserAuth>
     </>
   );
 }

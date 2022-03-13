@@ -22,21 +22,22 @@ const RoomPage = () => {
 
   return (
     <>
-      <CheckUserAuth />
-      <Navbar />
-      <div className="grid grid-rows-2 grid-flow-col gap-2">
-        <div className="grid justify-items-start">
-          <div className="row-span-2 ">
-            <p className="text-xl">{room?.name}</p>
-            <p className="text-lg">{room?.description}</p>
-          </div>
+      <CheckUserAuth>
+        <Navbar />
+        <div className="grid grid-rows-2 grid-flow-col gap-2">
+          <div className="grid justify-items-start">
+            <div className="row-span-2 ">
+              <p className="text-xl">{room?.name}</p>
+              <p className="text-lg">{room?.description}</p>
+            </div>
 
-          <MessagesOperations token={token} room={room} user={user} />
+            <MessagesOperations token={token} room={room} user={user} />
+          </div>
+          <div className="row-span-3 ">
+            <Participants room={room} user={user} />
+          </div>
         </div>
-        <div className="row-span-3 ">
-          <Participants room={room} user={user} />
-        </div>
-      </div>
+      </CheckUserAuth>
     </>
   );
 };

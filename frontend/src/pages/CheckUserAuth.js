@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
-export const CheckUserAuth = () => {
+export const CheckUserAuth = (props) => {
   const [token] = useCookies(['mytoken']);
   const navigate = useNavigate();
   useEffect(() => {
@@ -11,5 +11,5 @@ export const CheckUserAuth = () => {
     }
   }, [token]);
 
-  return <></>;
+  return props.children;
 };
