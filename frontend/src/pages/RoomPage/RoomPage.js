@@ -14,6 +14,7 @@ const RoomPage = () => {
   }, [id]);
   const [token] = useCookies(['mytoken']);
   const [user] = useCookies(['user']);
+  const tokenId = token.mytoken;
   const getRoom = async () => {
     const response = await fetch(`/api/room/${id}`);
     const data = await response.json();
@@ -31,7 +32,7 @@ const RoomPage = () => {
               <p className="text-lg">{room?.description}</p>
             </div>
 
-            <MessagesOperations token={token} room={room} user={user} />
+            <MessagesOperations token={tokenId} room={room} user={user} />
           </div>
           <div className="row-span-3 ">
             <Participants room={room} user={user} />

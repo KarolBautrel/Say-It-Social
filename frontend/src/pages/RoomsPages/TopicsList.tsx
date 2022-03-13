@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ExactRoom, Token } from 'pages/RoomsPages/types';
 
 type TopicsListType = {
-  token: any;
+  token: string;
   onFilterSuccess: (data: ExactRoom[]) => void;
 };
 
@@ -27,7 +27,7 @@ export const TopicsList = ({ token, onFilterSuccess }: TopicsListType) => {
   const getTopic = async () => {
     const response = await fetch('api/topics', {
       headers: {
-        Authorization: `Token ${token.mytoken}`
+        Authorization: `Token ${token}`
       }
     });
     const data = await response.json();

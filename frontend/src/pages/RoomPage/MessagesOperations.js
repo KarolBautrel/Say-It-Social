@@ -15,7 +15,7 @@ export const MessagesOperations = ({ room, user, token }) => {
             {user.user.name === messages.user.name && (
               <button
                 className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                onClick={() => deleteMessage(messages.id, token.mytoken)}>
+                onClick={() => deleteMessage(messages.id, token)}>
                 remove
               </button>
             )}
@@ -33,7 +33,7 @@ export const MessagesOperations = ({ room, user, token }) => {
       />
       <button
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={() => addMessage({ body: message, room: room?.id }, token.mytoken)}>
+        onClick={() => addMessage({ body: message, room: room?.id }, token)}>
         Add
       </button>
     </div>

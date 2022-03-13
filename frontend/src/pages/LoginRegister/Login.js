@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import APIService from '../../components/APIService';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { getUserData } from '../../components/Utils';
 
 function Login() {
@@ -19,11 +19,9 @@ function Login() {
       [event.target.name]: event.target.value
     });
 
-  useEffect(() => {
-    if (token.mytoken) {
-      navigate('/');
-    }
-  }, [token]);
+  if (token.mytoken) {
+    return <Navigate to="/" />;
+  }
 
   const onLogin = async () => {
     try {

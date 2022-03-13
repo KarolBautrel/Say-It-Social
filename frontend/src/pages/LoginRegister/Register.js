@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import APIService from '../../components/APIService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 function Register() {
@@ -40,13 +40,9 @@ function Register() {
       .catch((error) => console.log(error))
       .then(navigate('/login'));
   };
-
-  useEffect(() => {
-    if (token.mytoken) {
-      navigate('/');
-    }
-  }, [token]);
-
+  if (token.mytoken) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="w-full max-w-xs">
       {registerFormConfiguration.map(({ name, id, placeholder, type }) => (

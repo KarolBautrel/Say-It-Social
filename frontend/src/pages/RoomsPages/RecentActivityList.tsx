@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-export const RecentActivityList = ({ token }) => {
-  const [activities, setActivity] = useState([]);
+type ActivitiesType = {};
 
+type Token = {
+  token: any;
+};
+export const RecentActivityList = ({ token }: Token) => {
+  const [activities, setActivity] = useState([]);
   useEffect(() => {
     getActivity();
   }, []);
