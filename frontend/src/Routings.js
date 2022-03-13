@@ -5,7 +5,7 @@ import RoomPages from './pages/RoomsPages/RoomPages';
 import RoomPage from './pages/RoomPage/RoomPage';
 import Login from './components/Login';
 import Register from './components/Register';
-import CreateRoom from './components/CreateRoom';
+import CreateRoom from './pages/CreateRoom/CreateRoom';
 
 function Routings() {
   return (
