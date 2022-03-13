@@ -10,7 +10,7 @@ import { CheckUserAuth } from '../../pages/CheckUserAuth';
 const RoomPages = () => {
   const [exactRooms, setRooms] = useState([]);
   const [token] = useCookies(['mytoken']);
-
+  console.log(exactRooms);
   useEffect(() => {
     {
       getRooms();

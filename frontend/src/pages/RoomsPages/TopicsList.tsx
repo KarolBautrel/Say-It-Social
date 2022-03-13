@@ -1,13 +1,29 @@
 import { useState, useEffect } from 'react';
+import { ExactRoom } from 'pages/RoomsPages/types';
 
-export const TopicsList = ({ token, onFilterSuccess }) => {
-  const [topics, setTopic] = useState([]);
+type Token = {
+  mytoken: string;
+  user: any;
+};
+
+type TopicsListType = {
+  token: Token;
+  onFilterSuccess: (data: ExactRoom[]) => void;
+};
+
+type Topic = {
+  id: number;
+  topic: string;
+};
+
+export const TopicsList = ({ token, onFilterSuccess }: TopicsListType) => {
+  const [topics, setTopic] = useState<Topic[]>([]);
 
   useEffect(() => {
     getTopic();
   }, []);
 
-  const filterRooms = async (topic) => {
+  const filterRooms = async (topic: number | string) => {
     const response = await fetch(`api/rooms?topic=${topic}`);
     const data = await response.json();
     onFilterSuccess(data);
@@ -28,12 +44,12 @@ export const TopicsList = ({ token, onFilterSuccess }) => {
       <p className="text-2xl">Browse Topics</p>
       {topics?.map((topic) => (
         <p>
-          <button defaultValue="" onClick={() => filterRooms(topic.id, token.mytoken)}>
+          <button defaultValue="" onClick={() => filterRooms(topic.id)}>
             {topic.topic}
           </button>
         </p>
       ))}
-      <button defaultValue="" onClick={() => filterRooms('', token.mytoken)}>
+      <button defaultValue="" onClick={() => filterRooms('')}>
         All
       </button>
     </div>
