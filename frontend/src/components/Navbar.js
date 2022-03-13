@@ -6,15 +6,16 @@ export const Navbar = () => {
   const [user] = useCookies(['user']);
   const navbarDropdownConfiguration = [
     { id: 1, text: 'Dashboard', value: '/' },
-    { id: 2, text: 'Create Room', value: '/create_room' },
-    { id: 3, text: 'Settings', value: 'hrefValue' },
-    { id: 4, text: 'Logout', value: <Logout /> }
+    { id: 2, text: 'My Profile', value: `user/${user.user.id}` },
+    { id: 3, text: 'Create Room', value: '/create_room' },
+    { id: 4, text: 'Settings', value: 'hrefValue' },
+    { id: 5, text: 'Logout', value: <Logout /> }
   ];
   return (
     <div>
       <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img
               src="https://res.cloudinary.com/dxqrl41la/image/upload/v1647070109/Logo/logo_vdr5hs.png"
               className="mr-3 h-6 sm:h-10"

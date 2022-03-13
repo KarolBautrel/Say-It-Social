@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import APIService from '../components/APIService';
+import APIService from '../../components/APIService';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { getUserData } from './Utils';
+import { getUserData } from '../../components/Utils';
 
 function Login() {
   const [userConfiguration, setUserConfiguration] = useState({

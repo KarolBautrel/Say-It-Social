@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import UserDetail from './components/UserDetail';
+import UserDetail from './pages/UserDetails/UserDetail';
 import RoomPages from './pages/RoomsPages/RoomPages';
 import RoomPage from './pages/RoomPage/RoomPage';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './pages/Login/Login';
+import Register from './pages/LoginRegister/Register';
 import CreateRoom from './pages/CreateRoom/CreateRoom';
 
 function Routings() {
