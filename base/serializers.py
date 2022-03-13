@@ -51,7 +51,7 @@ class MessageCreateSerializer(ModelSerializer):
 
 
 class MessagesSerializer(ModelSerializer):
-    user = serializers.StringRelatedField(many=False)
+    user = UserDetailSerializer(many=False)
     room = serializers.StringRelatedField(many=False)
 
     class Meta:

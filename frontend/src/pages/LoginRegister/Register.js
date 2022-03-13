@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import APIService from '../components/APIService';
+import APIService from '../../components/APIService';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 function Register() {
   const [userRegisterConfiguration, setUserRegisterConfiguration] = useState({
@@ -10,25 +11,41 @@ function Register() {
     password: '',
     re_password: ''
   });
+
+  const [token, setToken] = useCookies(['mytoken']);
   const navigate = useNavigate();
   const handleChange = (event) =>
     setUserRegisterConfiguration({
       ...userRegisterConfiguration,
       [event.target.name]: event.target.value
     });
+
   const registerFormConfiguration = [
-    { name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
-    { name: 'username', id: 'username', placeholder: 'Username', type: 'username' },
-    { name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
-    { name: 'password', id: 'password', placeholder: 'Password', type: 'password' },
-    { name: 're_password', id: 're_password', placeholder: 'Confirm Password', type: 'password' }
+    { id: 1, name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
+    { id: 2, name: 'username', id: 'username', placeholder: 'Username', type: 'username' },
+    { id: 3, name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
+    { id: 4, name: 'password', id: 'password', placeholder: 'Password', type: 'password' },
+    {
+      id: 5,
+      name: 're_password',
+      id: 're_password',
+      placeholder: 'Confirm Password',
+      type: 'password'
+    }
   ];
+
   const onRegister = () => {
     APIService.RegisterUser(userRegisterConfiguration)
       .then((resp) => console.log(resp))
       .catch((error) => console.log(error))
       .then(navigate('/login'));
   };
+
+  useEffect(() => {
+    if (token.mytoken) {
+      navigate('/');
+    }
+  }, [token]);
 
   return (
     <div className="w-full max-w-xs">
@@ -38,6 +55,7 @@ function Register() {
             {name}
           </label>
           <input
+            key={id}
             type={type}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder={placeholder}

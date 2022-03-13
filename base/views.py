@@ -11,10 +11,14 @@ from base.serializers import (
     MessageUpdateSerializer,
     MessagesSerializer)
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import generics
 from .models import User, Room, Message, Topic
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from base.permissions import HostEditAllow, RequestUserAllowed, MessageCreatorAllow
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 class UserListView(generics.ListAPIView):
@@ -25,7 +29,7 @@ class UserListView(generics.ListAPIView):
 
 class UserRetrieveView(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    permission_classes = (RequestUserAllowed,)
+    permission_classes = (AllowAny,)
     serializer_class = UserDetailSerializer
 
 
@@ -37,11 +41,13 @@ class UserUpdateView(generics.RetrieveUpdateAPIView):
 
 class TopicView(generics.ListAPIView):
     queryset = Topic.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = TopicSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['topic']
 
 
-class RoomCreateView(generics.CreateAPIView):
+class RoomCreateView(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = RoomCreateSerializer
@@ -54,6 +60,9 @@ class RoomListView(generics.ListAPIView):
     queryset = Room.objects.all()
     permission_classes = (AllowAny, )
     serializer_class = RoomSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filterset_fields = ['topic']
+    search_fields = ['name']
 
 
 class RoomRetrieveView(generics.RetrieveAPIView):
@@ -66,6 +75,15 @@ class RoomUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Room.objects.all()
     permission_classes = (HostEditAllow,)
     serializer_class = RoomUpdateSerializer
+
+
+class RoomTopicView(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, *args, **kwargs):
+        queryset = Room.objects.filter(topic=self.kwargs['topic'])
+        serializer_class = RoomSerializer(queryset, many=True)
+        return Response(serializer_class.data)
 
 
 class MessageCreateView(generics.CreateAPIView):

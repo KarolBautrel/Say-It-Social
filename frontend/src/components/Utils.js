@@ -1,5 +1,4 @@
 import APIService from '../components/APIService';
-import { useNavigate } from 'react-router-dom';
 
 export const onLogout = async (token, user, onSuccessToken, onSuccessUser) => {
   try {
@@ -26,7 +25,7 @@ export const deleteMessage = async (messageId, token) => {
   return response;
 };
 
-export const newRoom = async ({ name, description, topic }, token) => {
+export const createRoom = async ({ name, description, topic }, token) => {
   const response = await APIService.createRoom({ name, description, topic }, token);
   return response;
 };

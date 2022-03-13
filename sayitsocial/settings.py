@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'djoser',
     "corsheaders",
     'django_extensions',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'base.User'
 
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
