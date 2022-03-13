@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ExactRoom } from 'pages/RoomsPages/types';
-
-type Token = {
-  mytoken: string;
-  user: any;
-};
+import { ExactRoom, Token } from 'pages/RoomsPages/types';
 
 type TopicsListType = {
   token: Token;

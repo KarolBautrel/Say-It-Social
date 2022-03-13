@@ -5,11 +5,12 @@ import { RecentActivityList } from './RecentActivityList';
 import { TopicsList } from './TopicsList';
 import { RoomFilter } from './RoomFilter';
 import { Navbar } from '../../components/Navbar';
-import { CheckUserAuth } from '../../pages/CheckUserAuth';
+import { CheckUserAuth } from '../CheckUserAuth';
+import { ExactRoom, Token } from 'pages/RoomsPages/types';
 
 const RoomPages = () => {
-  const [exactRooms, setRooms] = useState([]);
-  const [token] = useCookies(['mytoken']);
+  const [exactRooms, setRooms] = useState<ExactRoom[]>([]);
+  const [token] = useCookies<[Token]>(['mytoken']);
   console.log(exactRooms);
   useEffect(() => {
     {

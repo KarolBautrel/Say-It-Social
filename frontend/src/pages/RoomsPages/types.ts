@@ -29,3 +29,8 @@ type Participant = {
   name: string;
   email: string;
 };
+
+export type Token = {
+  mytoken: string;
+  user: any;
+};
