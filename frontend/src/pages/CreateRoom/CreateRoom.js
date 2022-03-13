@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { useCookies } from 'react-cookie';
 import { TopicList } from './TopicList';
 import { CreateRoomForm } from './CreateRoomForm';
+import { CheckUserAuth } from '../../pages/CheckUserAuth';
 
 function CreateRoom() {
   const [token] = useCookies(['mytoken']);
@@ -11,6 +12,7 @@ function CreateRoom() {
 
   return (
     <>
+      <CheckUserAuth />
       <Navbar />
       <div className="w-full max-w-xs">
         <h1>Create your room</h1>

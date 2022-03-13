@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserDetail from './pages/UserDetails/UserDetail';
 import RoomPages from './pages/RoomsPages/RoomPages';
 import RoomPage from './pages/RoomPage/RoomPage';
-import Login from './pages/Login/Login';
+import Login from './pages/LoginRegister/Login';
 import Register from './pages/LoginRegister/Register';
 import CreateRoom from './pages/CreateRoom/CreateRoom';
 

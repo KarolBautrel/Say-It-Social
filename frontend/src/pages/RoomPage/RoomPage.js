@@ -4,6 +4,8 @@ import { useCookies } from 'react-cookie';
 import { Participants } from './Participants';
 import { MessagesOperations } from './MessagesOperations.js';
 import { Navbar } from '../../components/Navbar';
+import { CheckUserAuth } from '../../pages/CheckUserAuth';
+
 const RoomPage = () => {
   const { id } = useParams();
   const [room, setRoom] = useState(null);
@@ -20,6 +22,7 @@ const RoomPage = () => {
 
   return (
     <>
+      <CheckUserAuth />
       <Navbar />
       <div className="grid grid-rows-2 grid-flow-col gap-2">
         <div className="grid justify-items-start">

@@ -6,16 +6,16 @@ import { RecentActivityList } from './RecentActivityList';
 import { TopicsList } from './TopicsList';
 import { RoomFilter } from './RoomFilter';
 import { Navbar } from '../../components/Navbar';
+import { CheckUserAuth } from '../../pages/CheckUserAuth';
+
 const RoomPages = () => {
   const [exactRooms, setRooms] = useState([]);
   const [token] = useCookies(['mytoken']);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token?.mytoken) {
+    {
       getRooms();
-    } else {
-      navigate('/login');
     }
   }, []);
 
@@ -29,6 +29,7 @@ const RoomPages = () => {
 
   return (
     <>
+      <CheckUserAuth />
       <Navbar />
       <div className="grid grid-flow-col gap-2">
         <hr></hr>

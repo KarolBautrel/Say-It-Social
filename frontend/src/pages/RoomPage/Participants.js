@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 export const Participants = ({ user, room }) => {
   return (
     <div>
