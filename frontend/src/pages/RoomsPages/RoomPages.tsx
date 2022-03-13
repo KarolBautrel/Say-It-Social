@@ -10,7 +10,8 @@ import { ExactRoom, Token } from 'pages/RoomsPages/types';
 
 const RoomPages = () => {
   const [exactRooms, setRooms] = useState<ExactRoom[]>([]);
-  const [token] = useCookies<[Token]>(['mytoken']);
+  const [token] = useCookies(['mytoken']);
+  console.log(token);
   console.log(exactRooms);
   useEffect(() => {
     {
@@ -24,7 +25,7 @@ const RoomPages = () => {
     setRooms(data);
   };
 
-  const updateRooms = (rooms) => setRooms(rooms);
+  const updateRooms = (rooms: ExactRoom[]) => setRooms(rooms);
 
   return (
     <>
@@ -32,7 +33,7 @@ const RoomPages = () => {
         <Navbar />
         <div className="grid grid-flow-col gap-2">
           <hr></hr>
-          <RoomFilter token={token} onFilterSuccess={updateRooms} />
+          <RoomFilter onFilterSuccess={updateRooms} />
           <div className="row-span-3 ">
             <TopicsList token={token} onFilterSuccess={updateRooms} />
           </div>

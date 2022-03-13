@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ExactRoom, Token } from 'pages/RoomsPages/types';
 
 type TopicsListType = {
-  token: Token;
+  token: any;
   onFilterSuccess: (data: ExactRoom[]) => void;
 };
 

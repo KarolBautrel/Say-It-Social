@@ -32,5 +32,5 @@ type Participant = {
 
 export type Token = {
   mytoken: string;
-  user: any;
+  user: Participant;
 };

@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
+import { ExactRoom } from 'pages/RoomsPages/types';
 
-export const RoomFilter = ({ onFilterSuccess }) => {
-  const [searchTerm, setSearchTerm] = useState([]);
+export const RoomFilter = ({
+  onFilterSuccess
+}: {
+  onFilterSuccess: (data: ExactRoom[]) => void;
+}) => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const searchPhrase = async (term) => {
+  const searchPhrase = async (term: string) => {
     const response = await fetch(`/api/rooms?search=${term}`);
     const data = await response.json();
     onFilterSuccess(data);
@@ -19,7 +24,7 @@ export const RoomFilter = ({ onFilterSuccess }) => {
           aria-label="Search"
           aria-describedby="button-addon2"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
         />
         <button
           className="btn inline-block px-2 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
