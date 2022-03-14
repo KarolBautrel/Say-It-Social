@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 
 function Register() {
   const [userRegisterConfiguration, setUserRegisterConfiguration] = useState({
+    value: '',
     name: '',
     username: '',
     email: '',
@@ -21,11 +22,24 @@ function Register() {
     });
 
   const registerFormConfiguration = [
-    { name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
-    { name: 'username', id: 'username', placeholder: 'Username', type: 'username' },
-    { name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
-    { name: 'password', id: 'password', placeholder: 'Password', type: 'password' },
+    { value: 'name', name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
     {
+      value: 'username',
+      name: 'username',
+      id: 'username',
+      placeholder: 'Username',
+      type: 'username'
+    },
+    { value: 'email', name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
+    {
+      value: 'password',
+      name: 'password',
+      id: 'password',
+      placeholder: 'Password',
+      type: 'password'
+    },
+    {
+      value: 're_password',
       name: 're_password',
       id: 're_password',
       placeholder: 'Confirm Password',
@@ -45,7 +59,7 @@ function Register() {
   }
   return (
     <div className="w-full max-w-xs">
-      {registerFormConfiguration.map(({ name, id, placeholder, type }) => (
+      {registerFormConfiguration.map(({ name, id, placeholder, type, value }) => (
         <div key={id}>
           <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">
             {name}
@@ -56,7 +70,7 @@ function Register() {
             placeholder={placeholder}
             id={id}
             name={name}
-            value={userRegisterConfiguration[name]}
+            value={userRegisterConfiguration[value]}
             onChange={handleChange}
           />
         </div>

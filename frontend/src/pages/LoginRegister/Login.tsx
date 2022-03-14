@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import APIService from '../../components/APIService';
 import { useCookies } from 'react-cookie';
 import { useNavigate, Navigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ function Login() {
   const [userData, setUserData] = useCookies(['user']);
   const navigate = useNavigate();
 
-  const handleChange = (event) =>
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setUserConfiguration({
       ...userConfiguration,
       [event.target.name]: event.target.value
@@ -29,12 +29,11 @@ function Login() {
 
       if (response.auth_token) {
         setToken('mytoken', response.auth_token);
-        console.log(response);
         const data = await getUserData(response.auth_token);
         setUserData('user', data);
         navigate('/');
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new Error('Error during login', error);
     }
   };
@@ -42,9 +41,7 @@ function Login() {
   return (
     <div className="w-full max-w-xs">
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" forHtml="username">
-          Email
-        </label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
         <input
           name="email"
           type="email"
@@ -56,9 +53,7 @@ function Login() {
         />
       </div>
       <div className="mb-6">
-        <label className="block text-gray-700 text-sm font-bold mb-2" forHtml="password">
-          Password
-        </label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
         <br />
         <input
           name="password"

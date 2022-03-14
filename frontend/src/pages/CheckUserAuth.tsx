@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { Navigate } from 'react-router-dom';
 
 type CheckUserAuthProp = {
-  children: ReactNode;
+  children: any;
 };
 
 export const CheckUserAuth = (props: CheckUserAuthProp) => {
