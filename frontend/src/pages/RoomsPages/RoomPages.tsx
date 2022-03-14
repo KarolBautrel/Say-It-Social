@@ -24,7 +24,6 @@ const RoomPages = () => {
     setRooms(data);
   };
   const updateRooms = (rooms: ExactRoom[]) => setRooms(rooms);
-  console.log(token);
   return (
     <CheckUserAuth>
       <Navbar />

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { createRoom } from '../../components/Utils';
-import { useNavigate } from 'react-router-dom';
 
 type RoomFormProp = {
   token: string;
