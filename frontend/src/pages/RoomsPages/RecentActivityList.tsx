@@ -14,7 +14,6 @@ type Token = {
 };
 export const RecentActivityList = ({ token }: Token) => {
   const [activities, setActivity] = useState<ActivityType[]>([]);
-  console.log(activities);
   useEffect(() => {
     getActivity();
   }, []);

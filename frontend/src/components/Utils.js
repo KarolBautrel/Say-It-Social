@@ -2,14 +2,11 @@ import APIService from '../components/APIService';
 
 export const onLogout = async (token, user, onSuccessToken, onSuccessUser) => {
   try {
-    console.log(user);
-    console.log(token);
     const response = await APIService.LogoutUser(token);
     if (response.ok) {
       onSuccessToken('mytoken');
       onSuccessUser('user');
     }
-    console.log(response);
   } catch (error) {
     console.error(error);
   }
