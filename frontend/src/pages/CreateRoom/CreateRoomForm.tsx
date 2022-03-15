@@ -1,13 +1,4 @@
 import { useState } from 'react';
-<<<<<<<< HEAD:frontend/src/pages/CreateRoom/CreateRoomForm.js
-import { createRoom } from '../../components/Utils';
-import { useNavigate } from 'react-router-dom';
-
-export const CreateRoomForm = ({ token, topicId }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const navigate = useNavigate();
-========
 import { createRoom } from '../../Utils/Utils';
 
 type RoomFormProps = {
@@ -18,8 +9,6 @@ type RoomFormProps = {
 export const CreateRoomForm = ({ token, topicId }: RoomFormProps) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-
->>>>>>>> typescriptconf:frontend/src/pages/CreateRoom/CreateRoomForm.tsx
   return (
     <div>
       <div className="mb-3">
@@ -51,11 +40,7 @@ export const CreateRoomForm = ({ token, topicId }: RoomFormProps) => {
         />
       </div>
       <button
-<<<<<<<< HEAD:frontend/src/pages/CreateRoom/CreateRoomForm.js
-        onClick={() => createRoom({ name, description, topic: topicId }, token.mytoken)}
-========
         onClick={() => createRoom({ name, description, topic: topicId }, token)}
->>>>>>>> typescriptconf:frontend/src/pages/CreateRoom/CreateRoomForm.tsx
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Submit
       </button>
