@@ -13,7 +13,7 @@ export type RegisterProp = {
 
 export type CreateMessageProp = {
   body: string;
-  room: string;
+  room: string | number;
 };
 
 export type CreateRoomProp = {

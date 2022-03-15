@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { addMessage, deleteMessage } from '../../components/Utils';
-import { RoomType, User } from 'pages/RoomPage/types';
+import { RoomType, User, Message } from 'pages/RoomPage/types';
 
 type MessageCreationProps = {
   room: RoomType;
