@@ -1,4 +1,4 @@
-import { LoginProp, RegisterProp, CreateMessageProp, CreateRoomProp } from 'components/types';
+import { LoginProp, RegisterProp, CreateMessageProp, CreateRoomProp } from 'Utils/types';
 
 export default class APIService {
   static LoginUser({ email, password }: LoginProp) {

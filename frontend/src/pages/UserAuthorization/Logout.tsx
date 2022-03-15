@@ -1,4 +1,4 @@
-import { onLogout } from './Utils';
+import { onLogout } from '../../Utils/Utils';
 import { useCookies } from 'react-cookie';
 
 function Logout() {
@@ -7,6 +7,8 @@ function Logout() {
 
   const tokenId = token.mytoken;
 
+  const userCookie = user.user;
+  console.log(userCookie);
   return (
     <div>
       <button onClick={() => onLogout(tokenId, removeCookie, removeCookieUser)}>Logout</button>

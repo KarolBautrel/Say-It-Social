@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import APIService from '../../components/APIService';
+import APIService from '../../Utils/Api/APIService';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
@@ -56,8 +56,7 @@ function Register() {
       .catch((error) => {
         throw new Error(error);
       })
-      .then(navigate('/login'));
-    console.log(navigate);
+      .then(() => navigate('login'));
   };
   if (token.mytoken) {
     return <Navigate to="/" />;

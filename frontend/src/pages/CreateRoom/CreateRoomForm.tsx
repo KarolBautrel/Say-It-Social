@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createRoom } from '../../components/Utils';
+import { createRoom } from '../../Utils/Utils';
 
 type RoomFormProp = {
   token: string;

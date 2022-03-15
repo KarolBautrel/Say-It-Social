@@ -1,5 +1,5 @@
 import React from 'react';
-import Logout from './Logout';
+import Logout from '../pages/UserAuthorization/Logout';
 import { useCookies } from 'react-cookie';
 
 export const Navbar = () => {

@@ -1,7 +1,11 @@
-import APIService from './APIService';
-import { CreateMessageProp, CreateRoomProp } from 'components/types';
+import APIService from './Api/APIService';
+import { CreateMessageProp, CreateRoomProp } from 'Utils/types';
 
-export const onLogout = async (token: string, onSuccessToken, onSuccessUser) => {
+export const onLogout = async (
+  token: string,
+  onSuccessToken: (name: 'mytoken') => void,
+  onSuccessUser: (data: 'user') => void
+) => {
   try {
     const response = await APIService.LogoutUser(token);
     console.log(onSuccessToken);
