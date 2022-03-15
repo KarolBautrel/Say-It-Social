@@ -15,13 +15,22 @@ class ParticipantSerializer(ModelSerializer):
         model = User
         fields = ['id', 'username', 'name', 'email']
 
+  
+
+class UserProfilePageSerializer(ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'name','bio']
+
+        
 
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'name', 'email']
 
-
+   
 class UpdateUserInfoSerializer(ModelSerializer):
     class Meta:
         model = User

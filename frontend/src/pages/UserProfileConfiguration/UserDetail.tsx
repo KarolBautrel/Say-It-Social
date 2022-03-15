@@ -20,7 +20,9 @@ const UserDetail = () => {
   return (
     <>
       <Navbar />
+      {userDetail && <div> @{userDetail?.username}</div>}
       {userDetail && <div> {userDetail?.name}</div>}
+      {userDetail && <div> {userDetail?.bio}</div>}
     </>
   );
 };

@@ -47,4 +47,3 @@ export const CreateRoomForm = ({ token, topicId }: RoomFormProps) => {
     </div>
   );
 };
-//.then(navigate('/')
