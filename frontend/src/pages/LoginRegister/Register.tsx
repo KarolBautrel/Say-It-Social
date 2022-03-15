@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import APIService from '../../components/APIService';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 function Register() {
-  const [userRegisterConfiguration, setUserRegisterConfiguration] = useState({
-    value: '',
+  const [userRegisterConfiguration, setUserRegisterConfiguration] = useState<{
+    [key: string]: string;
+  }>({
     name: '',
     username: '',
     email: '',
@@ -15,31 +16,28 @@ function Register() {
 
   const [token] = useCookies(['mytoken']);
   const navigate = useNavigate();
-  const handleChange = (event) =>
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setUserRegisterConfiguration({
       ...userRegisterConfiguration,
       [event.target.name]: event.target.value
     });
 
   const registerFormConfiguration = [
-    { value: 'name', name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
+    { name: 'name', id: 'name', placeholder: 'Name', type: 'name' },
     {
-      value: 'username',
       name: 'username',
       id: 'username',
       placeholder: 'Username',
       type: 'username'
     },
-    { value: 'email', name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
+    { name: 'email', id: 'email', placeholder: 'Email', type: 'email' },
     {
-      value: 'password',
       name: 'password',
       id: 'password',
       placeholder: 'Password',
       type: 'password'
     },
     {
-      value: 're_password',
       name: 're_password',
       id: 're_password',
       placeholder: 'Confirm Password',
@@ -48,18 +46,25 @@ function Register() {
   ];
 
   const onRegister = () => {
-    APIService.RegisterUser(userRegisterConfiguration)
+    APIService.RegisterUser({
+      name: userRegisterConfiguration?.name,
+      username: userRegisterConfiguration?.username,
+      email: userRegisterConfiguration?.email,
+      password: userRegisterConfiguration?.password,
+      re_password: userRegisterConfiguration?.re_password
+    })
       .catch((error) => {
         throw new Error(error);
       })
       .then(navigate('/login'));
+    console.log(navigate);
   };
   if (token.mytoken) {
     return <Navigate to="/" />;
   }
   return (
     <div className="w-full max-w-xs">
-      {registerFormConfiguration.map(({ name, id, placeholder, type, value }) => (
+      {registerFormConfiguration.map(({ name, id, placeholder, type }) => (
         <div key={id}>
           <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">
             {name}
@@ -70,7 +75,7 @@ function Register() {
             placeholder={placeholder}
             id={id}
             name={name}
-            value={userRegisterConfiguration[value]}
+            value={userRegisterConfiguration[name]}
             onChange={handleChange}
           />
         </div>
