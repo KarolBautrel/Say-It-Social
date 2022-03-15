@@ -1,0 +1,7 @@
+
+
+1. ogarniecie jeszcze tych plikow wszystkich, bo gdzies w components masz api service i jakies utilsy itd
+2. dodanie komponentow layoutowych 
+3. dodanie kwestii zarzadzania loadingiem/errorami 
+4. dorzucenie contextow bo przynajnniej chyba jeden sie przyda
+6. TOKEN ENUM EXCEPT STRING

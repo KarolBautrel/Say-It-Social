@@ -1,16 +1,22 @@
 import { Link } from 'react-router-dom';
+import { RoomType, User } from 'pages/RoomPage/types';
 
-export const Participants = ({ user, room }) => {
+type ParticipantsProps = {
+  room: RoomType;
+  user: User;
+};
+
+export const Participants = ({ user, room }: ParticipantsProps) => {
   return (
     <div>
       <p className="text-2xl font-bold">Participants: </p>
       {room?.participants.map((participant) => (
-        <div>
+        <div key={participant.id}>
           <p className="text-small">
             <Link to={`/user/${participant.id}`}>
               <button>
                 {participant.name}
-                {user.user.name === participant.name && <h> (you)</h>}
+                {user.name === participant.name && ' (you)'}
               </button>
             </Link>
           </p>

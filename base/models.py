@@ -54,7 +54,7 @@ class Message(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.body[0:20]
+        return f'created by {self.user} on {self.room} :   {self.body[0:20]}'
 
     class Meta:
         ordering = ['-created']
