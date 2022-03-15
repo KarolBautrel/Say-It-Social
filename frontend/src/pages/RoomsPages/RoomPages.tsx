@@ -13,9 +13,7 @@ const RoomPages = () => {
   const [token] = useCookies(['mytoken']);
   const tokenId: string = token?.mytoken;
   useEffect(() => {
-    {
-      getRooms();
-    }
+    getRooms();
   }, []);
 
   const getRooms = async () => {

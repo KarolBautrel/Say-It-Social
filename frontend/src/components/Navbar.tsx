@@ -10,7 +10,7 @@ export const Navbar = () => {
     { id: 2, text: 'My Profile', value: `user/${userId}` },
     { id: 3, text: 'Create Room', value: '/create_room' },
     { id: 4, text: 'Settings', value: '#' },
-    { id: 5, text: 'Logout', value: '#' }
+    { id: 5, text: <Logout />, value: '#' }
   ];
   return (
     <div>
@@ -53,9 +53,6 @@ export const Navbar = () => {
                   </a>
                 </li>
               ))}
-              <li>
-                <Logout />
-              </li>
             </div>
             <button
               data-collapse-toggle="mobile-menu-2"

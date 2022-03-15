@@ -1,7 +1,12 @@
-import { LoginProp, RegisterProp, CreateMessageProp, CreateRoomProp } from 'Utils/types';
+import {
+  LoginConfiguration,
+  RegisterConfiguration,
+  CreateMessageConfiguration,
+  CreateRoomConfiguration
+} from 'Utils/types';
 
 export default class APIService {
-  static LoginUser({ email, password }: LoginProp) {
+  static LoginUser({ email, password }: LoginConfiguration) {
     return fetch('/api/token/login/', {
       method: 'POST',
       headers: {
@@ -13,7 +18,7 @@ export default class APIService {
       .catch((error) => console.error(`Login user error: ${error}`));
   }
 
-  static RegisterUser({ name, username, password, re_password, email }: RegisterProp) {
+  static RegisterUser({ name, username, password, re_password, email }: RegisterConfiguration) {
     return fetch('/api/users/', {
       method: 'POST',
       headers: {
@@ -34,7 +39,7 @@ export default class APIService {
     }).catch((error) => console.error(`Logout user error: ${error}`));
   }
 
-  static createMessage({ body, room }: CreateMessageProp, token: string) {
+  static createMessage({ body, room }: CreateMessageConfiguration, token: string) {
     return fetch('/api/create_message', {
       method: 'POST',
       headers: {
@@ -59,7 +64,7 @@ export default class APIService {
     }).catch((error) => console.error(`Error during message deleting: ${error}`));
   }
 
-  static createRoom({ name, description, topic }: CreateRoomProp, token: string) {
+  static createRoom({ name, description, topic }: CreateRoomConfiguration, token: string) {
     return fetch('/api/create_room', {
       method: 'POST',
       headers: {

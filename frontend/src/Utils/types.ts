@@ -1,9 +1,9 @@
-export type LoginProp = {
+export type LoginConfiguration = {
   email: string;
   password: string;
 };
 
-export type RegisterProp = {
+export type RegisterConfiguration = {
   name: string;
   username: string;
   password: string;
@@ -11,12 +11,12 @@ export type RegisterProp = {
   email: string;
 };
 
-export type CreateMessageProp = {
+export type CreateMessageConfiguration = {
   body: string;
   room: string | number;
 };
 
-export type CreateRoomProp = {
+export type CreateRoomConfiguration = {
   name: string;
   description: string;
   topic: number | string;

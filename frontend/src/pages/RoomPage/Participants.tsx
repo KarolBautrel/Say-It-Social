@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { RoomType, User } from 'pages/RoomPage/types';
 
-type ParticipantsType = {
+type ParticipantsProps = {
   room: RoomType;
   user: User;
 };
 
-export const Participants = ({ user, room }: ParticipantsType) => {
+export const Participants = ({ user, room }: ParticipantsProps) => {
   return (
     <div>
       <p className="text-2xl font-bold">Participants: </p>

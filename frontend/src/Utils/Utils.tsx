@@ -1,5 +1,5 @@
 import APIService from './Api/APIService';
-import { CreateMessageProp, CreateRoomProp } from 'Utils/types';
+import { CreateRoomConfiguration, CreateMessageConfiguration } from 'Utils/types';
 
 export const onLogout = async (
   token: string,
@@ -19,7 +19,7 @@ export const onLogout = async (
   }
 };
 
-export const addMessage = async ({ body, room }: CreateMessageProp, token: string) => {
+export const addMessage = async ({ body, room }: CreateMessageConfiguration, token: string) => {
   const response = await APIService.createMessage({ body, room }, token);
   return response;
 };
@@ -29,7 +29,10 @@ export const deleteMessage = async (messageId: number, token: string) => {
   return response;
 };
 
-export const createRoom = async ({ name, description, topic }: CreateRoomProp, token: string) => {
+export const createRoom = async (
+  { name, description, topic }: CreateRoomConfiguration,
+  token: string
+) => {
   const response = await APIService.createRoom({ name, description, topic }, token);
   return response;
 };

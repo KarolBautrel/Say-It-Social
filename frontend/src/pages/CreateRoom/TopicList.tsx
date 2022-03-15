@@ -1,12 +1,12 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { TopicListType } from 'pages/CreateRoom/types';
 
-export type TopicProp = {
+export type TopicProps = {
   token: string;
   updateTopicId: (data: string) => void;
 };
 
-export const TopicList = ({ token, updateTopicId }: TopicProp) => {
+export const TopicList = ({ token, updateTopicId }: TopicProps) => {
   const [topicsList, setTopicsList] = useState<TopicListType[]>([]);
 
   useEffect(() => {

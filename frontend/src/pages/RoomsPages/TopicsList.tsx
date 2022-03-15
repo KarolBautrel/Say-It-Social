@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ExactRoom, Token } from 'pages/RoomsPages/types';
 
-type TopicsListType = {
+type TopicsListProps = {
   token: string;
   onFilterSuccess: (data: ExactRoom[]) => void;
 };
@@ -11,7 +11,7 @@ type Topic = {
   topic: string;
 };
 
-export const TopicsList = ({ token, onFilterSuccess }: TopicsListType) => {
+export const TopicsList = ({ token, onFilterSuccess }: TopicsListProps) => {
   const [topics, setTopic] = useState<Topic[]>([]);
 
   useEffect(() => {

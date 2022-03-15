@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { createRoom } from '../../Utils/Utils';
 
-type RoomFormProp = {
+type RoomFormProps = {
   token: string;
   topicId: string | number;
 };
 
-export const CreateRoomForm = ({ token, topicId }: RoomFormProp) => {
+export const CreateRoomForm = ({ token, topicId }: RoomFormProps) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 

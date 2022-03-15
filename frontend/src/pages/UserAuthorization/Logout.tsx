@@ -7,8 +7,6 @@ function Logout() {
 
   const tokenId = token.mytoken;
 
-  const userCookie = user.user;
-  console.log(userCookie);
   return (
     <div>
       <button onClick={() => onLogout(tokenId, removeCookie, removeCookieUser)}>Logout</button>
