@@ -1,16 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { User } from 'pages/RoomsPages/types';
+type ActivityType = {
+  id: number;
+  user: User;
+  room: string | number;
+  body: string;
+  created: string;
+};
 
-export const RecentActivityList = ({ token }) => {
-  const [activities, setActivity] = useState([]);
-
+type Token = {
+  token: string;
+};
+export const RecentActivityList = ({ token }: Token) => {
+  const [activities, setActivity] = useState<ActivityType[]>([]);
   useEffect(() => {
     getActivity();
   }, []);
   const getActivity = async () => {
     const response = await fetch('api/messages', {
       headers: {
-        Authorization: `Token ${token.mytoken}`
+        Authorization: `Token ${token}`
       }
     });
     const data = await response.json();

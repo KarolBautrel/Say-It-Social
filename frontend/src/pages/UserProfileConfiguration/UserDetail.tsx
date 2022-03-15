@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar';
+import { UserType } from 'pages/UserProfileConfiguration/types';
 
-const UserInfo = () => {
+const UserDetail = () => {
   const { id } = useParams();
-  const [userInfo, setUserInfo] = useState('');
-
+  const [userDetail, setUserDetail] = useState<UserType>();
+  console.log(userDetail);
   useEffect(() => {
-    getUserInfo();
+    getUserDetail();
   }, [id]);
 
-  const getUserInfo = async () => {
+  const getUserDetail = async () => {
     const response = await fetch(`/api/user/${id}`);
     const data = await response.json();
-    setUserInfo(data);
+    setUserDetail(data);
   };
 
   return (
     <>
       <Navbar />
-      <div> {userInfo.name}</div>
+      {userDetail && <div> {userDetail?.name}</div>}
     </>
   );
 };
 
-export default UserInfo;
+export default UserDetail;

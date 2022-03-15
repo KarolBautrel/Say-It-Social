@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import { createRoom } from '../../components/Utils';
-import { useNavigate } from 'react-router-dom';
+import { createRoom } from '../../Utils/Utils';
 
-export const CreateRoomForm = ({ token, topicId }) => {
+type RoomFormProps = {
+  token: string;
+  topicId: string | number;
+};
+
+export const CreateRoomForm = ({ token, topicId }: RoomFormProps) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const navigate = useNavigate();
+
   return (
     <div>
       <div className="mb-3">
@@ -37,7 +41,7 @@ export const CreateRoomForm = ({ token, topicId }) => {
         />
       </div>
       <button
-        onClick={() => createRoom({ name, description, topic: topicId }, token.mytoken)}
+        onClick={() => createRoom({ name, description, topic: topicId }, token)}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Submit
       </button>
