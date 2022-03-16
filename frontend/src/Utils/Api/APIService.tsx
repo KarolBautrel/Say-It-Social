@@ -75,9 +75,14 @@ export default class APIService {
     }).catch((error) => console.error(`Error during room creation: ${error}`));
   }
 
-  static updateUser(bio,id, token) {
-    return fetch(`api/update_user/${id}`,{
-      
-    }
+  static updateUser(id: number, token: string, bio: string) {
+    return fetch(`/api/update_user/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify({ bio: bio })
+    }).catch((error) => console.error(`Error during room creation: ${error}`));
   }
 }

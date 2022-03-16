@@ -37,7 +37,7 @@ class UserRetrieveView(generics.RetrieveAPIView):
     
 class UserUpdateView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
-    permission_classes = (RequestUserAllowed,)
+    permission_classes = (RequestUserAllowed, )
     serializer_class = UpdateUserInfoSerializer
 
 

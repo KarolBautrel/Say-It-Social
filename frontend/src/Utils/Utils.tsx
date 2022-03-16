@@ -46,3 +46,8 @@ export const getUserData = async (token: string) => {
   const data = await response.json();
   return data;
 };
+
+export const updateUser = async (id: number, token: string, bio: string) => {
+  const response = await APIService.updateUser(id, token, bio);
+  return response;
+};

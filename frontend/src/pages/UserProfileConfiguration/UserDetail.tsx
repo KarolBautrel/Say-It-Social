@@ -13,7 +13,7 @@ const UserDetail = () => {
   const [token] = useCookies(['mytoken']);
   const user = userCookie.user;
   const tokenId = token.mytoken;
-  console.log(user);
+
   useEffect(() => {
     getUserDetail();
   }, [id]);
