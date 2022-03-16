@@ -22,15 +22,22 @@ const UserDetail = () => {
     const data = await response.json();
     setUserDetail(data);
   };
-
   return (
     <CheckUserAuth>
       <Navbar />
-      {userDetail && <div> @{userDetail?.username}</div>}
-      {userDetail && <div> {userDetail?.name}</div>}
-      {userDetail && <div> {userDetail?.bio}</div>}
-
-      <UpdateUserInformations user={user} token={tokenId} />
+      <div>
+        <div>
+          {userDetail && <div> @{userDetail?.username}</div>}
+          {userDetail && <div> {userDetail?.name}</div>}
+          {userDetail && <div> {userDetail?.bio}</div>}
+          <UpdateUserInformations user={user} token={tokenId} />
+          <hr></hr>
+        </div>
+        <p className="text-xl">User rooms ({userDetail?.rooms.length})</p>
+        {userDetail?.rooms.map((room) => (
+          <div>{room.name}</div>
+        ))}
+      </div>
     </CheckUserAuth>
   );
 };

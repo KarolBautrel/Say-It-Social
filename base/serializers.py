@@ -15,15 +15,6 @@ class ParticipantSerializer(ModelSerializer):
         model = User
         fields = ['id', 'username', 'name', 'email']
 
-  
-
-class UserProfilePageSerializer(ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'name','bio']
-
-        
 
 class UserDetailSerializer(ModelSerializer):
     class Meta:
@@ -37,10 +28,6 @@ class UpdateUserInfoSerializer(ModelSerializer):
         fields = ['bio']
 
 
-class TopicSerializer(ModelSerializer):
-    class Meta:
-        model = Topic
-        fields = ['id', 'topic']
 
 
 class MessageCreateSerializer(ModelSerializer):
@@ -102,3 +89,24 @@ class RoomUpdateSerializer(ModelSerializer):
     class Meta:
         model = Room
         fields = ['name', 'description', 'topic']
+
+
+class UserProfilePageSerializer(ModelSerializer):
+    rooms = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'name', 'email', 'bio', 'rooms']
+
+    def get_rooms(self, obj):
+        return  RoomSerializer(obj.room_set.all(), many = True).data
+
+class TopicSerializer(ModelSerializer):
+    rooms = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Topic
+        fields = ['id', 'topic', 'rooms']
+
+    def get_rooms(self, obj):
+        return  RoomSerializer(obj.room_set.all(), many = True).data

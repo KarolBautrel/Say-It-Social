@@ -33,12 +33,8 @@ class UserRetrieveView(generics.RetrieveAPIView):
     permission_classes = (AllowAny,)
     serializer_class = UserProfilePageSerializer
     
-    def get_serializer_context(self):
-        context = super(UserRetrieveView, self).get_serializer_context()
-        context.update({'room' : self.get_object().room_set.all()})
-        print(context['room'])
-        return context
 
+    
 class UserUpdateView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (RequestUserAllowed,)
