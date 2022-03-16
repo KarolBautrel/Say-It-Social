@@ -29,10 +29,6 @@ class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'name', 'email']
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
    
 class UpdateUserInfoSerializer(ModelSerializer):
