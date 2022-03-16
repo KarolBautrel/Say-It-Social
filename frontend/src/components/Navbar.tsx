@@ -1,13 +1,17 @@
 import React from 'react';
 import Logout from '../pages/UserAuthorization/Logout';
 import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom';
+
 export const Navbar = () => {
   const [user] = useCookies(['user']);
   const userId = user?.user.id;
   const navbarDropdownConfiguration = [
     { id: 1, text: 'Dashboard', value: '/' },
+<<<<<<< HEAD
     { id: 2, text: <Link to={`/user/${userId}`}>My Profile</Link> },
+=======
+    { id: 2, text: 'My Profile', value: `user/${userId}` },
+>>>>>>> main
     { id: 3, text: 'Create Room', value: '/create_room' },
     { id: 4, text: 'Settings', value: '#' },
     { id: 5, text: <Logout />, value: '#' }
