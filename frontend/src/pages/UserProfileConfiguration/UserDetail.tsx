@@ -31,7 +31,7 @@ const UserDetail = () => {
           {userDetail && <div> @{userDetail?.username}</div>}
           {userDetail && <div> {userDetail?.name}</div>}
           {userDetail && <div> {userDetail?.bio}</div>}
-          <UpdateUserData user={user} token={tokenId} />
+          {user.name === userDetail?.name && <UpdateUserData user={user} token={tokenId} />}
           <hr></hr>
         </div>
         <p className="text-xl">User rooms ({userDetail?.rooms.length})</p>
