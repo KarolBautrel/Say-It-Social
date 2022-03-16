@@ -74,4 +74,10 @@ export default class APIService {
       body: JSON.stringify({ name, description, topic })
     }).catch((error) => console.error(`Error during room creation: ${error}`));
   }
+
+  static updateUser(bio,id, token) {
+    return fetch(`api/update_user/${id}`,{
+      
+    }
+  }
 }

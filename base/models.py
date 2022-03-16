@@ -15,6 +15,7 @@ class User (AbstractUser):
         max_length=30, null=True, blank=True, unique=True)
     bio = models.TextField(max_length=255, null=True)
     created = models.DateTimeField(auto_now_add=True)
+    avatar = models.ImageField(null=True, blank=True)
 
     REQUIRED_FIELDS = ['name', 'username']
     USERNAME_FIELD = 'email'
