@@ -28,8 +28,6 @@ class UpdateUserInfoSerializer(ModelSerializer):
         fields = ['bio']
 
 
-
-
 class MessageCreateSerializer(ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         read_only=True, default=serializers.CurrentUserDefault())
@@ -110,3 +108,18 @@ class TopicSerializer(ModelSerializer):
 
     def get_rooms(self, obj):
         return  RoomSerializer(obj.room_set.all(), many = True).data
+
+
+class EmailChangeSerializer(ModelSerializer):
+
+    email2 = serializers.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['email', 'email2']
+
+    def validate(self, data):
+        if data['email'] == data['email2']:
+            return data
+        else:
+            raise serializers.ValidationError('Emails needs to be the same')
