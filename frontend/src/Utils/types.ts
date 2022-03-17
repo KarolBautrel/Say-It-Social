@@ -21,3 +21,8 @@ export type CreateRoomConfiguration = {
   description: string;
   topic: number | string;
 };
+
+export type ChangeEmailConfiguration = {
+  email: string;
+  email2: string;
+};

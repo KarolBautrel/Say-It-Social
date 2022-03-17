@@ -85,4 +85,15 @@ export default class APIService {
       body: JSON.stringify({ bio: bio })
     }).catch((error) => console.error(`Error during room creation: ${error}`));
   }
+
+  static ChangeEmail(id: number, token: string, { email, email2 }) {
+    return fetch(`/api/user/change_email/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify({ email, email2 })
+    }).catch((error) => console.error(`Error during room creation: ${error}`));
+  }
 }
