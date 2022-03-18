@@ -12,7 +12,7 @@ type UserUpdateProp = {
 export const UpdateUserData = ({ currentBio, user, token }: UserUpdateProp) => {
   const [userBio, setUserBio] = useState(currentBio);
   const userId = user.id;
-  console.log(user.bio);
+
   return (
     <div>
       <textarea

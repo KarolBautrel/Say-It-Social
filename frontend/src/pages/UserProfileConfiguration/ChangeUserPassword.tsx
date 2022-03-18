@@ -16,17 +16,20 @@ function ChangePassword() {
     re_new_password: '',
     current_password: ''
   });
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setuserPasswordChangeConfiguration({
       ...userPasswordChangeConfiguration,
       [event.target.name]: event.target.value
     });
+
   const onChangePassword = () =>
     ChangeUserPassword(tokenId, {
       new_password: userPasswordChangeConfiguration?.new_password,
       re_new_password: userPasswordChangeConfiguration.re_new_password,
       current_password: userPasswordChangeConfiguration.current_password
     });
+
   const changePasswordFormConfiguration = [
     {
       name: 'current_password',

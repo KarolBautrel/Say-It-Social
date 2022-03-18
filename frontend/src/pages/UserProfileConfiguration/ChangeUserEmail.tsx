@@ -14,10 +14,17 @@ function ChangeUserEmail() {
     email: '',
     re_email: ''
   });
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setuserEmailChangeConfiguration({
       ...userEmailChangeConfiguration,
       [event.target.name]: event.target.value
+    });
+
+  const onChangePassword = () =>
+    ChangeUserMail(userId, tokenId, {
+      email: userEmailChangeConfiguration?.email,
+      re_email: userEmailChangeConfiguration.re_email
     });
 
   return (
@@ -55,12 +62,7 @@ function ChangeUserEmail() {
           />
         </div>
         <button
-          onClick={() =>
-            ChangeUserMail(userId, tokenId, {
-              email: userEmailChangeConfiguration?.email,
-              re_email: userEmailChangeConfiguration.re_email
-            })
-          }
+          onClick={onChangePassword}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button">
           Change Your Email !
