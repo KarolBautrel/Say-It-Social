@@ -9,7 +9,9 @@ function ChangeUserEmail() {
   const [userCookie] = useCookies(['user']);
   const tokenId = token.mytoken;
   const userId = userCookie.user.id;
-  const [userPasswordChangeConfiguration, setuserPasswordChangeConfiguration] = useState({
+  const [userPasswordChangeConfiguration, setuserPasswordChangeConfiguration] = useState<{
+    [key: string]: string;
+  }>({
     new_password: '',
     re_new_password: '',
     current_password: ''
@@ -20,50 +22,43 @@ function ChangeUserEmail() {
       [event.target.name]: event.target.value
     });
 
+  const changePasswordFormConfiguration = [
+    { name: 'new_password', id: 'new_password', placeholder: 'New Password', type: 'password' },
+    {
+      name: 're_new_password',
+      id: 're_new_password',
+      placeholder: 'Confirm New Password',
+      type: 'password'
+    },
+    {
+      name: 'current_password',
+      id: 'current_password',
+      placeholder: 'Current Password',
+      type: 'password'
+    }
+  ];
+
   return (
     <CheckUserAuth>
       <Navbar />
       <div className="w-full max-w-xs">
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">New Password</label>
-          <input
-            name="new_password"
-            type="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="New Password"
-            id="new_password"
-            value={userPasswordChangeConfiguration.new_password}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Confirm your new Password
-          </label>
-          <br />
-          <input
-            name="re_new_password"
-            type="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="re_new_password"
-            placeholder="Confirm Password"
-            value={userPasswordChangeConfiguration.re_new_password}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Current Password</label>
-          <br />
-          <input
-            name="current_password"
-            type="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="current_password"
-            placeholder="Current Password"
-            value={userPasswordChangeConfiguration.current_password}
-            onChange={handleChange}
-          />
-        </div>
+        {changePasswordFormConfiguration.map(({ name, id, placeholder, type }) => (
+          <div key={id}>
+            <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">
+              {placeholder}
+            </label>
+            <input
+              key={id}
+              type={type}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder={placeholder}
+              id={id}
+              name={name}
+              value={userPasswordChangeConfiguration[name]}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
         <button
           onClick={() =>
             ChangeUserPassword(tokenId, {
