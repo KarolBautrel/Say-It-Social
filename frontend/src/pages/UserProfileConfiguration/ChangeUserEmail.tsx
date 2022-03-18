@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { CheckUserAuth } from 'pages/CheckUserAuth';
 import { Navbar } from '../../components/Navbar';
 import { useCookies } from 'react-cookie';
@@ -33,7 +33,7 @@ function ChangeUserEmail() {
       <div className="w-full max-w-xs">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Your actual email : {userEmail}
+            Your current email : {userEmail}
           </label>
         </div>
         <div className="mb-4">

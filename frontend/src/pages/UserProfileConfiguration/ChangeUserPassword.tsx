@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { CheckUserAuth } from 'pages/CheckUserAuth';
 import { Navbar } from '../../components/Navbar';
 import { useCookies } from 'react-cookie';
@@ -6,9 +6,7 @@ import { ChangeUserPassword } from '../../Utils/Utils';
 
 function ChangePassword() {
   const [token] = useCookies(['mytoken']);
-  const [userCookie] = useCookies(['user']);
   const tokenId = token.mytoken;
-  const userId = userCookie.user.id;
   const [userPasswordChangeConfiguration, setuserPasswordChangeConfiguration] = useState<{
     [key: string]: string;
   }>({
