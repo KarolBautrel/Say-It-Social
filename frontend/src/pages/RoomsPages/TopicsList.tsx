@@ -9,6 +9,7 @@ type TopicsListProps = {
 type Topic = {
   id: number;
   topic: string;
+  rooms: string;
 };
 
 export const TopicsList = ({ token, onFilterSuccess }: TopicsListProps) => {
@@ -40,7 +41,7 @@ export const TopicsList = ({ token, onFilterSuccess }: TopicsListProps) => {
       {topics?.map((topic) => (
         <p>
           <button defaultValue="" onClick={() => filterRooms(topic.id)}>
-            {topic.topic}
+            {topic.topic} ({topic.rooms.length})
           </button>
         </p>
       ))}

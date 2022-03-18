@@ -30,8 +30,7 @@ export const MessagesOperations = ({ room, user, token }: MessageCreationProps) 
         </div>
       ))}
       <br />
-      <input
-        type="text"
+      <textarea
         className="form-control"
         placeholder="add your message"
         id="message"

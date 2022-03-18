@@ -21,3 +21,14 @@ export type CreateRoomConfiguration = {
   description: string;
   topic: number | string;
 };
+
+export type ChangeEmailConfiguration = {
+  email: string;
+  re_email: string;
+};
+
+export type ChangePasswordConfiguration = {
+  new_password: string;
+  re_new_password: string;
+  current_password: string;
+};

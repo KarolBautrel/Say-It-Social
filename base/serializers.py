@@ -13,34 +13,19 @@ class UserListSerializer(ModelSerializer):
 class ParticipantSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'email']
+        fields = ['id', 'username', 'name', 'email', 'bio']
 
-  
-
-class UserProfilePageSerializer(ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'name','bio']
-
-        
 
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'email']
+        fields = ['id', 'username', 'name', 'email', 'bio']
 
    
 class UpdateUserInfoSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ['bio']
-
-
-class TopicSerializer(ModelSerializer):
-    class Meta:
-        model = Topic
-        fields = ['id', 'topic']
 
 
 class MessageCreateSerializer(ModelSerializer):
@@ -102,3 +87,39 @@ class RoomUpdateSerializer(ModelSerializer):
     class Meta:
         model = Room
         fields = ['name', 'description', 'topic']
+
+
+class UserProfilePageSerializer(ModelSerializer):
+    rooms = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'name', 'email', 'bio', 'rooms']
+
+    def get_rooms(self, obj):
+        return  RoomSerializer(obj.room_set.all(), many = True).data
+
+class TopicSerializer(ModelSerializer):
+    rooms = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Topic
+        fields = ['id', 'topic', 'rooms']
+
+    def get_rooms(self, obj):
+        return  RoomSerializer(obj.room_set.all(), many = True).data
+
+
+class EmailChangeSerializer(ModelSerializer):
+
+    re_email = serializers.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['email', 're_email']
+
+    def validate(self, data):
+        if data['email'] == data['re_email']:
+            return data
+        else:
+            raise serializers.ValidationError('Emails needs to be the same')
