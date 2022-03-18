@@ -26,3 +26,9 @@ export type ChangeEmailConfiguration = {
   email: string;
   email2: string;
 };
+
+export type ChangePasswordConfiguration = {
+  new_password: string;
+  re_new_password: string;
+  current_password: string;
+};

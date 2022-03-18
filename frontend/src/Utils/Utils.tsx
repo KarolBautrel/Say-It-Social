@@ -2,7 +2,8 @@ import APIService from './Api/APIService';
 import {
   CreateRoomConfiguration,
   CreateMessageConfiguration,
-  ChangeEmailConfiguration
+  ChangeEmailConfiguration,
+  ChangePasswordConfiguration
 } from 'Utils/types';
 
 export const onLogout = async (
@@ -62,5 +63,17 @@ export const ChangeUserMail = async (
   { email, email2 }: ChangeEmailConfiguration
 ) => {
   const response = await APIService.ChangeEmail(id, token, { email, email2 });
+  return response;
+};
+
+export const ChangeUserPassword = async (
+  token: string,
+  { new_password, re_new_password, current_password }: ChangePasswordConfiguration
+) => {
+  const response = await APIService.ChangePassword(token, {
+    new_password,
+    re_new_password,
+    current_password
+  });
   return response;
 };
