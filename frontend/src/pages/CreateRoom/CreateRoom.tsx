@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar } from '../../components/Navbar';
+import { Navbar } from '../../components/layout/Navigation/Navbar';
 import { useCookies } from 'react-cookie';
 import { TopicList } from './TopicList';
 import { CreateRoomForm } from './CreateRoomForm';

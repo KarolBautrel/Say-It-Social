@@ -19,7 +19,7 @@ function Login() {
       [event.target.name]: event.target.value
     });
 
-  if (token.mytoken) {
+  if (token.mytoken && userData.user) {
     return <Navigate to="/" />;
   }
 
@@ -30,8 +30,7 @@ function Login() {
       if (response.auth_token) {
         setToken('mytoken', response.auth_token);
         const data = await getUserData(response.auth_token);
-        setUserData('user', data);
-        navigate('/');
+        await setUserData('user', data);
       }
     } catch (error: any) {
       throw new Error('Error during login', error);

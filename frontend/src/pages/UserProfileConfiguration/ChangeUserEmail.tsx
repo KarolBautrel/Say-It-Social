@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import { CheckUserAuth } from 'pages/CheckUserAuth';
-import { Navbar } from '../../components/Navbar';
+import { Navbar } from '../../components/layout/Navigation/Navbar';
 import { useCookies } from 'react-cookie';
 import { ChangeUserMail } from '../../Utils/Utils';
 

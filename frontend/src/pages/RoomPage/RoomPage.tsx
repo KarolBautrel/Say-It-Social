@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { Participants } from './Participants';
 import { MessagesOperations } from 'pages/RoomPage/MessagesOperations';
-import { Navbar } from '../../components/Navbar';
+import { Navbar } from '../../components/layout/Navigation/Navbar';
 import { CheckUserAuth } from '../CheckUserAuth';
 import { RoomType } from 'pages/RoomPage/types';
 
