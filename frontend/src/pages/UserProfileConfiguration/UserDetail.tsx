@@ -28,6 +28,9 @@ const UserDetail = () => {
     <CheckUserAuth>
       <MainLayout>
         <div>
+          <Button type="primary" danger>
+            Jebac stare bbabe
+          </Button>
           <div>
             {userDetail && <div> @{userDetail?.username}</div>}
             {userDetail && <div> {userDetail?.name}</div>}
