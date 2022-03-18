@@ -38,7 +38,7 @@ export const RecentActivityList = ({ token }: Token) => {
             </button>
           </Link>
           <p>To: {activity.room}</p>
-          <p className="italic">{activity.body}</p>
+          <p className="italic">{activity.body.substring(0, 25)}...</p>
         </div>
       ))}
     </div>
