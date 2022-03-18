@@ -17,7 +17,6 @@ export const RecentActivityList = ({ token }: Token) => {
   useEffect(() => {
     getActivity();
   }, []);
-  console.log(activities);
   const getActivity = async () => {
     const response = await fetch('api/messages', {
       headers: {
@@ -25,7 +24,6 @@ export const RecentActivityList = ({ token }: Token) => {
       }
     });
     const data = await response.json();
-    console.log(data);
     setActivity(data);
   };
 
