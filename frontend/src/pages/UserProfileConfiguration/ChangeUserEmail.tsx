@@ -9,9 +9,10 @@ function ChangeUserEmail() {
   const [userCookie] = useCookies(['user']);
   const tokenId = token.mytoken;
   const userId = userCookie.user.id;
+  const userEmail = userCookie.user.email;
   const [userEmailChangeConfiguration, setuserEmailChangeConfiguration] = useState({
     email: '',
-    email2: ''
+    re_email: ''
   });
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
     setuserEmailChangeConfiguration({
@@ -23,6 +24,11 @@ function ChangeUserEmail() {
     <CheckUserAuth>
       <Navbar />
       <div className="w-full max-w-xs">
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Your actual email : {userEmail}
+          </label>
+        </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
           <input
@@ -39,12 +45,12 @@ function ChangeUserEmail() {
           <label className="block text-gray-700 text-sm font-bold mb-2">Confirm your email</label>
           <br />
           <input
-            name="email2"
+            name="re_email"
             type="email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email2"
+            id="re_email"
             placeholder="Confirm Email"
-            value={userEmailChangeConfiguration.email2}
+            value={userEmailChangeConfiguration.re_email}
             onChange={handleChange}
           />
         </div>
@@ -52,7 +58,7 @@ function ChangeUserEmail() {
           onClick={() =>
             ChangeUserMail(userId, tokenId, {
               email: userEmailChangeConfiguration?.email,
-              email2: userEmailChangeConfiguration.email2
+              re_email: userEmailChangeConfiguration.re_email
             })
           }
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

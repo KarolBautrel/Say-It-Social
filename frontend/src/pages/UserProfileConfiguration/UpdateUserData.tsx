@@ -6,16 +6,17 @@ import { updateUser } from '../../Utils/Utils';
 type UserUpdateProp = {
   token: string;
   user: UserType;
+  currentBio: string;
 };
 
-export const UpdateUserData = ({ user, token }: UserUpdateProp) => {
-  const [userBio, setUserBio] = useState('');
+export const UpdateUserData = ({ currentBio, user, token }: UserUpdateProp) => {
+  const [userBio, setUserBio] = useState(currentBio);
   const userId = user.id;
+  console.log(user.bio);
   return (
     <div>
-      <input
+      <textarea
         name="bio"
-        type="text"
         placeholder="Update your bio"
         id="bio"
         value={userBio}

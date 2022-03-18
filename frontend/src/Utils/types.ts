@@ -24,7 +24,7 @@ export type CreateRoomConfiguration = {
 
 export type ChangeEmailConfiguration = {
   email: string;
-  email2: string;
+  re_email: string;
 };
 
 export type ChangePasswordConfiguration = {

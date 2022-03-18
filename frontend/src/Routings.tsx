@@ -15,9 +15,9 @@ function Routings() {
         <Route path="/" element={<RoomPages />} />
         <Route path="/user/:id" element={<UserDetail />} />
         <Route path="/room/:id" element={<RoomPage />} />
-        <Route path="/user/change_email" element={<ChangeUserEmail />} />
-        <Route path="/user/change_password" element={<ChangeUserPassword />} />
-        <Route path="/create_room" element={<CreateRoom />} />
+        <Route path="/user/changeEmail" element={<ChangeUserEmail />} />
+        <Route path="/user/changePassword" element={<ChangeUserPassword />} />
+        <Route path="/createRoom" element={<CreateRoom />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

@@ -88,14 +88,14 @@ export default class APIService {
     }).catch((error) => console.error(`Error during updating informations: ${error}`));
   }
 
-  static ChangeEmail(id: number, token: string, { email, email2 }: ChangeEmailConfiguration) {
+  static ChangeEmail(id: number, token: string, { email, re_email }: ChangeEmailConfiguration) {
     return fetch(`/api/user/change_email/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`
       },
-      body: JSON.stringify({ email, email2 })
+      body: JSON.stringify({ email, re_email })
     }).catch((error) => console.error(`Error during changing email: ${error}`));
   }
 

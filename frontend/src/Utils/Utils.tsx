@@ -60,9 +60,9 @@ export const updateUser = async (id: number, token: string, bio: string) => {
 export const ChangeUserMail = async (
   id: number,
   token: string,
-  { email, email2 }: ChangeEmailConfiguration
+  { email, re_email }: ChangeEmailConfiguration
 ) => {
-  const response = await APIService.ChangeEmail(id, token, { email, email2 });
+  const response = await APIService.ChangeEmail(id, token, { email, re_email });
   return response;
 };
 

@@ -4,7 +4,7 @@ import { Navbar } from '../../components/Navbar';
 import { useCookies } from 'react-cookie';
 import { ChangeUserPassword } from '../../Utils/Utils';
 
-function ChangeUserEmail() {
+function ChangePassword() {
   const [token] = useCookies(['mytoken']);
   const [userCookie] = useCookies(['user']);
   const tokenId = token.mytoken;
@@ -21,19 +21,24 @@ function ChangeUserEmail() {
       ...userPasswordChangeConfiguration,
       [event.target.name]: event.target.value
     });
-
+  const onChangePassword = () =>
+    ChangeUserPassword(tokenId, {
+      new_password: userPasswordChangeConfiguration?.new_password,
+      re_new_password: userPasswordChangeConfiguration.re_new_password,
+      current_password: userPasswordChangeConfiguration.current_password
+    });
   const changePasswordFormConfiguration = [
+    {
+      name: 'current_password',
+      id: 'current_password',
+      placeholder: 'Current Password',
+      type: 'password'
+    },
     { name: 'new_password', id: 'new_password', placeholder: 'New Password', type: 'password' },
     {
       name: 're_new_password',
       id: 're_new_password',
       placeholder: 'Confirm New Password',
-      type: 'password'
-    },
-    {
-      name: 'current_password',
-      id: 'current_password',
-      placeholder: 'Current Password',
       type: 'password'
     }
   ];
@@ -60,13 +65,7 @@ function ChangeUserEmail() {
           </div>
         ))}
         <button
-          onClick={() =>
-            ChangeUserPassword(tokenId, {
-              new_password: userPasswordChangeConfiguration?.new_password,
-              re_new_password: userPasswordChangeConfiguration.re_new_password,
-              current_password: userPasswordChangeConfiguration.current_password
-            })
-          }
+          onClick={onChangePassword}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button">
           Change Your Password !
@@ -76,4 +75,4 @@ function ChangeUserEmail() {
   );
 }
 
-export default ChangeUserEmail;
+export default ChangePassword;

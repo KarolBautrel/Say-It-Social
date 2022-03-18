@@ -13,13 +13,13 @@ class UserListSerializer(ModelSerializer):
 class ParticipantSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'email']
+        fields = ['id', 'username', 'name', 'email', 'bio']
 
 
 class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'email']
+        fields = ['id', 'username', 'name', 'email', 'bio']
 
    
 class UpdateUserInfoSerializer(ModelSerializer):
@@ -112,14 +112,14 @@ class TopicSerializer(ModelSerializer):
 
 class EmailChangeSerializer(ModelSerializer):
 
-    email2 = serializers.EmailField()
+    re_email = serializers.EmailField()
 
     class Meta:
         model = User
-        fields = ['email', 'email2']
+        fields = ['email', 're_email']
 
     def validate(self, data):
-        if data['email'] == data['email2']:
+        if data['email'] == data['re_email']:
             return data
         else:
             raise serializers.ValidationError('Emails needs to be the same')
