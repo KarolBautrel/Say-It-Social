@@ -2,7 +2,9 @@ import {
   LoginConfiguration,
   RegisterConfiguration,
   CreateMessageConfiguration,
-  CreateRoomConfiguration
+  CreateRoomConfiguration,
+  ChangePasswordConfiguration,
+  ChangeEmailConfiguration
 } from 'Utils/types';
 
 export default class APIService {
@@ -73,5 +75,41 @@ export default class APIService {
       },
       body: JSON.stringify({ name, description, topic })
     }).catch((error) => console.error(`Error during room creation: ${error}`));
+  }
+
+  static updateUser(id: number, token: string, bio: string) {
+    return fetch(`/api/update_user/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify({ bio: bio })
+    }).catch((error) => console.error(`Error during updating informations: ${error}`));
+  }
+
+  static ChangeEmail(id: number, token: string, { email, re_email }: ChangeEmailConfiguration) {
+    return fetch(`/api/user/change_email/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify({ email, re_email })
+    }).catch((error) => console.error(`Error during changing email: ${error}`));
+  }
+
+  static ChangePassword(
+    token: string,
+    { new_password, re_new_password, current_password }: ChangePasswordConfiguration
+  ) {
+    return fetch(`/api/users/set_password/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify({ new_password, re_new_password, current_password })
+    }).catch((error) => console.error(`Error during changing password: ${error}`));
   }
 }

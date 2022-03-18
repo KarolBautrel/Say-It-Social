@@ -2,6 +2,7 @@ from django.shortcuts import render
 from base.serializers import (
     UpdateUserInfoSerializer,
     UserListSerializer,
+    EmailChangeSerializer,
     TopicSerializer,
     RoomSerializer,
     RoomCreateSerializer,
@@ -10,7 +11,8 @@ from base.serializers import (
     UserProfilePageSerializer,
     MessageCreateSerializer,
     MessageUpdateSerializer,
-    MessagesSerializer)
+    MessagesSerializer,
+    )
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -33,15 +35,15 @@ class UserRetrieveView(generics.RetrieveAPIView):
     permission_classes = (AllowAny,)
     serializer_class = UserProfilePageSerializer
     
-    def get_serializer_context(self):
-        context = super(UserRetrieveView, self).get_serializer_context()
-        context.update({'room' : self.get_object().room_set.all()})
-        print(context['room'])
-        return context
-
-class UserUpdateView(generics.RetrieveUpdateAPIView):
+class UserChangeEmailView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (RequestUserAllowed,)
+    serializer_class = EmailChangeSerializer
+
+    
+class UserUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (RequestUserAllowed, )
     serializer_class = UpdateUserInfoSerializer
 
 

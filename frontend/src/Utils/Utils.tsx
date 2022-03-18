@@ -1,5 +1,10 @@
 import APIService from './Api/APIService';
-import { CreateRoomConfiguration, CreateMessageConfiguration } from 'Utils/types';
+import {
+  CreateRoomConfiguration,
+  CreateMessageConfiguration,
+  ChangeEmailConfiguration,
+  ChangePasswordConfiguration
+} from 'Utils/types';
 
 export const onLogout = async (
   token: string,
@@ -45,4 +50,30 @@ export const getUserData = async (token: string) => {
   });
   const data = await response.json();
   return data;
+};
+
+export const updateUser = async (id: number, token: string, bio: string) => {
+  const response = await APIService.updateUser(id, token, bio);
+  return response;
+};
+
+export const ChangeUserMail = async (
+  id: number,
+  token: string,
+  { email, re_email }: ChangeEmailConfiguration
+) => {
+  const response = await APIService.ChangeEmail(id, token, { email, re_email });
+  return response;
+};
+
+export const ChangeUserPassword = async (
+  token: string,
+  { new_password, re_new_password, current_password }: ChangePasswordConfiguration
+) => {
+  const response = await APIService.ChangePassword(token, {
+    new_password,
+    re_new_password,
+    current_password
+  });
+  return response;
 };

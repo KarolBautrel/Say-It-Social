@@ -8,7 +8,7 @@ export const Navbar = () => {
   const navbarDropdownConfiguration = [
     { id: 1, text: 'Dashboard', value: '/' },
     { id: 2, text: <Link to={`/user/${userId}`}>My Profile</Link> },
-    { id: 3, text: 'Create Room', value: '/create_room' },
+    { id: 3, text: 'Create Room', value: '/createRoom' },
     { id: 4, text: 'Settings', value: '#' },
     { id: 5, text: <Logout />, value: '#' }
   ];

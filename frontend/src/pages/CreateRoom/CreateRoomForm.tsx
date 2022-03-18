@@ -30,8 +30,7 @@ export const CreateRoomForm = ({ token, topicId }: RoomFormProps) => {
           Description
         </label>
         <br />
-        <input
-          type="description"
+        <textarea
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="description"
           id="description"

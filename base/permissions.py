@@ -5,8 +5,9 @@ class RequestUserAllowed(permissions.BasePermission):
     message = 'Only user of profile can update his account'
 
     def has_permission(self, request, view):
-        return request.method in permissions.SAFE_METHODS
-
+        if request.user.is_authenticated:
+                return True
+        return False
     def has_object_permission(self, request, view, obj):
         if obj == request.user:
             return True
