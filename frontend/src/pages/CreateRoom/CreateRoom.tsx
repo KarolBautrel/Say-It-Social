@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { TopicList } from './TopicList';
 import { CreateRoomForm } from './CreateRoomForm';
 import { CheckUserAuth } from '../CheckUserAuth';
+import { MainLayout } from 'components/layout/MainLayout/MainLayout';
 
 function CreateRoom() {
   const [token] = useCookies(['mytoken']);
@@ -14,12 +15,13 @@ function CreateRoom() {
 
   return (
     <CheckUserAuth>
-      <Navbar />
-      <div className="w-full max-w-xs">
-        <h1>Create your room</h1>
-        <TopicList token={tokenId} updateTopicId={updateTopicId} />
-        <CreateRoomForm token={tokenId} topicId={topicId} />
-      </div>
+      <MainLayout>
+        <div className="w-full max-w-xs">
+          <h1>Create your room</h1>
+          <TopicList token={tokenId} updateTopicId={updateTopicId} />
+          <CreateRoomForm token={tokenId} topicId={topicId} />
+        </div>
+      </MainLayout>
     </CheckUserAuth>
   );
 }

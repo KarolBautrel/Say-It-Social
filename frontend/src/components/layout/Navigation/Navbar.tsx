@@ -1,20 +1,6 @@
-import React from 'react';
 import Logout from '../../../pages/UserAuthorization/Logout';
-import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom';
-export const Navbar = () => {
-  const [user] = useCookies(['user']);
-  const userId = user.user?.id;
-  console.log(user);
-  console.log(userId);
-  const navbarDropdownConfiguration = [
-    { id: 1, text: 'Dashboard', value: '/' },
-    { id: 2, text: <Link to={`/user/${userId}`}>My Profile</Link> },
-    { id: 3, text: 'Create Room', value: '/createRoom' },
-    { id: 4, text: 'Settings', value: '#' },
-    { id: 5, text: <Logout />, value: '#' }
-  ];
 
+export const Navbar = () => {
   return (
     <nav className="overflow-y-auto px-3 bg-gray-50 rounded dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -34,9 +20,9 @@ export const Navbar = () => {
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"></path>
+              clipRule="evenodd"></path>
           </svg>
           <svg
             className="hidden w-6 h-6"
@@ -44,9 +30,9 @@ export const Navbar = () => {
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
+              clipRule="evenodd"></path>
           </svg>
         </button>
         <div className="hidden w-full md:block md:w-auto" id="mobile-menu">

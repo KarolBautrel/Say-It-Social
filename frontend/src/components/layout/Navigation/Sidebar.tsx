@@ -4,24 +4,35 @@ import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
+  HomeOutlined,
+  SettingOutlined,
   UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined
+  LogoutOutlined,
+  EditOutlined,
+  MailOutlined,
+  ToolOutlined
 } from '@ant-design/icons';
 
 export const Sidebar = () => {
+  const { SubMenu } = Menu;
   const { Sider } = Layout;
   const [user] = useCookies(['user']);
   const userId = user.user?.id;
   const [currentKey, setCurrentKey] = useState<string>('1');
-  const sidebarConfiguration = [
-    { id: 1, text: 'Dashboard', icon: <UserOutlined /> },
+  const sidebarMenuConfiguration = [
+    { id: 1, text: <Link to={`/`}>Homepage</Link>, icon: <HomeOutlined /> },
     { id: 2, text: <Link to={`/user/${userId}`}>My Profile</Link>, icon: <UserOutlined /> },
-    { id: 3, text: 'Create Room', icon: <UserOutlined /> },
-    { id: 4, text: 'Settings', icon: <UserOutlined /> },
-    { id: 5, text: <Logout />, icon: <UserOutlined /> }
+    { id: 3, text: <Logout />, icon: <LogoutOutlined /> }
+  ];
+  const sidebarSubMenuConfiguration = [
+    { id: 4, text: <Link to={`/createRoom`}>Create Room</Link>, icon: <EditOutlined /> },
+    { id: 5, text: <Link to={`/user/changeEmail`}>Change Email</Link>, icon: <MailOutlined /> },
+    {
+      id: 6,
+      text: <Link to={`/user/changePassword`}>Change Password</Link>,
+      icon: <ToolOutlined />
+    },
+    { id: 7, text: <Link to={`/`}>Update Profile</Link>, icon: <UserOutlined /> }
   ];
 
   return (
@@ -33,7 +44,14 @@ export const Sidebar = () => {
         defaultSelectedKeys={['1']}
         selectedKeys={[currentKey]}
         onClick={(event) => setCurrentKey(event.key)}>
-        {sidebarConfiguration.map(({ id, text, icon }) => (
+        <SubMenu key={'sub1'} icon={<SettingOutlined />} title="Settings">
+          {sidebarSubMenuConfiguration.map(({ id, text, icon }) => (
+            <Menu.Item key={id} icon={icon}>
+              {text}
+            </Menu.Item>
+          ))}
+        </SubMenu>
+        {sidebarMenuConfiguration.map(({ id, text, icon }) => (
           <Menu.Item key={id} icon={icon}>
             {text}
           </Menu.Item>

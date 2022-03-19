@@ -6,6 +6,7 @@ import { MessagesOperations } from 'pages/RoomPage/MessagesOperations';
 import { Navbar } from '../../components/layout/Navigation/Navbar';
 import { CheckUserAuth } from '../CheckUserAuth';
 import { RoomType } from 'pages/RoomPage/types';
+import { MainLayout } from 'components/layout/MainLayout/MainLayout';
 
 const RoomPage = () => {
   const { id } = useParams();
@@ -27,17 +28,18 @@ const RoomPage = () => {
   return (
     <>
       <CheckUserAuth>
-        <Navbar />
-        <div className="grid grid-rows-2 grid-flow-col gap-2">
-          <div className="grid justify-items-start">
-            <div className="row-span-2 ">
-              <p className="text-xl">{room?.name}</p>
-              <p className="text-lg">{room?.description}</p>
+        <MainLayout>
+          <div className="grid grid-rows-2 grid-flow-col gap-2">
+            <div className="grid justify-items-start">
+              <div className="row-span-2 ">
+                <p className="text-xl font-bold">{room?.name}</p>
+                <p className="text-lg">{room?.description}</p>
+              </div>
+              {room && <MessagesOperations token={tokenId} room={room} user={user} />}
             </div>
-            {room && <MessagesOperations token={tokenId} room={room} user={user} />}
+            <div className="row-span-3 ">{room && <Participants room={room} user={user} />}</div>
           </div>
-          <div className="row-span-3 ">{room && <Participants room={room} user={user} />}</div>
-        </div>
+        </MainLayout>
       </CheckUserAuth>
     </>
   );
