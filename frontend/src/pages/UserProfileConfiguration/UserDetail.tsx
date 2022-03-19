@@ -6,6 +6,7 @@ import { UpdateUserData } from 'pages/UserProfileConfiguration/UpdateUserData';
 import { CheckUserAuth } from '../CheckUserAuth';
 import { Link } from 'react-router-dom';
 import { MainLayout } from 'components/layout/MainLayout/MainLayout';
+import { Button } from 'antd';
 const UserDetail = () => {
   const { id } = useParams();
   const [userDetail, setUserDetail] = useState<UserType>();
@@ -34,19 +35,21 @@ const UserDetail = () => {
             {user.name === userDetail?.name && (
               <UpdateUserData user={user} token={tokenId} currentBio={userDetail?.bio} />
             )}
-            <hr></hr>
           </div>
-          <p className="text-xl">User rooms ({userDetail?.rooms.length})</p>
-          {userDetail?.rooms.map((room) => (
-            <div>
-              {room.name}
-              <Link to={`/room/${room.id}`}>
-                <button className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
-                  Get to the room
-                </button>
-              </Link>
-            </div>
-          ))}
+          <div>
+            <p className="text-3xl">User rooms ({userDetail?.rooms.length})</p>
+            <br />
+            {userDetail?.rooms.map((room) => (
+              <div>
+                <p className=" text-xl">{room.name}</p>
+                <Link to={`/room/${room.id}`}>
+                  <p>
+                    <Button>Get to the room</Button>
+                  </p>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </MainLayout>
     </CheckUserAuth>
