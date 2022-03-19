@@ -28,9 +28,8 @@ const RoomPages = () => {
     <CheckUserAuth>
       <MainLayout>
         <div className="grid grid-flow-col gap-2">
-          <hr></hr>
-          <RoomFilter onFilterSuccess={updateRooms} />
           <div className="row-span-3 ">
+            <RoomFilter onFilterSuccess={updateRooms} />
             <TopicsList token={tokenId} onFilterSuccess={updateRooms} />
           </div>
           <div className="row-span-3 ">
