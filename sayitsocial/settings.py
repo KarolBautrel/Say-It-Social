@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'djoser',
     "corsheaders",
     'django_extensions',
-    'django_filters'
+    'django_filters',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -79,8 +80,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sayitsocial.wsgi.application'
-
-
+ASGI_APPLICATION = "sayitsocial.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
