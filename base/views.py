@@ -34,13 +34,13 @@ class UserRetrieveView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserProfilePageSerializer
-    
+
 class UserChangeEmailView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (RequestUserAllowed,)
     serializer_class = EmailChangeSerializer
 
-    
+
 class UserUpdateView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (RequestUserAllowed, )
@@ -96,7 +96,7 @@ class RoomTopicView(APIView):
 
 class MessageCreateView(generics.CreateAPIView):
     queryset = Message.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = MessageCreateSerializer
 
     def perform_create(self, serializer):
