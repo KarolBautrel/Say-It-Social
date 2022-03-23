@@ -10,6 +10,7 @@ import { MainLayout } from 'components/layout/MainLayout/MainLayout';
 const RoomPage = () => {
   const { id } = useParams();
   const [room, setRoom] = useState<RoomType>();
+  const [data, setData] = useState('');
   null;
   useEffect(() => {
     getRoom();
@@ -23,6 +24,20 @@ const RoomPage = () => {
     const data = await response.json();
     setRoom(data);
   };
+  let url = `ws://127.0.0.1:8000/ws/socket-server/`;
+  const chatSocket = new WebSocket(url);
+  const [status, setStatus] = useState('idle');
+
+  useEffect(() => {
+    if (!chatSocket.readyState) {
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        console.log('Data', data);
+        setData(data);
+      };
+    }
+  }, [status]);
+  console.log(chatSocket);
 
   return (
     <>
@@ -34,7 +49,16 @@ const RoomPage = () => {
                 <p className="text-xl font-bold">{room?.name}</p>
                 <p className="text-lg">{room?.description}</p>
               </div>
-              {room && <MessagesOperations token={tokenId} room={room} user={user} />}
+              {room && (
+                <MessagesOperations
+                  token={tokenId}
+                  room={room}
+                  user={user}
+                  chatSocket={chatSocket}
+                  messagesFromWeb={data.message}
+                  setStatus={setStatus}
+                />
+              )}
             </div>
             <div className="row-span-3 ">{room && <Participants room={room} user={user} />}</div>
           </div>

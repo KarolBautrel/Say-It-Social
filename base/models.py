@@ -40,6 +40,9 @@ class Room(models.Model):
     participants = models.ManyToManyField(
         User, related_name='participants', blank=True)
 
+    def __str__(self):
+        return f'{self.topic.topic}- {self.name}'
+
     class Meta:
         ordering = ['-created']
 

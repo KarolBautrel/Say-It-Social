@@ -9,41 +9,31 @@ type MessageCreationProps = {
   token: string;
 };
 
-export const MessagesOperations = ({ room, user, token }: MessageCreationProps) => {
+export const MessagesOperations = ({
+  room,
+  user,
+  token,
+  chatSocket,
+  messagesFromWeb,
+  setStatus
+}: MessageCreationProps) => {
   const [message, setMessage] = useState('');
 
-  let url = `ws://127.0.0.1:8000/ws/socket-server/`;
-  const chatSocket = new WebSocket(url);
-
-  chatSocket.onmessage = function (e) {
-    let data = JSON.parse(e.data);
-    console.log('Data', data);
-
-    if (data.type === 'chat') {
-      let messages = document.getElementById('messages');
-      messages?.insertAdjacentHTML('beforeend', `<p>${data.message}</p>`);
-    }
+  const onAddMessage = async () => {
+    setStatus('pending');
+    await addMessage({ body: message, room: room?.id }, token);
+    setStatus('success');
   };
-  const onAddMessage = () => {
-    addMessage({ body: message, room: room?.id }, token),
-      chatSocket.send(
-        JSON.stringify({
-          message: message
-        })
-      );
-  };
-
-  message;
   return (
     <div className="col-span-2 ">
       <br />
       <p className="text-xl font-bold">Conversation</p>
-      {room?.messages.map((messages) => (
+      {messagesFromWeb.map((messages) => (
         <div key={messages.id}>
-          <p className="text-light font-bold">@{messages.user.name}</p>
+          <p className="text-light font-bold">@{messages.user}</p>
           <p className="text-light">
             {messages.body}
-            {user.name === messages.user.name && (
+            {user.id === messages.user && (
               <Button type="link" danger onClick={() => deleteMessage(messages.id, token)}>
                 remove
               </Button>
@@ -51,6 +41,7 @@ export const MessagesOperations = ({ room, user, token }: MessageCreationProps) 
           </p>
         </div>
       ))}
+
       <br />
       <textarea
         className="form-control"
