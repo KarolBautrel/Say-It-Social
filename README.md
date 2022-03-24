@@ -6,6 +6,7 @@ Social app build with Django REST Framework and future React frontend
 Project is created with:
 * Python version: 3.9
 * Django version: 4.0
+* Django REST Framework
 * Javascript
 * React.js
 * Typescript
