@@ -2,6 +2,12 @@ import json
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
 from . models import Message, User, Room
+from .views import RoomRetrieveView
+
+
+
+
+
 class ChatConsumer(WebsocketConsumer):
 
     def connect(self):
@@ -12,10 +18,9 @@ class ChatConsumer(WebsocketConsumer):
           self.channel_name
         )
         messages = Message.objects.filter(room=26)
-        data_ready_for_json =list( messages.values('room','body','user'))
+        data_ready_for_json =list( messages.values('room','body','user','id'))
         self.accept()
         self.send(text_data=json.dumps({
-        'type':'chat',
         'message': data_ready_for_json
 
       }))

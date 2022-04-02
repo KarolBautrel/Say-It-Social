@@ -37,7 +37,7 @@ const RoomPage = () => {
       };
     }
   }, [status]);
-  console.log(chatSocket);
+  console.log(data.message);
 
   return (
     <>
@@ -54,7 +54,6 @@ const RoomPage = () => {
                   token={tokenId}
                   room={room}
                   user={user}
-                  chatSocket={chatSocket}
                   messagesFromWeb={data.message}
                   setStatus={setStatus}
                 />

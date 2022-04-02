@@ -13,7 +13,6 @@ export const MessagesOperations = ({
   room,
   user,
   token,
-  chatSocket,
   messagesFromWeb,
   setStatus
 }: MessageCreationProps) => {
@@ -33,6 +32,7 @@ export const MessagesOperations = ({
           <p className="text-light font-bold">@{messages.user}</p>
           <p className="text-light">
             {messages.body}
+
             {user.id === messages.user && (
               <Button type="link" danger onClick={() => deleteMessage(messages.id, token)}>
                 remove
