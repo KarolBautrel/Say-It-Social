@@ -16,7 +16,9 @@ function CreateRoom() {
   return (
     <CheckUserAuth>
       <MainLayout>
-        <div className="w-full max-w-xs">
+        <div
+          className="w-full max-w-xs"
+          style={{ textAlign: '-webkit-center', marginTop: '50px', marginLeft: '250px' }}>
           <h1>Create your room</h1>
           <TopicList token={tokenId} updateTopicId={updateTopicId} />
           <CreateRoomForm token={tokenId} topicId={topicId} />

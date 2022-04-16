@@ -37,7 +37,6 @@ const RoomPage = () => {
       };
     }
   }, [status]);
-  console.log(data.message);
 
   return (
     <>

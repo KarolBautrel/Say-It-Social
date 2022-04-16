@@ -23,6 +23,7 @@ export const MessagesOperations = ({
     await addMessage({ body: message, room: room?.id }, token);
     setStatus('success');
   };
+
   return (
     <div className="col-span-2 ">
       <br />
