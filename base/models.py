@@ -16,13 +16,19 @@ class User (AbstractUser):
     bio = models.TextField(max_length=255, null=True)
     created = models.DateTimeField(auto_now_add=True)
     avatar = models.ImageField(null=True, blank=True)
-
+    friends = models.ManyToManyField('User', blank=True)
     REQUIRED_FIELDS = ['name', 'username']
     USERNAME_FIELD = 'email'
 
     def __str__(self):
         return self.username
 
+class FriendRequest(models.Model):
+    from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name = 'to_user', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'from {self.from_user} to {self.to_user}'
 
 class Topic (models.Model):
     topic = models.CharField(max_length=40, null=True, blank=True)

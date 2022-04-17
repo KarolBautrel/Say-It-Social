@@ -38,7 +38,7 @@ function Login() {
   };
 
   return (
-    <div className="app" style={{ textAlign: '-webkit-center', marginTop: '150px' }}>
+    <div className="app" style={{ textAlign: '-webkit-center' as const, marginTop: '150px' }}>
       <div className="w-full max-w-xs">
         <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
