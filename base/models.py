@@ -40,12 +40,11 @@ class Room(models.Model):
     participants = models.ManyToManyField(
         User, related_name='participants', blank=True)
 
+    def __str__(self):
+        return f'{self.topic.topic}- {self.name}'
+
     class Meta:
         ordering = ['-created']
-
-    def __str__(self):
-        return self.name
-
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -56,6 +55,9 @@ class Message(models.Model):
 
     def __str__(self):
         return f'created by {self.user} on {self.room} :   {self.body[0:20]}'
+
+    def last_15_messages(self):
+        return Message.objects.order_by('-created').all()[:15]
 
     class Meta:
         ordering = ['-created']

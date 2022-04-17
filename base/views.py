@@ -34,13 +34,13 @@ class UserRetrieveView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserProfilePageSerializer
-    
+
 class UserChangeEmailView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (RequestUserAllowed,)
     serializer_class = EmailChangeSerializer
 
-    
+
 class UserUpdateView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (RequestUserAllowed, )
@@ -72,12 +72,17 @@ class RoomListView(generics.ListAPIView):
     filterset_fields = ['topic']
     search_fields = ['name']
 
-
 class RoomRetrieveView(generics.RetrieveAPIView):
     queryset = Room.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RoomSerializer
 
+    def get_serializer_context(self):
+        context = super(RoomRetrieveView, self).get_serializer_context()
+        context.update({'id': self.get_object().id})
+        roomId = context['id']
+        print(roomId)
+        return roomId
 
 class RoomUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Room.objects.all()
@@ -96,7 +101,7 @@ class RoomTopicView(APIView):
 
 class MessageCreateView(generics.CreateAPIView):
     queryset = Message.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     serializer_class = MessageCreateSerializer
 
     def perform_create(self, serializer):
@@ -120,3 +125,19 @@ class MessageListView(generics.ListAPIView):
     queryset = Message.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = MessagesSerializer
+
+
+
+
+
+"""class RoomRetrieveView(generics.RetrieveAPIView):
+    queryset = Room.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RoomSerializer
+
+    def get_serializer_context(self):
+        context = super(RoomRetrieveView, self).get_serializer_context()
+        context.update({'id': self.get_object().id})
+        roomId = context['id']
+        print(roomId)
+        return roomId"""
