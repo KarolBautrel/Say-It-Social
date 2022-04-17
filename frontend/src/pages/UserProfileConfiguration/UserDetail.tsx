@@ -27,16 +27,18 @@ const UserDetail = () => {
   return (
     <CheckUserAuth>
       <MainLayout>
-        <div>
-          <div>
-            {userDetail && <div> @{userDetail?.username}</div>}
-            {userDetail && <div> {userDetail?.name}</div>}
-            {userDetail && <div> {userDetail?.bio}</div>}
-            {user.name === userDetail?.name && (
-              <UpdateUserData user={user} token={tokenId} currentBio={userDetail?.bio} />
-            )}
+        <div className="grid grid-rows-2 grid-flow-col gap-2">
+          <div className="grid justify-items-start">
+            <div className="row-span-2 ">
+              {userDetail && <div> @{userDetail?.username}</div>}
+              {userDetail && <div> {userDetail?.name}</div>}
+              {userDetail && <div> {userDetail?.bio}</div>}
+              {user.name === userDetail?.name && (
+                <UpdateUserData user={user} token={tokenId} currentBio={userDetail?.bio} />
+              )}
+            </div>
           </div>
-          <div>
+          <div className="row-span-3 ">
             <p className="text-3xl">User rooms ({userDetail?.rooms.length})</p>
             <br />
             {userDetail?.rooms.map((room) => (

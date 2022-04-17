@@ -48,7 +48,9 @@ function ChangePassword() {
   return (
     <CheckUserAuth>
       <MainLayout>
-        <div className="w-full max-w-xs">
+        <div
+          className="w-full max-w-xs"
+          style={{ textAlign: '-webkit-center', marginTop: '50px', marginLeft: '250px' }}>
           {changePasswordFormConfiguration.map(({ name, id, placeholder, type }) => (
             <div key={id}>
               <label htmlFor={name} className="block text-gray-700 text-sm font-bold mb-2">

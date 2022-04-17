@@ -31,7 +31,9 @@ function ChangeUserEmail() {
   return (
     <CheckUserAuth>
       <MainLayout>
-        <div className="w-full max-w-xs">
+        <div
+          className="w-full max-w-xs"
+          style={{ textAlign: '-webkit-center', marginTop: '50px', marginLeft: '250px' }}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Your current email : {userEmail}
