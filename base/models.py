@@ -2,13 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-GENDER = (
-    ('Male', 'Male'),
-    ('Female', 'Female'),
-    ('Different', 'Different')
-)
-
-
 class User (AbstractUser):
     name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(
@@ -17,7 +10,7 @@ class User (AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
     avatar = models.ImageField(null=True, blank=True)
     friends = models.ManyToManyField('User', blank=True)
-    REQUIRED_FIELDS = ['name', 'username']
+    REQUIRED_FIELDS = ['name', 'username', 'friends']
     USERNAME_FIELD = 'email'
 
     def __str__(self):
@@ -29,6 +22,7 @@ class FriendRequest(models.Model):
 
     def __str__(self):
         return f'from {self.from_user} to {self.to_user}'
+
 
 class Topic (models.Model):
     topic = models.CharField(max_length=40, null=True, blank=True)

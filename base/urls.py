@@ -17,7 +17,9 @@ from .views import (
     MessageDeleteView,
     MessageListView,
     SendFriendRequestView,
-    AcceptFriendRequestView
+    AcceptFriendRequestView,
+    RejectFriendRequestView,
+    DeleteUserFromFriendsView
 )
 
 urlpatterns = [
@@ -39,6 +41,8 @@ urlpatterns = [
     path('delete_message/<int:pk>',
          MessageDeleteView.as_view(), name='delete-message'),
     path ('send_friend_request/<int:pk>', SendFriendRequestView.as_view(), name= 'send-friend-request'),
-    path ('accept_friend_request/<int:pk>', AcceptFriendRequestView.as_view(), name = 'accept-friend-request')
+    path ('accept_friend_request/<int:pk>', AcceptFriendRequestView.as_view(), name = 'accept-friend-request'),
+    path ('reject_friend_request/<int:pk>', RejectFriendRequestView.as_view(), name = 'reject-friend-request'),
+    path ('delete_friend/<int:pk>', DeleteUserFromFriendsView.as_view(), name = 'delete-friend'),
 
 ]

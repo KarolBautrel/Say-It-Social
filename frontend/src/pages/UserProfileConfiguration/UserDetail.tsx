@@ -23,6 +23,7 @@ const UserDetail = () => {
     const response = await fetch(`/api/user/${id}`);
     const data = await response.json();
     setUserDetail(data);
+    console.log(user.friends);
   };
   return (
     <CheckUserAuth>
