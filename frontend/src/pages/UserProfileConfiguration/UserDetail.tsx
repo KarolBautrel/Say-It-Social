@@ -7,6 +7,7 @@ import { CheckUserAuth } from '../CheckUserAuth';
 import { Link } from 'react-router-dom';
 import { MainLayout } from 'components/layout/MainLayout/MainLayout';
 import { Button } from 'antd';
+
 const UserDetail = () => {
   const { id } = useParams();
   const [userDetail, setUserDetail] = useState<UserType>();
@@ -34,17 +35,22 @@ const UserDetail = () => {
               {userDetail && <div> @{userDetail?.username}</div>}
               {userDetail && <div> {userDetail?.name}</div>}
               {userDetail && <div> {userDetail?.bio}</div>}
-              <div>
-                <p className="text-xl">FRIENDS</p>
-              </div>
-              {userDetail?.friends.map((friend) => (
-                <div>
-                  <p className=" text-l">{friend.username}</p>
-                </div>
-              ))}
+
               {user.name === userDetail?.name && (
                 <UpdateUserData user={user} token={tokenId} currentBio={userDetail?.bio} />
               )}
+              <div>
+                <p className="text-xl">{userDetail?.username}'s friends</p>
+              </div>
+              {userDetail?.friends.map((friend) => (
+                <div>
+                  <Link to={`/user/${friend.id}`}>
+                    <button>
+                      <p className=" text-l">{friend.username}</p>
+                    </button>
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
           <div className="row-span-3 ">

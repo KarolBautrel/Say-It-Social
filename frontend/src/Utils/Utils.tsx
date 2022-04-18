@@ -88,3 +88,8 @@ export const RejectFriendRequest = async (token: string, id: number) => {
   const response = await APIService.RejectFriendRequest(token, id);
   return response;
 };
+
+export const DeleteFromFriends = async (token: string, id: number) => {
+  const response = await APIService.DeleteFromFriends(token, id);
+  return response;
+};

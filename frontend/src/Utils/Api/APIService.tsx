@@ -129,4 +129,12 @@ export default class APIService {
       }
     }).catch((error) => console.error('Error during rejecting invitation'));
   }
+  static DeleteFromFriends(token: string, id: any) {
+    return fetch(`/api/delete_friend/${id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    }).catch((error) => console.error('Error during deleting user'));
+  }
 }
