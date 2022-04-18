@@ -5,6 +5,7 @@ import {
   ChangeEmailConfiguration,
   ChangePasswordConfiguration
 } from 'Utils/types';
+import { tokenToString } from 'typescript';
 
 export const onLogout = async (
   token: string,
@@ -75,5 +76,15 @@ export const ChangeUserPassword = async (
     re_new_password,
     current_password
   });
+  return response;
+};
+
+export const AcceptFriendRequest = async (token: string, id: number) => {
+  const response = await APIService.AcceptFriendRequest(token, id);
+  return response;
+};
+
+export const RejectFriendRequest = async (token: string, id: number) => {
+  const response = await APIService.RejectFriendRequest(token, id);
   return response;
 };

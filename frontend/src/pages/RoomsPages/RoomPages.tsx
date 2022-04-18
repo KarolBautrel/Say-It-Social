@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 import { RecentActivityList } from './RecentActivityList';
 import { TopicsList } from './TopicsList';
 import { RoomFilter } from './RoomFilter';
-import { Navbar } from '../../components/layout/Navigation/Navbar';
 import { CheckUserAuth } from 'pages/CheckUserAuth';
 import { ExactRoom, Token } from 'pages/RoomsPages/types';
-import { Sidebar } from '../../components/layout/Navigation/Sidebar';
 import { MainLayout } from 'components/layout/MainLayout/MainLayout';
 
 const RoomPages = () => {

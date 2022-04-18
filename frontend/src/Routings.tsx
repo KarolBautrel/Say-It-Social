@@ -7,6 +7,7 @@ import Register from './pages/UserAuthorization/Register';
 import CreateRoom from './pages/CreateRoom/CreateRoom';
 import ChangeUserEmail from './pages/UserProfileConfiguration/ChangeUserEmail';
 import ChangeUserPassword from './pages/UserProfileConfiguration/ChangeUserPassword';
+import { FriendRequests } from './pages/UserProfileConfiguration/FriendRequests';
 
 function Routings() {
   return (
@@ -19,6 +20,7 @@ function Routings() {
         <Route path="/room/:id" element={<RoomPage />} />
         <Route path="/user/changeEmail" element={<ChangeUserEmail />} />
         <Route path="/user/changePassword" element={<ChangeUserPassword />} />
+        <Route path="/user/friendRequests" element={<FriendRequests />} />
         <Route path="/createRoom" element={<CreateRoom />} />
       </Routes>
     </Router>

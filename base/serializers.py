@@ -130,4 +130,4 @@ class FriendRequestSerializer(ModelSerializer):
 
     class Meta:
         model = FriendRequest
-        fields = ['from_user']
+        fields = ['from_user', 'id']

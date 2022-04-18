@@ -112,4 +112,21 @@ export default class APIService {
       body: JSON.stringify({ new_password, re_new_password, current_password })
     }).catch((error) => console.error(`Error during changing password: ${error}`));
   }
+
+  static AcceptFriendRequest(token: string, id: any) {
+    return fetch(`/api/accept_friend_request/${id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    }).catch((error) => console.error('Error during accepting invitation'));
+  }
+  static RejectFriendRequest(token: string, id: any) {
+    return fetch(`/api/reject_friend_request/${id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    }).catch((error) => console.error('Error during rejecting invitation'));
+  }
 }
