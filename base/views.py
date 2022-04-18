@@ -13,6 +13,7 @@ from base.serializers import (
     MessageCreateSerializer,
     MessageUpdateSerializer,
     MessagesSerializer,
+    FriendRequestSerializer
     )
 
 from rest_framework.views import APIView
@@ -89,7 +90,7 @@ class RoomUpdateView(generics.RetrieveUpdateAPIView):
 class RoomTopicView(APIView):
     permission_classes = (IsAuthenticated, )
 
-    def get(self):
+    def get(self,*args,**kwargs):
         queryset = Room.objects.filter(topic=self.kwargs['topic'])
         serializer_class = RoomSerializer(queryset, many=True)
         return Response(serializer_class.data)
@@ -122,10 +123,18 @@ class MessageListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = MessagesSerializer
 
+class RetrieveFriendRequestView(APIView):
+
+    permission_classes = (IsAuthenticated,)
+    def get(self,*args,**kwargs):
+        queryset = FriendRequest.objects.filter(to_user=self.request.user)
+        serializer_class = FriendRequestSerializer(queryset, many=True)
+        return Response(serializer_class.data)
+
 class SendFriendRequestView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self):
+    def get(self,*args,**kwargs):
         from_user = self.request.user
         to_user = User.objects.get(id=self.kwargs['pk'])
         friend_request, created = FriendRequest.objects.get_or_create(from_user = from_user, to_user = to_user)
@@ -137,7 +146,7 @@ class SendFriendRequestView(APIView):
 class AcceptFriendRequestView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self):
+    def get(self,*args,**kwargs):
         friend_request = FriendRequest.objects.get(id = self.kwargs['pk'])
         if friend_request.to_user == self.request.user:
             friend_request.to_user.friends.add(friend_request.from_user)
@@ -150,7 +159,7 @@ class AcceptFriendRequestView(APIView):
 class RejectFriendRequestView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self):
+    def get(self,*args,**kwargs):
         friend_request = FriendRequest.objects.get(id = self.kwargs['pk'])
         if friend_request.to_user == self.request.user:
             friend_request.delete()
@@ -159,7 +168,7 @@ class RejectFriendRequestView(APIView):
 class DeleteUserFromFriendsView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self):
+    def get(self,*args,**kwargs):
         friend = User.objects.get(id = self.kwargs['pk'])
         if friend in self.request.user.friends.all():
             self.request.user.friends.remove(friend)

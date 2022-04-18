@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
-from base.models import User, Room, Message, Topic
+from base.models import FriendRequest, User, Room, Message, Topic
 
 
 class UserListSerializer(ModelSerializer):
@@ -21,7 +21,7 @@ class UserDetailSerializer(ModelSerializer):
         model = User
         fields = ['id', 'username', 'name', 'email', 'bio']
 
-   
+
 class UpdateUserInfoSerializer(ModelSerializer):
     class Meta:
         model = User
@@ -91,10 +91,10 @@ class RoomUpdateSerializer(ModelSerializer):
 
 class UserProfilePageSerializer(ModelSerializer):
     rooms = serializers.SerializerMethodField()
-
+    friends = UserDetailSerializer(many=True)
     class Meta:
         model = User
-        fields = ['id', 'username', 'name', 'email', 'bio', 'rooms']
+        fields = ['id', 'username', 'name', 'email', 'bio', 'rooms', 'friends']
 
     def get_rooms(self, obj):
         return  RoomSerializer(obj.room_set.all(), many = True).data
@@ -123,3 +123,11 @@ class EmailChangeSerializer(ModelSerializer):
             return data
         else:
             raise serializers.ValidationError('Emails needs to be the same')
+
+class FriendRequestSerializer(ModelSerializer):
+
+    from_user = UserDetailSerializer(many=False)
+
+    class Meta:
+        model = FriendRequest
+        fields = ['from_user']
