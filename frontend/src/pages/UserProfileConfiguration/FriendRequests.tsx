@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { AcceptFriendRequest } from 'Utils/Utils';
 import { RejectFriendRequest } from 'Utils/Utils';
 
-export const FriendRequests = (token) => {
+export const FriendRequests = (token: any) => {
   const [invitations, setInvitations] = useState<any[]>([]);
 
   useEffect(() => {

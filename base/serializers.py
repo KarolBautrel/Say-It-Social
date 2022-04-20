@@ -81,7 +81,6 @@ class RoomCreateSerializer(ModelSerializer):
 
 
 class RoomUpdateSerializer(ModelSerializer):
-
     topic = serializers.ReadOnlyField(source='topic.name')
 
     class Meta:
@@ -111,7 +110,6 @@ class TopicSerializer(ModelSerializer):
 
 
 class EmailChangeSerializer(ModelSerializer):
-
     re_email = serializers.EmailField()
 
     class Meta:
@@ -125,7 +123,6 @@ class EmailChangeSerializer(ModelSerializer):
             raise serializers.ValidationError('Emails needs to be the same')
 
 class FriendRequestSerializer(ModelSerializer):
-
     from_user = UserDetailSerializer(many=False)
 
     class Meta:

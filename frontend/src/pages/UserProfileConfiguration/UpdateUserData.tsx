@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { UserType } from 'pages/UserProfileConfiguration/types';
-import APIService from '../../Utils/Api/APIService';
 import { updateUser } from '../../Utils/Utils';
 
 type UserUpdateProp = {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserType } from 'pages/UserProfileConfiguration/types';
 import { useCookies } from 'react-cookie';
@@ -13,7 +13,7 @@ const UserDetail = () => {
   const [userDetail, setUserDetail] = useState<UserType>();
   const [userCookie] = useCookies(['user']);
   const [token] = useCookies(['mytoken']);
-  const [requestUserFriends, setRequestUserFriends] = useState();
+  const [requestUser, setRequestUserFriends] = useState();
 
   const user = userCookie.user;
   const tokenId = token.mytoken;
@@ -36,7 +36,7 @@ const UserDetail = () => {
     const data = await response.json();
     setRequestUserFriends(data);
   };
-  console.log(requestUserFriends?.friends);
+  console.log(requestUser?.friends);
 
   return (
     <CheckUserAuth>
@@ -44,9 +44,10 @@ const UserDetail = () => {
         <div className="grid grid-rows-2 grid-flow-col gap-2">
           <div className="grid justify-items-start">
             <div className="row-span-2 ">
-              {userDetail && <div> @{userDetail?.username}</div>}!
-              {requestUserFriends?.friends.includes(userDetail?.id) &&
-                user.id === userDetail?.id && <Button>Send friend request</Button>}
+              {userDetail && <div> @{userDetail?.username}</div>}
+              {!requestUser?.friends.includes(userDetail?.id) && user.id === userDetail?.id && (
+                <Button>Send friend request</Button>
+              )}
               {userDetail && <div> {userDetail?.name}</div>}
               {userDetail && <div> {userDetail?.bio}</div>}
               {user.name === userDetail?.name && (

@@ -92,9 +92,3 @@ export const DeleteFromFriends = async (token: string, id: number) => {
   const response = await APIService.DeleteFromFriends(token, id);
   return response;
 };
-
-export const getRequestUserData = async () => {
-  const response = await fetch(`/api/user/${requestUser}`);
-  const data = await response.json();
-  return data;
-};
