@@ -32,7 +32,7 @@ export const Sidebar = () => {
       text: <Link to={`/user/changePassword`}>Change Password</Link>,
       icon: <ToolOutlined />
     },
-    { id: 7, text: <Link to={`/`}>Friends</Link>, icon: <UserOutlined /> }
+    { id: 7, text: <Link to={`/user/friends`}>Friends</Link>, icon: <UserOutlined /> }
   ];
 
   return (

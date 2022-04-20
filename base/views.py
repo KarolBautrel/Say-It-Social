@@ -13,7 +13,8 @@ from base.serializers import (
     MessageCreateSerializer,
     MessageUpdateSerializer,
     MessagesSerializer,
-    FriendRequestSerializer
+    FriendRequestSerializer,
+    FriendListSerializer
     )
 
 from rest_framework.views import APIView
@@ -176,3 +177,9 @@ class DeleteUserFromFriendsView(APIView):
             return HttpResponse ('Friend deleted from friend list')
         else:
             return HttpResponse ('No friend with this name in your friend list')
+
+
+class UserFriendListView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny, )
+    serializer_class = FriendListSerializer

@@ -5,7 +5,6 @@ import {
   ChangeEmailConfiguration,
   ChangePasswordConfiguration
 } from 'Utils/types';
-import { tokenToString } from 'typescript';
 
 export const onLogout = async (
   token: string,
@@ -92,4 +91,10 @@ export const RejectFriendRequest = async (token: string, id: number) => {
 export const DeleteFromFriends = async (token: string, id: number) => {
   const response = await APIService.DeleteFromFriends(token, id);
   return response;
+};
+
+export const getRequestUserData = async () => {
+  const response = await fetch(`/api/user/${requestUser}`);
+  const data = await response.json();
+  return data;
 };

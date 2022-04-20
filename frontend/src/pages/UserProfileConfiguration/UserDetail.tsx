@@ -13,6 +13,8 @@ const UserDetail = () => {
   const [userDetail, setUserDetail] = useState<UserType>();
   const [userCookie] = useCookies(['user']);
   const [token] = useCookies(['mytoken']);
+  const [requestUserFriends, setRequestUserFriends] = useState();
+
   const user = userCookie.user;
   const tokenId = token.mytoken;
 
@@ -20,22 +22,33 @@ const UserDetail = () => {
     getUserDetail();
   }, [id]);
 
+  useEffect(() => {
+    getRequestUserData();
+  }, [user.id]);
+
   const getUserDetail = async () => {
     const response = await fetch(`/api/user/${id}`);
     const data = await response.json();
     setUserDetail(data);
-    console.log(user.friends);
   };
+  const getRequestUserData = async () => {
+    const response = await fetch(`/api/user/friend_list/${user.id}`);
+    const data = await response.json();
+    setRequestUserFriends(data);
+  };
+  console.log(requestUserFriends?.friends);
+
   return (
     <CheckUserAuth>
       <MainLayout>
         <div className="grid grid-rows-2 grid-flow-col gap-2">
           <div className="grid justify-items-start">
             <div className="row-span-2 ">
-              {userDetail && <div> @{userDetail?.username}</div>}
+              {userDetail && <div> @{userDetail?.username}</div>}!
+              {requestUserFriends?.friends.includes(userDetail?.id) &&
+                user.id === userDetail?.id && <Button>Send friend request</Button>}
               {userDetail && <div> {userDetail?.name}</div>}
               {userDetail && <div> {userDetail?.bio}</div>}
-
               {user.name === userDetail?.name && (
                 <UpdateUserData user={user} token={tokenId} currentBio={userDetail?.bio} />
               )}
